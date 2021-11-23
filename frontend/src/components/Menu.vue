@@ -1,0 +1,56 @@
+<template>
+  <div class="menu">
+    <router-link active-class="active-link" class="menu-link" exact to="/">Портфолио</router-link>
+    <router-link active-class="active-link" class="menu-link" to="/contacts">Контакты</router-link>
+    <router-link active-class="active-link" class="menu-link" to="/blog">Блог</router-link>
+    <router-link active-class="active-link" class="menu-link" to="/resume">Резюме</router-link>
+  </div>
+</template>
+
+<script>
+export default {
+  name: 'Menu'
+};
+</script>
+
+<style lang="scss" scoped>
+@import "src/main";
+
+.menu {
+  display: flex;
+  justify-content: center;
+  margin-top: 4vh;
+  user-select: none;
+  overflow-x: auto;
+}
+
+@media screen and (max-width: 410px) {
+  .menu {
+    justify-content: flex-start;
+  }
+}
+
+
+.menu-link {
+  margin-left: 8px;
+  margin-right: 8px;
+  font-size: 24px;
+  font-weight: 300;
+  color: var(--text-color);
+  text-decoration: none;
+  transition: all .3s ease;
+}
+
+@media screen and (max-width: 576px) {
+  .menu-link {
+    font-size: 16px;
+  }
+}
+
+.active-link {
+  background: $accentGradient;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: 500;
+}
+</style>

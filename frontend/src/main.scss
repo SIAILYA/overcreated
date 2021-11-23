@@ -1,0 +1,29 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap');
+@import "src/utils";
+
+:root {
+  --background-primary: #151515;
+  --background-secondary: #212121;
+  --accent-main: #00B61D;
+  --accent-second: #00FF57;
+  --text-color: #FFF
+}
+
+$background: var(--background-primary);
+$textColor: var(--text-color);
+$accentMain: var(--accent-main);
+$accentSecond: var(--accent-second);
+$accentGradient: linear-gradient(90deg, $accentMain 0%, $accentSecond 100%);
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: #151515;
+  color: $textColor;
+  font-family: 'Montserrat', sans-serif;
+}
+
+::selection {
+  background-color: $accentMain;
+}
+
