@@ -1,6 +1,6 @@
 <template>
   <div class="menu">
-    <router-link active-class="active-link" class="menu-link" exact to="/">Портфолио</router-link>
+    <router-link active-class="active-link" class="menu-link" to="/">Портфолио</router-link>
     <router-link active-class="active-link" class="menu-link" to="/contacts">Контакты</router-link>
     <router-link active-class="active-link" class="menu-link" to="/blog">Блог</router-link>
     <router-link active-class="active-link" class="menu-link" to="/resume">Резюме</router-link>

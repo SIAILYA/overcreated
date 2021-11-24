@@ -1,25 +1,25 @@
 .d-flex {
-  display: flex;
+  display: flex!important;
 }
 
 .flex-column {
-  flex-direction: column;
+  flex-direction: column!important;
 }
 
 .mt-auto {
-  margin-top: auto;
+  margin-top: auto!important;
 }
 
 .mb-auto {
-  margin-bottom: auto;
+  margin-bottom: auto!important;
 }
 
 .ml-auto {
-  margin-left: auto;
+  margin-left: auto!important;
 }
 
 .mr-auto {
-  margin-right: auto;
+  margin-right: auto!important;
 }
 
 .mx-auto {
@@ -33,17 +33,26 @@
 }
 
 .p-relative {
-  position: relative;
+  position: relative!important;
 }
 
 .p-absolute {
-  position: absolute;
+  position: absolute!important;
 }
 
 .justify-center {
-  justify-content: center;
+  justify-content: center!important;
 }
 
 .text-center {
-  text-align: center;
+  text-align: center!important;
+}
+
+.d-block{
+  display: block!important;
+}
+
+.my-1 {
+  margin-top: 3px;
+  margin-bottom: 3px;
 }

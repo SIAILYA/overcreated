@@ -22,8 +22,7 @@ export default {
       required: true
     },
     color: {
-      type: Number,
-      default: null
+      type: Array
     }
   },
   data() {
@@ -51,16 +50,16 @@ export default {
   computed: {
     ...mapGetters(['getSelectedTopics']),
     isSelected() {
-      return this.getSelectedTopics.includes(this.name);
+      return this.getSelectedTopics.includes(this.slug);
     }
   },
   methods: {
     ...mapActions(["selectTopic", "deselectTopic"]),
     toggleSelect() {
       if (this.isSelected) {
-        this.deselectTopic(this.name)
+        this.deselectTopic(this.slug)
       } else {
-        this.selectTopic(this.name)
+        this.selectTopic(this.slug)
       }
     }
   },
@@ -70,7 +69,7 @@ export default {
     if (this.color === null) {
       colorPair = this.colors[Math.floor(Math.random() * this.colors.length)];
     } else {
-      colorPair = this.colors[this.color];
+      colorPair = this.color;
     }
 
     this.selected = this.getSelectedTopics.includes(name);
