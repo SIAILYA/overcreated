@@ -3,7 +3,9 @@ const {Schema} = require("mongoose");
 const TopicSchema = new Schema({
     name: String,
     slug: {type: String, unique: true},
-    color: [String]
+    color: [String],
+    defaultSelected: {type: Boolean, default: false},
+    onList: {type: Boolean, default: false}
 })
 
 const FileSchema = new Schema({

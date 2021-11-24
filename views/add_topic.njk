@@ -16,6 +16,24 @@
             <div class="col-6 col-md-6 mt-2">
                 <input type="text" class="form-control" name="color2" placeholder="Цвет 2">
             </div>
+            <div class="col-12 col-md-6 mt-2">
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" name="onList"
+                           value="true"
+                           id="ol_checkbox" checked>
+                    <label class="form-check-label" for="ol_checkbox">
+                        Показан на фронте
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" name="defaultSelected"
+                           value="true"
+                           id="ds_checkbox" checked>
+                    <label class="form-check-label" for="ds_checkbox">
+                        Выбран по умолчанию (на фронте)
+                    </label>
+                </div>
+            </div>
 {#            TODO: Сделать превью#}
             <div class="col-12 text-center mt-3">
                 <button class="btn btn-success">Отправить</button>

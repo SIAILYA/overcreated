@@ -8,8 +8,9 @@ const bodyParser = require('body-parser')
 const cookieParser = require('cookie-parser')
 const fs = require("fs/promises")
 const app = express();
+const cors = require('cors')
 
-mongoose.connect('mongodb://127.0.0.1:27017/overcreated',
+mongoose.connect('mongodb://2021@194.67.111.141:27017/overcreated?authSource=overcreated&readPreference=primary&directConnection=true&ssl=false',
     {useNewUrlParser: true, useUnifiedTopology: true}
 );
 
@@ -24,9 +25,11 @@ app.set('view engine', 'njk');
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(cookieParser())
+app.use(cors())
 
 const multer = require('multer')
 const {Project, Topic} = require("./database/models");
+const {Obj} = require("nunjucks/src/object");
 const upload = multer({dest: 'uploads/'})
 
 app.get("/admin", (req, res) => {
@@ -53,12 +56,16 @@ app.post("/admin/add_topic", async (req, res) => {
 
 app.get("/admin/edit_topic/:id", (async (req, res) => {
     const editTopic = await Topic.findById(req.params.id)
+
     res.render("edit_topic", {editTopic})
 }))
 
 app.post("/admin/edit_topic/:id", (async (req, res) => {
     const editedTopic = req.body
     editedTopic.color = [editedTopic.color1, editedTopic.color2]
+
+    editedTopic.defaultSelected = Object.keys(editedTopic).indexOf("defaultSelected") !== -1
+    editedTopic.onList = Object.keys(editedTopic).indexOf("onList") !== -1
 
     await Topic.findByIdAndUpdate(req.params.id, editedTopic)
 
@@ -72,7 +79,6 @@ app.get("/admin/delete_topic/:id", (async (req, res) => {
 
 app.get("/admin/projects", async (req, res) => {
     const allProjects = await Project.find()
-    console.log(allProjects)
 
     res.render("projects", {allProjects})
 })
@@ -86,7 +92,9 @@ app.get("/admin/add_project", async (req, res) => {
 app.post("/admin/add_project", async (req, res) => {
     const projectObject = req.body
 
-    projectObject.techs = projectObject.techs.split(",").map(tech => {return tech.trim()}).filter(tech => tech.length > 1)
+    projectObject.techs = projectObject.techs.split(",").map(tech => {
+        return tech.trim()
+    }).filter(tech => tech.length > 1)
 
     projectObject.topics = Object.keys(projectObject).map(key => {
         return key.substr(0, 5) === "topic" ? projectObject[key] : ""
@@ -109,7 +117,9 @@ app.get("/admin/edit_project/:id", async (req, res) => {
 app.post("/admin/edit_project/:id", async (req, res) => {
     const editedProject = req.body
 
-    editedProject.techs = editedProject.techs.split(",").map(tech => {return tech.trim()}).filter(tech => tech.length > 1)
+    editedProject.techs = editedProject.techs.split(",").map(tech => {
+        return tech.trim()
+    }).filter(tech => tech.length > 1)
 
     editedProject.topics = Object.keys(editedProject).map(key => {
         return key.substr(0, 5) === "topic" ? editedProject[key] : ""
@@ -141,6 +151,27 @@ app.post("/api/upload_photo", upload.array("photo", 10), async (req, res) => {
 
     res.send("Ok")
 })
+
+app.get("/api/v1/topics/get", (async (req, res) => {
+    const topics = await Topic.find({onList: true}, {__v: 0})
+    res.send(topics)
+}))
+
+app.post("/api/v1/projects/get", (async (req, res) => {
+    const topicIDs = (await Topic.find({slug: {$in: req.body.topics}}, {_id: 1})).map(topic => topic._id)
+    // FIXME: Архетектура говно, надо посылать id топиков
+    const projects = await Project.find(
+        {
+            visible: true,
+            topics:
+                {
+                    $elemMatch: {$in: topicIDs}
+                }
+        },
+        {name: 1, slug: 1, shortDescription: 1, color: 1, demoLink: 1, developTime: 1, techs: 1})
+
+    res.send(projects)
+}))
 
 const staticFileMiddleware = express.static(__dirname + "/dist")
 

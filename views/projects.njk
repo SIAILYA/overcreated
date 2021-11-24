@@ -2,7 +2,7 @@
 
 {% block content %}
     <h2 class="mb-4 text-center">Проекты</h2>
-    <div class="row text-center justify-content-center projects-list">
+    <div class="row text-center projects-list">
         {% for project in allProjects %}
             <a class="text-decoration-none d-block project mx-2 text-black card col-12 col-md-6 col-lg-4 p-2" href="/admin/edit_project/{{ project._id.toString() }}">
                 <h2 style="background: linear-gradient(45deg, {{project.color[0] if project.color[0] else "#000"}} 33%, {{project.color[1] if project.color[1] else "#000"}} 66%, #8AA9D6); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
