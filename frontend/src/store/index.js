@@ -11,9 +11,9 @@ export default new Vuex.Store({
   state: {
     selectedTopics: [],
     availableTopics: [],
-    topicsLoading: false,
+    topicsLoading: true,
     projects: [],
-    projectsLoading: false
+    projectsLoading: true
   },
   actions: {
     selectTopic(context, topicSlug) {

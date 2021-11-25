@@ -1,9 +1,9 @@
 <template>
   <div class="menu">
-    <router-link active-class="active-link" class="menu-link" to="/">Портфолио</router-link>
-    <router-link active-class="active-link" class="menu-link" to="/contacts">Контакты</router-link>
-    <router-link active-class="active-link" class="menu-link" to="/blog">Блог</router-link>
-    <router-link active-class="active-link" class="menu-link" to="/resume">Резюме</router-link>
+    <router-link class="menu-link" exact-active-class="active-link" to="/">Портфолио</router-link>
+    <router-link class="menu-link" exact-active-class="active-link" to="/contacts">Контакты</router-link>
+    <router-link class="menu-link" exact-active-class="active-link" to="/blog">Блог</router-link>
+    <router-link class="menu-link" exact-active-class="active-link" to="/resume">Резюме</router-link>
   </div>
 </template>
 
