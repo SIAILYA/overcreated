@@ -3,9 +3,11 @@
     <div ref="header" class="overcreated-header text-center mx-auto" @click="toggleQuote">
       <h1 class="header">overcreated</h1>
       <div class="d-flex">
-          <span v-if="this.$route.meta.headerSection"
-                class="header-section d-flex my-auto">:{{ this.$route.meta.headerSection }}</span>
-        <div ref="header_line" class="line d-flex my-auto" style="width: 0"></div>
+          <span v-if="this.$route.meta.headerSection" ref="headline"
+                class="header-section d-flex my-auto">:{{ this.$route.meta.headerSection }}
+          </span>
+        <div ref="header_line" class="line d-flex my-auto"
+             style="width: 0; transition: all .3s ease"></div>
       </div>
     </div>
     <span ref="quote" class="quote p-relative">
@@ -45,7 +47,8 @@ export default {
       ],
       activeQuote: '',
       quoteTimer: 0,
-      quoteChange: true
+      quoteChange: true,
+      prevSection: ""
     };
   },
   methods: {
@@ -69,10 +72,10 @@ export default {
     clearQuote() {
       this.$refs.quote_inner.classList.remove('quote-showed');
       this.quoteChange = true;
-    }
+    },
   },
   mounted() {
-    this.$refs.header_line.style.transition = 'width 1.2s';
+    this.$refs.header_line.style.transition = ' all .3s ease, width 1.2s';
     setTimeout(() => {
       this.$refs.header_line.style.width = '25%';
     }, 200);
@@ -83,6 +86,10 @@ export default {
     this.$refs.header.addEventListener('mouseleave', () => {
       this.$refs.header_line.style.width = '25%';
     });
+  },
+  beforeRouteUpdate(to, from, next) {
+    console.log(to, from)
+    next()
   }
 };
 </script>
@@ -115,8 +122,26 @@ export default {
 .line {
   height: 10px;
   border-radius: 50px;
-  transition: width .8s;
   background: $accentGradient;
+  transition: all .3s ease;
+}
+
+html[theme="green"] {
+  .line {
+    background: $accentSecond;
+  }
+}
+
+html[theme="blue"] {
+  .line {
+    background: $accentSecond;
+  }
+}
+
+html[theme="red"] {
+  .line {
+    background: $accentSecond;
+  }
 }
 
 .header-section {

@@ -1,37 +1,26 @@
 <template>
-  <default-view>
-    <div class="text-center">
-      <h1>404</h1>
-      <div>
-        Кажется Вы заблудидись! Такой страницы нет!
-      </div>
-      <div class="back" @click="$router.go(-1)">
-        Вернуться назад
-      </div>
+  <div class="text-center">
+    <h1>404</h1>
+    <div>
+      Кажется Вы заблудидись! Такой страницы нет!
     </div>
-  </default-view>
+    <div class="back" @click="$router.go(-1)">
+      Вернуться назад
+    </div>
+  </div>
 </template>
 
 <script>
-
-import DefaultView from "./DefaultView";
-
 export default {
   name: 'NotFound',
   components: {
-    DefaultView
-  },
-  beforeRouteEnter(to, from, next) {
-    console.log(to.meta)
-    document.documentElement.setAttribute("theme", to.meta.themeColor)
-    next()
   }
 };
 </script>
 
 <style scoped>
 h1 {
-  background: linear-gradient(45deg, var(--accent-main) 33%, var(--accent-second) 66%);
+  background: linear-gradient(45deg, var(--accent-main-red) 33%, var(--accent-second-red) 66%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   font-size: 20vh;

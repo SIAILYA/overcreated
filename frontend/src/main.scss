@@ -1,10 +1,20 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap');
 @import "src/utils";
+@import "src/animations";
 
 :root {
   --background-primary: #151515;
   --background-secondary: #212121;
-  --text-color: #FFF
+  --text-color: #FFF;
+
+  --accent-main-red: #8a0000;
+  --accent-second-red: #c90000;
+
+  --accent-main-green: #00B61D;
+  --accent-second-green: #00FF57;
+
+  --accent-main-blue: #00698A;
+  --accent-second-blue: #00BDC9;
 }
 
 html[theme="green"] {
@@ -35,6 +45,10 @@ html, body {
   color: $textColor;
   font-family: 'Montserrat', sans-serif;
 }
+
+//body {
+//  padding: 0 calc(20px - (100vw - 100%)) 0 0;
+//}
 
 ::selection {
   background-color: $accentMain;

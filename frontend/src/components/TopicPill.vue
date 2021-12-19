@@ -92,6 +92,10 @@ export default {
   margin-bottom: 12px;
   transition: all .3s ease;
   user-select: none;
+
+  &:hover {
+    filter: brightness(.85);
+  }
 }
 
 .topic-pill__inner {

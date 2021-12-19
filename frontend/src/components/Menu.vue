@@ -1,6 +1,6 @@
 <template>
   <div class="menu">
-    <router-link class="menu-link" exact-active-class="active-link" to="/">Портфолио</router-link>
+    <router-link class="menu-link" active-class="active-link" to="/" exact-path>Портфолио</router-link>
     <router-link class="menu-link" exact-active-class="active-link" to="/contacts">Контакты</router-link>
     <router-link class="menu-link" exact-active-class="active-link" to="/blog">Блог</router-link>
     <router-link class="menu-link" exact-active-class="active-link" to="/resume">Резюме</router-link>
@@ -48,9 +48,6 @@ export default {
 }
 
 .active-link {
-  background: $accentGradient;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  font-weight: 500;
+  color: $accentSecond;
 }
 </style>

@@ -1,5 +1,5 @@
 <template>
-  <default-view>
+  <div>
     <div ref="topics" :class="getAvailableTopics.length && 'show-topics'"
          class="topics-pills d-flex">
       <topic-pill v-for="topic in getAvailableTopics"
@@ -12,7 +12,7 @@
     <div :class="getProjectsLoading ? 'show-spinner' : ''" class="d-flex spinner__wrapper">
       <loading-spinner class="mx-auto projects-loading"></loading-spinner>
     </div>
-    <transition duration="300" mode="out-in" name="fade">
+    <transition appear duration="300" mode="out-in" name="fade">
       <div v-if="getProjects.length === 0 && !getProjectsLoading"
            class="d-block text-center child-view mx-auto">
         <h3 class="text-center not-found">
@@ -52,7 +52,9 @@
               </div>
               <div class="d-flex my-1 text-overflow-ellipsis">
                 <span class="material-icons-outlined my-auto me-2">link</span>
-                <div class=" my-auto">{{ project.demoLink }}</div>
+                <a :href="project.demoLink" target="_blank" class="project-demo-link my-auto">{{
+                    project.demoLink
+                  }}</a>
               </div>
             </div>
             <div class="d-flex mini-topics">
@@ -75,7 +77,7 @@
       </transition-group>
     </transition>
     <div ref="popup_topic" class="popup-topic">{{ popupTopic }}</div>
-  </default-view>
+  </div>
 </template>
 
 <script>
@@ -89,7 +91,6 @@ export default {
   components: {
     LoadingSpinner,
     TopicPill,
-    DefaultView
   },
   data() {
     return {
@@ -126,11 +127,6 @@ export default {
 
       this.loadProjects()
     })
-  },
-  beforeRouteEnter(to, from, next) {
-    console.log(to.meta)
-    document.documentElement.setAttribute("theme", to.meta.themeColor)
-    next()
   }
 };
 </script>
@@ -237,6 +233,16 @@ $cardsAtRow: 4;
 
   .spinner__wrapper {
     margin: 2vh 0;
+  }
+}
+
+.project-demo-link {
+  color: white;
+  text-decoration: none;
+
+  &:hover {
+    color: white;
+    text-decoration: underline;
   }
 }
 

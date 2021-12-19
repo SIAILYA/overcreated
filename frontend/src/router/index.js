@@ -37,4 +37,8 @@ const router = new VueRouter({
   routes,
 });
 
+router.afterEach((to, from) => {
+  document.documentElement.setAttribute("theme", to.meta.themeColor)
+})
+
 export default router;
