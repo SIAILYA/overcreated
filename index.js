@@ -168,9 +168,13 @@ app.post("/api/v1/projects/get", (async (req, res) => {
                     $elemMatch: {$in: topicIDs}
                 }
         },
-        {name: 1, slug: 1, shortDescription: 1, color: 1, demoLink: 1, developTime: 1, techs: 1})
-
+        {name: 1, slug: 1, shortDescription: 1, color: 1, demoLink: 1, developTime: 1, techs: 1}).populate("topics", {color: 1, name: 1, _id: 0})
     res.send(projects)
+}))
+
+app.get("/404", ((req, res) => {
+    res.status(404)
+    res.sendFile(__dirname + "/dist" + "/index.html")
 }))
 
 const staticFileMiddleware = express.static(__dirname + "/dist")
