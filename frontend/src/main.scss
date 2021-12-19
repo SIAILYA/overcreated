@@ -15,6 +15,9 @@
 
   --accent-main-blue: #00698A;
   --accent-second-blue: #00BDC9;
+
+  --accent-main-purple: #AD00C9;
+  --accent-second-purple: #C7005F;
 }
 
 html[theme="green"] {
@@ -30,6 +33,11 @@ html[theme="blue"] {
 html[theme="red"] {
   --accent-main: #8a0000;
   --accent-second: #c90000;
+}
+
+html[theme="purple"] {
+  --accent-main: #AD00C9;
+  --accent-second: #C7005F;
 }
 
 $background: var(--background-primary);
