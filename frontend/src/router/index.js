@@ -29,6 +29,12 @@ const routes = [
     component: Contacts,
     meta: {headerSection: "contacts", themeColor: "blue"}
   },
+  {
+    path: '/resume',
+    name: 'Resume',
+    component: Resume,
+    meta: {headerSection: "resume", themeColor: "pink"}
+  },
 ];
 
 const router = new VueRouter({
