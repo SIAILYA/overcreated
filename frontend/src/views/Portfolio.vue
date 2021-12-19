@@ -81,7 +81,6 @@
 </template>
 
 <script>
-import DefaultView from './DefaultView';
 import TopicPill from '../components/TopicPill';
 import {mapActions, mapGetters} from "vuex";
 import LoadingSpinner from "../components/LoadingSpinner";
