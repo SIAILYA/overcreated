@@ -9,14 +9,18 @@ const cookieParser = require('cookie-parser')
 const fs = require("fs/promises")
 const app = express();
 const cors = require('cors')
+const crypto = require("crypto")
 
-mongoose.connect('mongodb://ovc:overcreatedwebapp2021@194.67.111.141:27017/overcreated?authSource=overcreated&readPreference=primary&directConnection=true&ssl=false',
-    {useNewUrlParser: true, useUnifiedTopology: true}
-);
+const adminName = "siailyaadmin"
+const adminHash = "MigTlxdJgcxsMgddlmlTuuR5rPFMaeqytAfD5vYAXTA="
+
+mongoose.connect('mongodb://ovc:overcreatedwebapp2021@194.67.111.141:27017/overcreated?authSource=overcreated&readPreference=primary&directConnection=true&ssl=false', {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+});
 
 nunjucks.configure('views', {
-    autoescape: true,
-    express: app
+    autoescape: true, express: app
 });
 
 app.set('views', path.join(__dirname, 'views'));
@@ -27,30 +31,54 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(cookieParser())
 app.use(cors())
 
+app.use(require('express-session')({secret: 'overcreatedsiailyakey5000', resave: false, saveUninitialized: false}));
+
+const checkLogin = (req, res, next) => {
+    if (req.session.loggedIn) {
+        next()
+    } else {
+        res.redirect("/admin/login")
+    }
+}
+
 const multer = require('multer')
 const {Project, Topic} = require("./database/models");
-const {Obj} = require("nunjucks/src/object");
 const upload = multer({dest: 'uploads/'})
 
 const TelegramBot = require('node-telegram-bot-api');
 const token = '5082176059:AAGdSKkszYZQ-NuTgGY19EtzQS-yjCtgzVQ';
 const bot = new TelegramBot(token, {polling: true});
 
-app.get("/admin", (req, res) => {
+app.get("/admin/login", ((req, res) => {
+    res.render("login")
+}))
+
+app.post('/admin/login', (req, res) => {
+    const hash = crypto.createHash('sha256').update(req.body.password).digest('base64');
+
+    if (hash === adminHash && req.body.login === adminName) {
+        req.session.loggedIn = true
+        res.redirect("/admin")
+    } else {
+        res.redirect("/admin/login")
+    }
+});
+
+app.get("/admin", checkLogin, (req, res) => {
     res.render("index")
 })
 
-app.get("/admin/topics", async (req, res) => {
+app.get("/admin/topics", checkLogin, async (req, res) => {
     const allTopics = (await Topic.find())
 
     res.render("topics", {allTopics})
 })
 
-app.get("/admin/add_topic", ((req, res) => {
+app.get("/admin/add_topic", checkLogin, ((req, res) => {
     res.render("add_topic")
 }))
 
-app.post("/admin/add_topic", async (req, res) => {
+app.post("/admin/add_topic", checkLogin, async (req, res) => {
     const topicObject = req.body
     topicObject.color = [topicObject.color1, topicObject.color2]
     await Topic.create(topicObject)
@@ -58,13 +86,13 @@ app.post("/admin/add_topic", async (req, res) => {
     res.redirect("/admin/topics")
 })
 
-app.get("/admin/edit_topic/:id", (async (req, res) => {
+app.get("/admin/edit_topic/:id", checkLogin, (async (req, res) => {
     const editTopic = await Topic.findById(req.params.id)
 
     res.render("edit_topic", {editTopic})
 }))
 
-app.post("/admin/edit_topic/:id", (async (req, res) => {
+app.post("/admin/edit_topic/:id", checkLogin, (async (req, res) => {
     const editedTopic = req.body
     editedTopic.color = [editedTopic.color1, editedTopic.color2]
 
@@ -76,24 +104,24 @@ app.post("/admin/edit_topic/:id", (async (req, res) => {
     res.redirect("/admin/topics")
 }))
 
-app.get("/admin/delete_topic/:id", (async (req, res) => {
+app.get("/admin/delete_topic/:id", checkLogin, (async (req, res) => {
     await Topic.findByIdAndDelete(req.params.id)
     res.redirect("/admin/topics")
 }))
 
-app.get("/admin/projects", async (req, res) => {
+app.get("/admin/projects", checkLogin, async (req, res) => {
     const allProjects = await Project.find()
 
     res.render("projects", {allProjects})
 })
 
-app.get("/admin/add_project", async (req, res) => {
+app.get("/admin/add_project", checkLogin, async (req, res) => {
     const allTopics = (await Topic.find())
 
     res.render("add_project", {allTopics})
 })
 
-app.post("/admin/add_project", async (req, res) => {
+app.post("/admin/add_project", checkLogin, async (req, res) => {
     const projectObject = req.body
 
     projectObject.techs = projectObject.techs.split(",").map(tech => {
@@ -111,14 +139,14 @@ app.post("/admin/add_project", async (req, res) => {
     res.redirect("/admin/projects")
 })
 
-app.get("/admin/edit_project/:id", async (req, res) => {
+app.get("/admin/edit_project/:id", checkLogin, async (req, res) => {
     const project = (await Project.findById(req.params.id))
     const allTopics = (await Topic.find())
 
     res.render("edit_project", {project, allTopics})
 })
 
-app.post("/admin/edit_project/:id", async (req, res) => {
+app.post("/admin/edit_project/:id", checkLogin, async (req, res) => {
     const editedProject = req.body
 
     editedProject.techs = editedProject.techs.split(",").map(tech => {
@@ -137,7 +165,7 @@ app.post("/admin/edit_project/:id", async (req, res) => {
     res.redirect("/admin/projects")
 })
 
-app.get("/admin/delete_project/:id", (async (req, res) => {
+app.get("/admin/delete_project/:id", checkLogin, (async (req, res) => {
     await Project.findByIdAndDelete(req.params.id)
     res.redirect("/admin/projects")
 }))
@@ -164,20 +192,17 @@ app.get("/api/v1/topics/get", (async (req, res) => {
 app.post("/api/v1/projects/get", (async (req, res) => {
     const topicIDs = (await Topic.find({slug: {$in: req.body.topics}}, {_id: 1})).map(topic => topic._id)
     // FIXME: Архетектура говно, надо посылать id топиков
-    const projects = await Project.find(
-        {
-            visible: true,
-            topics:
-                {
-                    $elemMatch: {$in: topicIDs}
-                }
-        },
-        {name: 1, slug: 1, shortDescription: 1, color: 1, demoLink: 1, developTime: 1, techs: 1}).populate("topics", {color: 1, name: 1, _id: 0})
+    const projects = await Project.find({
+        visible: true, topics: {
+            $elemMatch: {$in: topicIDs}
+        }
+    }, {
+        name: 1, slug: 1, shortDescription: 1, color: 1, demoLink: 1, developTime: 1, techs: 1
+    }).populate("topics", {color: 1, name: 1, _id: 0})
     res.send(projects)
 }))
 
 app.post("/api/v1/send_request", ((req, res) => {
-    console.log(req.body)
     bot.sendMessage(367861919, JSON.stringify(req.body));
 }))
 
@@ -189,12 +214,7 @@ app.get("/404", ((req, res) => {
 const staticFileMiddleware = express.static(__dirname + "/dist")
 
 app.use(history({
-    disableDotRule: false,
-    verbose: true,
-    htmlAcceptHeaders: ['text/html'],
-    rewrites: [
-        {from: "/404", to: "/404"}
-    ]
+    disableDotRule: false, verbose: true, htmlAcceptHeaders: ['text/html'], rewrites: [{from: "/404", to: "/404"}]
 }))
 
 app.use(staticFileMiddleware)
