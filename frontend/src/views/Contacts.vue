@@ -70,11 +70,11 @@
           <h2>Оставьте свои контакты</h2>
           <span>свяжусь с Вами в ближайшее время!</span>
           <div :style="'height: ' + stage * 44 + 'px'" class="mt-3 feedback-info">
-            <input v-if="stage >= 1" v-model="feedbackInfo.name" class="ovc-input"
+            <input v-if="stage >= 1" ref="fi_1" v-model="feedbackInfo.name" class="ovc-input"
                    placeholder="Как к Вам обращаться?">
-            <input v-if="stage >= 2" v-model="feedbackInfo.contact" class="ovc-input"
+            <input v-if="stage >= 2" ref="fi_2" v-model="feedbackInfo.contact" class="ovc-input"
                    placeholder="Ваш телефон, телеграм и т.д.">
-            <input v-if="stage >= 3" v-model="feedbackInfo.question" class="ovc-input"
+            <input v-if="stage >= 3" ref="fi_3" v-model="feedbackInfo.question" class="ovc-input"
                    placeholder="Можете задать вопрос или что-нибудь уточнить">
           </div>
           <div class="mt-3">
@@ -93,6 +93,8 @@
 
 <script>
 
+import axios from "axios";
+
 export default {
   name: "Contacts",
   data() {
@@ -107,12 +109,25 @@ export default {
   },
   methods: {
     feedbackNext() {
+      for (let i = 1; i <= this.stage; i++) {
+        console.log(i)
+        console.log(this.$refs)
+        this.$refs["fi_" + i].classList.remove("invalid-ovc")
+      }
+
       if (this.stage === 1 && this.feedbackInfo.name !== "") {
         this.stage = 2
       } else if (this.stage === 2 && this.feedbackInfo.contact !== "") {
         this.stage = 3
       } else if (this.stage === 3){
-        console.log("send")
+        axios.post("http://localhost:5088" + "/api/send_request", {name: this.name, contact: this.contact, question: this.question})
+      } else {
+        this.$refs["fi_" + this.stage].focus()
+        this.$refs["fi_" + this.stage].classList.add("invalid-ovc")
+
+        setTimeout(() => {
+          this.$refs["fi_" + this.stage].classList.remove("invalid-ovc")
+        }, 1500)
       }
     }
   }
@@ -168,10 +183,15 @@ export default {
   color: var(--text-color);
   margin-bottom: 10px;
   width: 80%;
+  transition: all .5s ease;
 
   &:focus {
     outline: none;
   }
+}
+
+.invalid-ovc {
+  border-color: #8e3b3b;
 }
 
 .feedback-info {
@@ -226,6 +246,23 @@ export default {
   font-weight: 300;
   a {
     color: white;
+    text-decoration: none;
+    position: relative;
+
+    &::after {
+      content: "";
+      transition: all .5s ease;
+      position: absolute;
+      width: 0;
+      height: 1px;
+      background: white;
+      bottom: 0;
+      left: 0;
+    }
+
+    &:hover::after {
+      width: 100%;
+    }
   }
 }
 
