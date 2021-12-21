@@ -46,6 +46,10 @@ export default new Vuex.Store({
         context.commit("setProjects", loaded)
         context.commit("setProjectsLoading", false)
       })
+    },
+    clearTopics(context) {
+      context.commit("setSelectedTopics", [])
+      context.dispatch("loadProjects")
     }
   },
   mutations: {

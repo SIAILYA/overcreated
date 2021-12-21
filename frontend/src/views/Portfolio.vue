@@ -8,6 +8,9 @@
                   :name="topic.name"
                   :slug="topic.slug"
       />
+      <div class="reset-topics" @click="clearTopics">
+        <span class="material-icons-outlined m-auto">clear</span>
+      </div>
     </div>
     <div :class="getProjectsLoading ? 'show-spinner' : ''" class="d-flex spinner__wrapper">
       <loading-spinner class="mx-auto projects-loading"></loading-spinner>
@@ -17,6 +20,8 @@
            class="d-block text-center child-view mx-auto">
         <h3 class="text-center not-found">
           Увы, ничего не нашлось
+          <br>
+          <span>Выберете один или несколько топиков, чтобы посмотреть проекты</span>
         </h3>
       </div>
       <transition-group v-else class="child-view projects-list d-flex flex-wrap"
@@ -52,7 +57,7 @@
               </div>
               <div class="d-flex my-1 text-overflow-ellipsis">
                 <span class="material-icons-outlined my-auto me-2">link</span>
-                <a :href="project.demoLink" target="_blank" class="project-demo-link my-auto">{{
+                <a :href="project.demoLink" class="project-demo-link my-auto" target="_blank">{{
                     project.demoLink
                   }}</a>
               </div>
@@ -101,7 +106,7 @@ export default {
       "getProjectsLoading", "getProjectsLoading"])
   },
   methods: {
-    ...mapActions(["loadTopics", "loadProjects"]),
+    ...mapActions(["loadTopics", "loadProjects", "clearTopics"]),
     showPopUp(ev, name) {
       const [x, y] = [ev.clientX, ev.clientY]
 
@@ -153,6 +158,23 @@ export default {
 .show-topics {
   opacity: 1;
   transform: translateY(0);
+}
+
+.reset-topics {
+  padding: 7px;
+  border-radius: 50px;
+  cursor: pointer;
+  display: flex;
+  margin-bottom: 12px;
+  transition: all .3s ease;
+  user-select: none;
+  border: var(--background-secondary) 2px solid;
+  color: rgba(200, 200, 200, .8);
+
+  &:hover {
+    background: var(--background-secondary);
+    filter: brightness(.85);
+  }
 }
 
 .projects-list {
@@ -287,9 +309,14 @@ $cardsAtRow: 4;
   margin-top: 4vh;
   font-size: 24px;
   font-weight: 500;
+
+  span {
+    font-size: 16px;
+    font-weight: 300;
+  }
 }
 
-@media screen and (max-width: 1400px) {
+@media screen and (max-width: 1640px) {
   $cardsAtRow: 3;
 
   .project-card {
@@ -305,7 +332,7 @@ $cardsAtRow: 4;
   }
 }
 
-@media screen and (max-width: 1000px) {
+@media screen and (max-width: 1070px) {
   $cardsAtRow: 2;
 
   .project-card {
