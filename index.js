@@ -10,7 +10,7 @@ const fs = require("fs/promises")
 const app = express();
 const cors = require('cors')
 
-mongoose.connect('mongodb://2021@194.67.111.141:27017/overcreated?authSource=overcreated&readPreference=primary&directConnection=true&ssl=false',
+mongoose.connect('mongodb://ovc:overcreatedwebapp2021@194.67.111.141:27017/overcreated?authSource=overcreated&readPreference=primary&directConnection=true&ssl=false',
     {useNewUrlParser: true, useUnifiedTopology: true}
 );
 
@@ -31,6 +31,10 @@ const multer = require('multer')
 const {Project, Topic} = require("./database/models");
 const {Obj} = require("nunjucks/src/object");
 const upload = multer({dest: 'uploads/'})
+
+const TelegramBot = require('node-telegram-bot-api');
+const token = '5082176059:AAGdSKkszYZQ-NuTgGY19EtzQS-yjCtgzVQ';
+const bot = new TelegramBot(token, {polling: true});
 
 app.get("/admin", (req, res) => {
     res.render("index")
@@ -170,6 +174,11 @@ app.post("/api/v1/projects/get", (async (req, res) => {
         },
         {name: 1, slug: 1, shortDescription: 1, color: 1, demoLink: 1, developTime: 1, techs: 1}).populate("topics", {color: 1, name: 1, _id: 0})
     res.send(projects)
+}))
+
+app.post("/api/v1/send_request", ((req, res) => {
+    console.log(req.body)
+    bot.sendMessage(367861919, JSON.stringify(req.body));
 }))
 
 app.get("/404", ((req, res) => {

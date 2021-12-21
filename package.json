@@ -19,6 +19,7 @@
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.0.13",
     "multer": "^1.4.3",
+    "node-telegram-bot-api": "^0.56.0",
     "nunjucks": "^3.2.3",
     "vue-chartjs": "^3.5.1"
   }
