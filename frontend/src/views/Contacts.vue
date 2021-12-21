@@ -2,29 +2,7 @@
   <div class="text-center">
     <!--    <h2 class="contacts-header">Контакты мои контакты</h2>-->
 
-    <div class="row mt-4">
-      <div class="col-12 col-lg-4">
-        <div class="feedback-card text-center">
-          <h2>Оставьте свои контакты</h2>
-          <span>свяжусь с Вами в ближайшее время!</span>
-          <div :style="'height: ' + stage * 35 + 'px'" class="mt-3 feedback-info">
-            <input v-if="stage >= 1" v-model="feedbackInfo.name" class="ovc-input"
-                   placeholder="Как к Вам обращаться?">
-            <input v-if="stage >= 2" v-model="feedbackInfo.contact" class="ovc-input"
-                   placeholder="Ваш телефон, телеграм и т.д.">
-            <input v-if="stage >= 3" v-model="feedbackInfo.question" class="ovc-input"
-                   placeholder="Можете задать вопрос или что-нибудь уточнить">
-          </div>
-          <div class="mt-3">
-            <button class="feedback-next" @click="feedbackNext">
-              {{
-                this.stage !== 3 ?
-                  'Дальше' : 'Отправить'
-              }}
-            </button>
-          </div>
-        </div>
-      </div>
+    <div class="row">
       <div class="col-12 col-lg-8 text-start contacts-list mt-lg-0 mt-3">
         <h3>Приоритетные способы связи</h3>
 
@@ -84,6 +62,28 @@
               <div class="contact-header">Behance</div>
               <div class="contact-secondary">behance.net/siailya</div>
             </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 col-lg-4">
+        <div class="feedback-card text-center">
+          <h2>Оставьте свои контакты</h2>
+          <span>свяжусь с Вами в ближайшее время!</span>
+          <div :style="'height: ' + stage * 38 + 'px'" class="mt-3 feedback-info">
+            <input v-if="stage >= 1" v-model="feedbackInfo.name" class="ovc-input"
+                   placeholder="Как к Вам обращаться?">
+            <input v-if="stage >= 2" v-model="feedbackInfo.contact" class="ovc-input"
+                   placeholder="Ваш телефон, телеграм и т.д.">
+            <input v-if="stage >= 3" v-model="feedbackInfo.question" class="ovc-input"
+                   placeholder="Можете задать вопрос или что-нибудь уточнить">
+          </div>
+          <div class="mt-3">
+            <button class="feedback-next" @click="feedbackNext">
+              {{
+                this.stage !== 3 ?
+                  'Дальше' : 'Отправить'
+              }}
+            </button>
           </div>
         </div>
       </div>
@@ -218,5 +218,28 @@ export default {
 .contact-secondary {
   font-size: 18px;
   font-weight: 300;
+}
+
+@media screen and (max-width: 768px){
+  .contact-img {
+    margin-right: 10px;
+    width: 45px;
+    height: 45px;
+  }
+
+  .contact-header {
+    font-size: 18px;
+    font-weight: 500;
+    margin-bottom: 4px;
+  }
+
+  .contact-secondary {
+    font-size: 16px;
+    font-weight: 300;
+  }
+
+  .contacts-list h3 {
+    font-size: 22px;
+  }
 }
 </style>
