@@ -173,7 +173,7 @@ export default {
 }
 
 .feedback-next {
-  background: $accentGradient;
+  background: linear-gradient(90deg, var(--accent-main-blue) 0%, var(--accent-second-blue) 100%);;
   outline: none;
   border: none;
   color: white;
