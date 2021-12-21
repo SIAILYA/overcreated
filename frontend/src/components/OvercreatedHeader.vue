@@ -150,14 +150,14 @@ html[theme="red"] {
 }
 
 .quote {
-  margin-top: 4vh;
-  width: 80%;
-  margin-left: 10%;
+  margin-top: 3vh;
+  //width: 80%;
+  //margin-left: 10%;
   text-align: center;
   z-index: 2;
   transition: all .5s ease;
   height: 30px;
-  padding-bottom: 30px;
+  padding-bottom: 32px;
 }
 
 .quote_inner {
@@ -192,12 +192,17 @@ html[theme="red"] {
   .header {
     font-size: 64px;
   }
+
+  .quote-showed {
+    height: 42px;
+  }
 }
 
 @media screen and (max-width: 768px) {
   .header {
     font-size: 48px;
   }
+
 }
 
 @media screen and (max-width: 576px) {
@@ -214,11 +219,11 @@ html[theme="red"] {
   }
 
   .quote_inner {
-    font-size: 16px;
+    font-size: 14px;
   }
 
   .quote-showed {
-    height: 36px;
+    height: 54px;
   }
 }
 </style>
