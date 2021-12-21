@@ -1,5 +1,5 @@
 <template>
-  <div class="text-center">
+  <div class="text-center pb-4">
     <!--    <h2 class="contacts-header">Контакты мои контакты</h2>-->
 
     <div class="row">
@@ -12,20 +12,20 @@
               <img class="contact-img" src="../assets/tg.svg" alt="">
               <div>
                 <div class="contact-header">@siailya</div>
-                <div class="contact-secondary">t.me/siailya</div>
+                <div class="contact-secondary"><a target="_blank" href="https://t.me/siailya">t.me/siailya</a></div>
               </div>
             </div>
             <div class="col-12 col-md-6 d-flex mb-3 mb-md-0">
               <img class="contact-img" src="../assets/vk.svg" alt="">
               <div>
                 <div class="contact-header">Самойлов Илья</div>
-                <div class="contact-secondary">vk.com/siailya</div>
+                <div class="contact-secondary"><a target="_blank" href="https://vk.com/siailya">vk.com/siailya</a></div>
               </div>
             </div>
           </div>
         </div>
 
-        <h3 class="mt-4">Еще можно</h3>
+        <h3 class="mt-3 mt-lg-4">Еще можно</h3>
 
         <div class="more">
           <div class="row">
@@ -33,34 +33,34 @@
               <img class="contact-img" src="../assets/phone.svg" alt="">
               <div>
                 <div class="contact-header">Позвонить</div>
-                <div class="contact-secondary">+7-999-516-63-83</div>
+                <div class="contact-secondary"><a target="_blank" href="tel:+7-999-516-63-83">+7-999-516-63-83</a></div>
               </div>
             </div>
             <div class="col-12 col-md-6 d-flex mb-3 mb-md-0">
               <img class="contact-img" src="../assets/mail.svg" alt="">
               <div>
                 <div class="contact-header">Написать</div>
-                <div class="contact-secondary">sia.ilya.dev@gmail.com</div>
+                <div class="contact-secondary"><a target="_blank" href="mailto:sia.ilya.dev@gmail.com">sia.ilya.dev@gmail.com</a></div>
               </div>
             </div>
           </div>
         </div>
 
-        <h3 class="mt-5">Мои рабочие пространства</h3>
+        <h3 class="mt-4 mt-lg-5">Мои рабочие пространства</h3>
 
         <div class="workspaces">
           <div class="mb-3 d-flex">
             <img class="contact-img" src="../assets/gh.svg" alt="">
             <div>
               <div class="contact-header">GitHub</div>
-              <div class="contact-secondary">github.com/SIAILYA</div>
+              <div class="contact-secondary"><a target="_blank" href="https://github.com/SIAILYA">github.com/SIAILYA</a></div>
             </div>
           </div>
           <div class="mb-3 d-flex">
             <img class="contact-img" src="../assets/be.svg" alt="">
             <div>
               <div class="contact-header">Behance</div>
-              <div class="contact-secondary">behance.net/siailya</div>
+              <div class="contact-secondary"><a target="_blank" href="https://behance.net/siailya">behance.net/siailya</a></div>
             </div>
           </div>
         </div>
@@ -69,7 +69,7 @@
         <div class="feedback-card text-center">
           <h2>Оставьте свои контакты</h2>
           <span>свяжусь с Вами в ближайшее время!</span>
-          <div :style="'height: ' + stage * 38 + 'px'" class="mt-3 feedback-info">
+          <div :style="'height: ' + stage * 44 + 'px'" class="mt-3 feedback-info">
             <input v-if="stage >= 1" v-model="feedbackInfo.name" class="ovc-input"
                    placeholder="Как к Вам обращаться?">
             <input v-if="stage >= 2" v-model="feedbackInfo.contact" class="ovc-input"
@@ -140,6 +140,12 @@ export default {
   padding: 20px;
   border-radius: 22px;
   text-align: center;
+  transition: all .5s ease;
+
+  &:hover {
+    box-shadow: 0px 0px 12px 1px rgba(255, 255, 255, 0.15);
+    transform: scale(1.01);
+  }
 
   h2 {
     line-height: 1;
@@ -156,7 +162,7 @@ export default {
   background: none;
   border: #4b4b4b solid 1.5px;
   border-radius: 30px;
-  padding: 5px;
+  padding: 8px 6px;
   font-size: 16px;
   text-align: center;
   color: var(--text-color);
@@ -218,6 +224,9 @@ export default {
 .contact-secondary {
   font-size: 18px;
   font-weight: 300;
+  a {
+    color: white;
+  }
 }
 
 @media screen and (max-width: 768px){
