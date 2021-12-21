@@ -3,6 +3,7 @@ import VueRouter from 'vue-router';
 import Portfolio from '../views/Portfolio.vue';
 import NotFound from '../views/NotFound.vue';
 import Contacts from '../views/Contacts.vue';
+import Resume from "../views/Resume";
 
 Vue.use(VueRouter);
 
@@ -33,7 +34,7 @@ const routes = [
     path: '/resume',
     name: 'Resume',
     component: Resume,
-    meta: {headerSection: "resume", themeColor: "pink"}
+    meta: {headerSection: "resume", themeColor: "purple"}
   },
 ];
 
