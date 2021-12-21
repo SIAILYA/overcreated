@@ -13,7 +13,7 @@
             <div class="webdev mt-2">Web Developer</div>
             <button class="mt-3 pdfdownload d-flex">
               <span class="material-icons-outlined me-2 my-auto">file_download</span>
-              <span class="my-auto">Резюме в PDF</span>
+              <a href="/downloads/resume.pdf" target="_blank" class="my-auto">Резюме в PDF</a>
             </button>
           </div>
         </div>
@@ -105,7 +105,7 @@
     </div>
     <div class="col-12 col-lg-5 mt-4 mt-lg-0">
       <div class="my-skills">Мои скиллы</div>
-      <div class="my-skills-ps">(вернее то, как я их ощущаю)</div>
+      <div class="my-skills-ps">(то, как я их ощущаю)</div>
       <skills-radar class="skills-radar"/>
     </div>
   </div>
@@ -178,6 +178,11 @@ export default {
   font-family: 'Montserrat', sans-serif;
   color: white;
   font-weight: 300;
+
+  a {
+    color: white;
+    text-decoration: none;
+  }
 }
 
 @media screen and (max-width: 768px) {

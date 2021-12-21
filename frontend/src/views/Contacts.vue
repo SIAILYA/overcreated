@@ -110,8 +110,6 @@ export default {
   methods: {
     feedbackNext() {
       for (let i = 1; i <= this.stage; i++) {
-        console.log(i)
-        console.log(this.$refs)
         this.$refs["fi_" + i].classList.remove("invalid-ovc")
       }
 
@@ -120,7 +118,7 @@ export default {
       } else if (this.stage === 2 && this.feedbackInfo.contact !== "") {
         this.stage = 3
       } else if (this.stage === 3){
-        axios.post("http://localhost:5088" + "/api/send_request", {name: this.name, contact: this.contact, question: this.question})
+        axios.post("http://localhost:5088" + "/api/v1/send_request", this.feedbackInfo)
       } else {
         this.$refs["fi_" + this.stage].focus()
         this.$refs["fi_" + this.stage].classList.add("invalid-ovc")
