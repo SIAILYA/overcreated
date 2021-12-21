@@ -94,6 +94,7 @@
 <script>
 
 import axios from "axios";
+import {BACKEND} from "../../backend.config";
 
 export default {
   name: "Contacts",
@@ -118,7 +119,7 @@ export default {
       } else if (this.stage === 2 && this.feedbackInfo.contact !== "") {
         this.stage = 3
       } else if (this.stage === 3){
-        axios.post("http://localhost:5088" + "/api/v1/send_request", this.feedbackInfo)
+        axios.post(BACKEND + "/api/v1/send_request", this.feedbackInfo)
       } else {
         this.$refs["fi_" + this.stage].focus()
         this.$refs["fi_" + this.stage].classList.add("invalid-ovc")

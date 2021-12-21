@@ -2,8 +2,9 @@ import Vue from 'vue';
 import Vuex from 'vuex';
 import axios from "axios";
 import router from '../router'
+import {BACKEND} from "../../backend.config";
 
-const BACKEND = "http://localhost:5088"
+// const BACKEND = "http://localhost:5088"
 
 Vue.use(Vuex);
 
