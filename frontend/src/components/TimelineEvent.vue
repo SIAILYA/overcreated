@@ -50,6 +50,7 @@ export default {
 
 <style lang="scss" scoped>
 @import "../main";
+@use "sass:math";
 
 .event-card {
   > div {
@@ -108,8 +109,8 @@ export default {
 
         width: $innerOnHover;
         height: $innerOnHover;
-        left: (100% - $innerOnHover) / 2;
-        top: (100% - $innerOnHover) / 2;
+        left: math.div(100% - $innerOnHover, 2);
+        top: math.div(100% - $innerOnHover, 2);
         border-radius: 100px;
         background: var(--background-primary);
         position: absolute;
@@ -122,7 +123,7 @@ export default {
   height: 50px;
   border-left-width: 2px;
   border-left-color: var(--text-color);
-  opacity: 50%;
+  //opacity: 50%;
   margin-top: 6px;
   margin-bottom: 6px;
 }
