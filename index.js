@@ -170,6 +170,10 @@ app.get("/admin/delete_project/:id", checkLogin, (async (req, res) => {
     res.redirect("/admin/projects")
 }))
 
+app.get("/api/v1/status", ((req, res) => {
+    res.send("Working")
+}))
+
 app.post("/api/upload_photo", upload.array("photo", 10), async (req, res) => {
     for (const file of req.files) {
         const ext = file.originalname.split(".")[file.originalname.split(".").length - 1]
@@ -192,6 +196,7 @@ app.get("/api/v1/topics/get", (async (req, res) => {
 app.post("/api/v1/projects/get", (async (req, res) => {
     const topicIDs = (await Topic.find({slug: {$in: req.body.topics}}, {_id: 1})).map(topic => topic._id)
     // FIXME: Архетектура говно, надо посылать id топиков
+    console.log(topicIDs)
     const projects = await Project.find({
         visible: true, topics: {
             $elemMatch: {$in: topicIDs}
@@ -211,16 +216,13 @@ app.get("/404", ((req, res) => {
     res.sendFile(__dirname + "/dist" + "/index.html")
 }))
 
-const staticFileMiddleware = express.static(__dirname + "/dist")
-
 app.use(history({
     disableDotRule: false, verbose: true, htmlAcceptHeaders: ['text/html'], rewrites: [{from: "/404", to: "/404"}]
 }))
 
-app.use(staticFileMiddleware)
+app.use(express.static("dist"))
 app.use(express.static('uploads'))
 app.use(express.static('static'))
 
 
 app.listen(5088)
-

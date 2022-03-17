@@ -17,6 +17,8 @@ COPY --from=builder /app/dist /app/dist
 COPY index.js /app/index.js
 COPY package.json /app/package.json
 COPY views /app/views
+COPY database /app/database
+COPY static /app/static
 
 RUN npm i
 
