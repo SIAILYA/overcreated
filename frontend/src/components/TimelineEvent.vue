@@ -49,8 +49,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "../main";
 @use "sass:math";
+@import "../main";
 
 .event-card {
   > div {
