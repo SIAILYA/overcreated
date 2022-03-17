@@ -14,7 +14,7 @@ export default {
       datasets: [
         {
           backgroundColor: gradient,
-          data: [80, 30, 95, 75, 80, 70, 60],
+          data: [40, 25, 80, 85, 90, 70, 60],
           comments: false,
         }
       ]

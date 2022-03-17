@@ -1,5 +1,9 @@
 <template>
   <div>
+    <div class="page-caption text-center">
+      <h2 class="mt-0">Витрина моих проектов</h2>
+    </div>
+
     <div ref="topics" :class="getAvailableTopics.length && 'show-topics'"
          class="topics-pills d-flex">
       <topic-pill v-for="topic in getAvailableTopics"
@@ -46,7 +50,7 @@
             <span class="d-block">
             {{ project.shortDescription }}
           </span>
-            <div class="mt-auto">
+            <div class="mt-auto text-start">
               <div class="d-flex my-1 text-overflow-ellipsis">
                 <span class="material-icons-outlined my-auto me-2">schedule</span>
                 <span class=" my-auto">~{{ project.developTime }} часов</span>
@@ -55,8 +59,8 @@
                 <span class="material-icons-outlined my-auto me-2">reorder</span>
                 <span class=" my-auto">{{ project.techs.join(", ") }}</span>
               </div>
-              <div class="d-flex my-1 text-overflow-ellipsis">
-                <span class="material-icons-outlined my-auto me-2">link</span>
+              <div class="d-inline-flex mr-auto my-1 text-overflow-ellipsis">
+                <span class="material-icons-outlined link-icon my-auto me-2">link</span>
                 <a :href="project.demoLink" class="project-demo-link my-auto" target="_blank">{{
                     project.demoLink
                   }}</a>
@@ -138,6 +142,25 @@ export default {
 <style lang="scss" scoped>
 @import "../animations";
 
+.page-caption {
+  margin-bottom: 20px;
+
+  h2 {
+    font-weight: 400;
+  }
+
+  @media screen and (max-width: 768px) {
+    h2 {
+      font-size: 18px;
+      margin-bottom: .5rem;
+    }
+
+    div {
+      font-size: 12px;
+    }
+  }
+}
+
 .topics-pills {
   justify-content: center;
   flex-wrap: wrap;
@@ -177,6 +200,14 @@ export default {
   }
 }
 
+@media screen and (max-width: 576px) {
+  .reset-topics {
+    span {
+      font-size: 16px;
+    }
+  }
+}
+
 .projects-list {
   position: relative;
   flex-wrap: wrap;
@@ -194,9 +225,13 @@ $cardsAtRow: 4;
   padding: 0 1.5% 4vh;
   margin-bottom: 4vh;
   display: block;
-  cursor: pointer;
+  //cursor: pointer;
   //height: 100%;
   flex: 0 1 auto;
+
+  .link-icon {
+    width: 24px;
+  }
 
   h2 {
     margin: 0;

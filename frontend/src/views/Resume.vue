@@ -10,10 +10,11 @@
             <h2 class="name">Самойлов Илья</h2>
             <div class="aka">aka siailya</div>
             <div class="aka">aka overcreated</div>
+            <div class="aka">aka samolyev</div>
             <div class="webdev mt-2">Web Developer</div>
             <button class="mt-3 pdfdownload d-flex">
               <span class="material-icons-outlined me-2 my-auto">file_download</span>
-              <a href="/downloads/resume.pdf" target="_blank" class="my-auto">Резюме в PDF</a>
+              <a href="https://disk.yandex.ru/i/WDM1jsSOXCQbtA" target="_blank" class="my-auto">Резюме в PDF</a>
             </button>
           </div>
         </div>

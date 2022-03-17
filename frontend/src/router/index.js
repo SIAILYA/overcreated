@@ -4,6 +4,7 @@ import Portfolio from '../views/Portfolio.vue';
 import NotFound from '../views/NotFound.vue';
 import Contacts from '../views/Contacts.vue';
 import Resume from "../views/Resume";
+import Timeline from "../views/Timeline";
 
 Vue.use(VueRouter);
 
@@ -19,7 +20,7 @@ const routes = [
     meta: {headerSection: "not_found", themeColor: "red"}
   },
   {
-    path: '/',
+    path: '/portfolio',
     name: 'Portfolio',
     component: Portfolio,
     meta: {headerSection: "portfolio", themeColor: "green"}
@@ -35,6 +36,12 @@ const routes = [
     name: 'Resume',
     component: Resume,
     meta: {headerSection: "resume", themeColor: "purple"}
+  },
+  {
+    path: '/',
+    name: 'Timeline',
+    component: Timeline,
+    meta: {headerSection: "timeline", themeColor: "orange"}
   },
 ];
 

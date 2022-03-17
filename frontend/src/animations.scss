@@ -23,3 +23,17 @@
 .projects-list-move {
   transition: transform .8s ease;
 }
+
+.timeline-enter, .timeline-leave-to {
+  opacity: 0;
+  transform: translateY(10vh);
+}
+
+.timeline-leave-active {
+  position: absolute;
+  width: 100%;
+}
+
+.timeline-move {
+  transition: transform .8s ease;
+}

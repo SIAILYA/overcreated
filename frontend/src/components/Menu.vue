@@ -1,7 +1,8 @@
 <template>
   <div class="menu">
-    <router-link class="menu-link" active-class="active-link" to="/" exact-path>Портфолио</router-link>
+    <router-link class="menu-link" active-class="active-link" to="/" exact>Таймлайн</router-link>
     <router-link class="menu-link" exact-active-class="active-link" to="/contacts">Контакты</router-link>
+    <router-link class="menu-link" exact-path exact-active-class="active-link" to="/portfolio">Портфолио</router-link>
 <!--    <router-link class="menu-link" exact-active-class="active-link" to="/blog">Блог</router-link>-->
     <router-link class="menu-link" exact-active-class="active-link" to="/resume">Резюме</router-link>
   </div>
@@ -24,11 +25,11 @@ export default {
   overflow-x: auto;
 }
 
-//@media screen and (max-width: 410px) {
-//  .menu {
-//    justify-content: flex-start;
-//  }
-//}
+@media screen and (max-width: 576px) {
+  .menu {
+    justify-content: flex-start;
+  }
+}
 
 
 .menu-link {

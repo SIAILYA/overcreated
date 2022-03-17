@@ -15,13 +15,13 @@
                 <div class="contact-secondary"><a target="_blank" href="https://t.me/siailya">t.me/siailya</a></div>
               </div>
             </div>
-            <div class="col-12 col-md-6 d-flex mb-3 mb-md-0">
-              <img class="contact-img" src="../assets/vk.svg" alt="">
-              <div>
-                <div class="contact-header">Самойлов Илья</div>
-                <div class="contact-secondary"><a target="_blank" href="https://vk.com/siailya">vk.com/siailya</a></div>
-              </div>
-            </div>
+<!--            <div class="col-12 col-md-6 d-flex mb-3 mb-md-0">-->
+<!--              <img class="contact-img" src="../assets/vk.svg" alt="">-->
+<!--              <div>-->
+<!--                <div class="contact-header">Самойлов Илья</div>-->
+<!--                <div class="contact-secondary"><a target="_blank" href="https://vk.com/siailya">vk.com/siailya</a></div>-->
+<!--              </div>-->
+<!--            </div>-->
           </div>
         </div>
 
@@ -46,9 +46,16 @@
           </div>
         </div>
 
-        <h3 class="mt-4 mt-lg-5">Мои рабочие пространства</h3>
+        <h3 class="mt-4 mt-lg-5">Мои рабочие и творческие пространства</h3>
 
         <div class="workspaces">
+          <div class="mb-3 d-flex">
+            <img class="contact-img" src="../assets/tg.svg" alt="">
+            <div>
+              <div class="contact-header">Телеграм-канал</div>
+              <div class="contact-secondary"><a target="_blank" href="https://t.me/samolyev">t.me/samolyev</a></div>
+            </div>
+          </div>
           <div class="mb-3 d-flex">
             <img class="contact-img" src="../assets/gh.svg" alt="">
             <div>

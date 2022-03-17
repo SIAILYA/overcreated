@@ -40,6 +40,11 @@ html[theme="purple"] {
   --accent-second: #C7005F;
 }
 
+html[theme="orange"] {
+  --accent-main: #c97900;
+  --accent-second: #ff7300;
+}
+
 $background: var(--background-primary);
 $textColor: var(--text-color);
 $accentMain: var(--accent-main);
@@ -52,6 +57,10 @@ html, body {
   background: #151515;
   color: $textColor;
   font-family: 'Montserrat', sans-serif;
+}
+
+* {
+  -webkit-tap-highlight-color: transparent;
 }
 
 //body {
@@ -69,6 +78,7 @@ html {
 
 ::-webkit-scrollbar {
   width: 8px;
+  height: 2px;
   transition: all 0.3s ease;
 }
 
