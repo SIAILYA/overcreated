@@ -245,9 +245,10 @@ export default {
   border-radius: 100px;
   position: relative;
   background: $accentGradient;
+  cursor: pointer;
 
   .category__inner {
-    padding: 6px 10px;
+    padding: 8px 12px;
     border-radius: 100px;
     transition: all .3s ease;
   }

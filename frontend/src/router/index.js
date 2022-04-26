@@ -20,6 +20,10 @@ const routes = [
     meta: {headerSection: "not_found", themeColor: "red"}
   },
   {
+    path: "/",
+    redirect: "/portfolio"
+  },
+  {
     path: '/portfolio',
     name: 'Portfolio',
     component: Portfolio,
@@ -38,7 +42,7 @@ const routes = [
     meta: {headerSection: "resume", themeColor: "purple"}
   },
   {
-    path: '/',
+    path: '/timeline',
     name: 'Timeline',
     component: Timeline,
     meta: {headerSection: "timeline", themeColor: "orange"}
