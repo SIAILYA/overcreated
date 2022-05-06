@@ -70,6 +70,13 @@ export default {
       chosenCategories: ["Работа", "Образование"],
       events: [
         {
+          category: "Хакатон",
+          dates: "Апрель'22",
+          title: "Победа в отборочном «Вездекоде-22»",
+          caption: "<span>Первое место</span> / команда FTIT",
+          lineBottom: true
+        },
+        {
           category: "Работа",
           dates: "Январь'22",
           title: "Работа",
