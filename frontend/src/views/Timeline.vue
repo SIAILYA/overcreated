@@ -22,7 +22,7 @@
       </div>
     </div>
 
-    <transition-group class="mt-5"
+    <transition-group class="mt-5 timeline"
                       name="timeline" tag="div">
       <timeline-event v-for="(e, index) in shownEvents"
                       :key="e.title + e.caption"
@@ -67,13 +67,13 @@ export default {
         "Свой проект": ['#0050C9', '#4A88FF'],
         "Фриланс": ['#7000FF', '#B02FFF'],
       },
-      chosenCategories: ["Работа", "Образование"],
+      chosenCategories: ["Работа", "Образование", "Хакатон", "Свой проект"],
       events: [
         {
           category: "Хакатон",
           dates: "Апрель'22",
-          title: "Победа в отборочном «Вездекоде-22»",
-          caption: "<span>Первое место</span> / команда FTIT",
+          title: "Победа в отборочном «Вездекоде-2022»",
+          caption: "<span>команда FTIT</span> / <a href='https://vk.com/ftitdev' target='_blank'>1 место</a>",
           lineBottom: true
         },
         {
@@ -94,21 +94,28 @@ export default {
           category: "Хакатон",
           dates: "Ноябрь'21",
           title: "Хакатон «IronHack 2021»",
-          caption: "<span>Команда FTIT</span> / проект «Каспийский Лотус»",
+          caption: "<span>Команда FTIT</span> / <a href='https://vk.com/ftitdev' target='_blank'>проект «Каспийский Лотус»</a>",
+          lineBottom: true
+        },
+        {
+          category: "Хакатон",
+          dates: "Октябрь'21",
+          title: "Хакатон «MoreTech 3.0»",
+          caption: "<span>Команда FTITN</span> / <a href='https://vk.com/ftitdev' target='_blank'>Финалисты</a>",
           lineBottom: true
         },
         {
           category: "Хакатон",
           dates: "Октябрь'21",
           title: "Хакатон «Вездекод 2021»",
-          caption: "<span>Команда FTIT</span> / Финалисты",
+          caption: "<span>Команда FTIT</span> / <a href='https://vk.com/ftitdev' target='_blank'>Финалисты</a>",
           lineBottom: true
         },
         {
           category: "Хакатон",
           dates: "Сентябрь'21",
           title: "Хакатон «UchiHack 2021»",
-          caption: "<span>Команда FTITN</span> / Победители",
+          caption: "<span>Команда FTITN</span> / <a href='https://vk.com/ftitdev' target='_blank'>Победители</a>",
           lineBottom: true
         },
         {
@@ -150,14 +157,14 @@ export default {
           category: "Хакатон",
           dates: "Февраль'21",
           title: "Хакатон «Charity Boost»",
-          caption: "<span>Команда FTITN</span> / Призёры",
+          caption: "<span>Команда FTITN</span> / <a href='https://vk.com/ftitdev' target='_blank'>Призёры</a>",
           lineBottom: true
         },
         {
           category: "Хакатон",
           dates: "Сентябрь'20 - январь'21",
           title: "Конкурс «VK Fresh Code»",
-          caption: "<span>Мини-приложение «Твоё общежитие»</span> / Победители",
+          caption: "<span>Мини-приложение «Твоё общежитие»</span> / <a href='https://vk.com/ftitdev' target='_blank'>Победители</a>",
           lineBottom: true
         },
         {
@@ -270,5 +277,13 @@ export default {
 
 .event {
   transition: all .8s ease;
+}
+</style>
+
+<style lang="scss">
+.timeline {
+  a {
+    color: white
+  }
 }
 </style>
