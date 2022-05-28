@@ -13,7 +13,7 @@
            :key="c"
            :class="chosenCategories.includes(c) && 'selected'"
            class="category mx-1 mb-2"
-           :style="`background: linear-gradient(93.97deg, ${categoriesColors[c][0]} 6.33%, ${categoriesColors[c][1]} 94.4%)`"
+           :style="`background: ${categoriesColors[c][0]}`"
            @click="onCategoryToggle(c)"
       >
         <div class="category__inner">

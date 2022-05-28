@@ -78,7 +78,7 @@ export default {
       this.innerStyleObject.background = "var(--background-primary)"
     } else {
       this.innerStyleObject.background = "none"
-      this.styleObject.background = `linear-gradient(93.97deg, ${colorPair[0]} 6.33%, ${colorPair[1]} 94.4%)`;
+      this.styleObject.background = `${colorPair[0]}`;
     }
   },
 };

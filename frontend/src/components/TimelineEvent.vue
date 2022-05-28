@@ -11,7 +11,7 @@
       <div class="dates">
         {{ dates }}
       </div>
-      <span :style="`background: linear-gradient(93.97deg, ${catColors[category][0]} 6.33%, ${catColors[category][1]} 94.4%)`"
+      <span :style="`background: ${catColors[category][0]}`"
             class="circle"
       >
           <span class="circle__inner"></span>

@@ -1,11 +1,14 @@
 <template>
   <div class="d-flex flex-column">
     <div ref="header" class="overcreated-header text-center mx-auto" @click="toggleQuote">
-      <h1 class="header">overcreated</h1>
+      <h1 class="header">over<span>created</span></h1>
       <div class="d-flex">
-          <span v-if="this.$route.meta.headerSection" ref="headline"
-                class="header-section d-flex my-auto">:{{ this.$route.meta.headerSection }}
-          </span>
+<!--        <transition-group appear duration="300" mode="out-in" name="fade">-->
+<!--          <span v-if="this.$route.meta.headerSection" ref="headline"-->
+<!--                class="header-section d-flex my-auto">-->
+<!--              {{ ":" + this.$route.meta.headerSection }}-->
+<!--          </span>-->
+<!--        </transition-group>-->
         <div ref="header_line" class="line d-flex my-auto"
              style="width: 0; transition: all .3s ease"></div>
       </div>
@@ -104,9 +107,15 @@ export default {
 
 .header {
   font-size: 112px;
+  font-weight: 400;
   color: $textColor;
   margin: 0;
   line-height: 1;
+
+  span {
+    color: $accentMain;
+    transition: all .3s ease;
+  }
 }
 
 @keyframes line-growth {
@@ -122,26 +131,8 @@ export default {
 .line {
   height: 10px;
   border-radius: 50px;
-  background: $accentGradient;
+  background: $accentMain;
   transition: all .3s ease;
-}
-
-html[theme="green"] {
-  .line {
-    background: $accentSecond;
-  }
-}
-
-html[theme="blue"] {
-  .line {
-    background: $accentSecond;
-  }
-}
-
-html[theme="red"] {
-  .line {
-    background: $accentSecond;
-  }
 }
 
 .header-section {

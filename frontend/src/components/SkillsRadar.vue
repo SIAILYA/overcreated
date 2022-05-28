@@ -6,7 +6,7 @@ export default {
   mounted() {
     let ctx = document.createElement('canvas').getContext('2d');
     let gradient = ctx.createLinearGradient(0, 0, 220, 220);
-    gradient.addColorStop(0, 'rgba(173, 0, 201, .8)');
+    gradient.addColorStop(0, 'rgba(199, 0, 95, .8)');
     gradient.addColorStop(1, 'rgba(199, 0, 95, .8)');
 
     this.renderChart({
