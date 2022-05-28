@@ -1,0 +1,24 @@
+.slide-up-enter-active, .slide-up-leave-active {
+  transition: all .3s ease;
+}
+
+.slide-up-enter-to, .slide-up-leave {
+  transform: translateY(-100px);
+}
+
+.slide-up-enter, .slide-up-leave-to {
+  transform: translateY(-100px);
+}
+
+.rotate-enter-active, .rotate-leave-active {
+  transition: all .3s ease;
+}
+
+.rotate-enter-to, .rotate-leave {
+  transform: rotate(0);
+}
+
+.rotate-enter, .rotate-leave-to {
+  transform: rotate(360deg);
+}
+
