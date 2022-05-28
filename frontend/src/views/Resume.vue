@@ -170,7 +170,7 @@ export default {
 }
 
 .pdfdownload {
-  background: linear-gradient(90deg, var(--accent-main-purple) 0%, var(--accent-second-purple) 100%);
+  background: var(--accent-second-purple);
   border: none;
   outline: none;
   border-radius: 50px;
@@ -249,7 +249,7 @@ export default {
   .line {
     width: 30%;
     height: 10px;
-    background: linear-gradient(90deg, var(--accent-main-purple) 0%, var(--accent-second-purple) 100%);
+    background: var(--accent-second-purple);
     display: inline-block;
     border-radius: 50px;
     transition: all 1s ease;

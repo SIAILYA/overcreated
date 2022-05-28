@@ -40,9 +40,7 @@
           <!--          :to="'/project/' + project.slug"-->
           <div class="project-card__inner">
             <h2 :style="{
-              background: `linear-gradient(45deg, ${project.color[0] || '#FFF'} 33%, ${ project.color[1] || '#FFF' } 66%, #8AA9D6)`,
-              '-webkit-background-clip': 'text',
-              '-webkit-text-fill-color': 'transparent'
+              color: `${project.color[0] || '#FFF'}`,
              }"
             >
               {{ project.name }}
@@ -255,6 +253,10 @@ $cardsAtRow: 4;
   text-overflow: ellipsis;
   overflow: hidden;
   transition: all .5s ease;
+
+  h2 {
+    font-weight: 600;
+  }
 }
 
 .project-card__inner:hover {

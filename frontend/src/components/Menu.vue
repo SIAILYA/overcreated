@@ -49,6 +49,6 @@ export default {
 }
 
 .active-link {
-  color: $accentSecond;
+  color: $accentMain;
 }
 </style>

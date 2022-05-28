@@ -15,13 +15,13 @@
                 <div class="contact-secondary"><a target="_blank" href="https://t.me/siailya">t.me/siailya</a></div>
               </div>
             </div>
-<!--            <div class="col-12 col-md-6 d-flex mb-3 mb-md-0">-->
-<!--              <img class="contact-img" src="../assets/vk.svg" alt="">-->
-<!--              <div>-->
-<!--                <div class="contact-header">Самойлов Илья</div>-->
-<!--                <div class="contact-secondary"><a target="_blank" href="https://vk.com/siailya">vk.com/siailya</a></div>-->
-<!--              </div>-->
-<!--            </div>-->
+            <div class="col-12 col-md-6 d-flex mb-3 mb-md-0">
+              <img class="contact-img" src="../assets/vk.svg" alt="">
+              <div>
+                <div class="contact-header">Самойлов Илья</div>
+                <div class="contact-secondary"><a target="_blank" href="https://vk.com/siailya">vk.com/siailya</a></div>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -72,28 +72,28 @@
           </div>
         </div>
       </div>
-      <div class="col-12 col-lg-4">
-        <div class="feedback-card text-center">
-          <h2>Оставьте свои контакты</h2>
-          <span>свяжусь с Вами в ближайшее время!</span>
-          <div :style="'height: ' + stage * 44 + 'px'" class="mt-3 feedback-info">
-            <input v-if="stage >= 1" ref="fi_1" v-model="feedbackInfo.name" class="ovc-input"
-                   placeholder="Как к Вам обращаться?">
-            <input v-if="stage >= 2" ref="fi_2" v-model="feedbackInfo.contact" class="ovc-input"
-                   placeholder="Ваш телефон, телеграм и т.д.">
-            <input v-if="stage >= 3" ref="fi_3" v-model="feedbackInfo.question" class="ovc-input"
-                   placeholder="Можете задать вопрос или что-нибудь уточнить">
-          </div>
-          <div class="mt-3">
-            <button class="feedback-next" @click="feedbackNext">
-              {{
-                this.stage !== 3 ?
-                  'Дальше' : 'Отправить'
-              }}
-            </button>
-          </div>
-        </div>
-      </div>
+<!--      <div class="col-12 col-lg-4">-->
+<!--        <div class="feedback-card text-center">-->
+<!--          <h2>Оставьте свои контакты</h2>-->
+<!--          <span>свяжусь с Вами в ближайшее время!</span>-->
+<!--          <div :style="'height: ' + stage * 44 + 'px'" class="mt-3 feedback-info">-->
+<!--            <input v-if="stage >= 1" ref="fi_1" v-model="feedbackInfo.name" class="ovc-input"-->
+<!--                   placeholder="Как к Вам обращаться?">-->
+<!--            <input v-if="stage >= 2" ref="fi_2" v-model="feedbackInfo.contact" class="ovc-input"-->
+<!--                   placeholder="Ваш телефон, телеграм и т.д.">-->
+<!--            <input v-if="stage >= 3" ref="fi_3" v-model="feedbackInfo.question" class="ovc-input"-->
+<!--                   placeholder="Можете задать вопрос или что-нибудь уточнить">-->
+<!--          </div>-->
+<!--          <div class="mt-3">-->
+<!--            <button class="feedback-next" @click="feedbackNext">-->
+<!--              {{-->
+<!--                this.stage !== 3 ?-->
+<!--                  'Дальше' : 'Отправить'-->
+<!--              }}-->
+<!--            </button>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
     </div>
   </div>
 </template>
