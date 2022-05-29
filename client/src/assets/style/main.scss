@@ -51,6 +51,11 @@ body[variant~='light'] {
   --accent: #{$accentGreen};
 }
 
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
 body {
   background: var(--background-primary);
   color: var(--text-color);
@@ -59,6 +64,9 @@ body {
   transition: background-color .3s ease, color .3s ease;
 }
 
+::selection {
+  background-color: var(--accent);
+}
 
 body[theme~="blue"] {
   --accent: var(--accent-blue);

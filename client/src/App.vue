@@ -1,7 +1,13 @@
 <template>
   <div>
     <ovc-header/>
-    <router-view/>
+    <ovc-headline/>
+
+    <router-view v-slot="{ Component }">
+      <transition appear duration="300" mode="out-in" name="fade">
+        <component :is="Component"/>
+      </transition>
+    </router-view>
   </div>
 </template>
 
@@ -10,6 +16,7 @@
 import OvcHeader from "./components/OvcHeader.vue";
 import {watch} from "vue";
 import {useRoute} from "vue-router";
+import OvcHeadline from "./components/OvcHeadline.vue";
 
 const route = useRoute()
 let theme = "green"

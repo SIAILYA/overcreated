@@ -1,16 +1,16 @@
 <template>
   <header class="container position-relative">
-    <div class="d-flex justify-content-center menu-items mt-4">
-      <ovc-link check-active to="/timeline">
+    <div class="d-flex justify-content-center menu-items">
+      <ovc-link size="l" check-active to="/timeline">
         Таймлайн
       </ovc-link>
-      <ovc-link check-active to="/">
+      <ovc-link size="l" check-active to="/">
         Портфолио
       </ovc-link>
-      <ovc-link check-active to="/contacts">
+      <ovc-link size="l" check-active to="/contacts">
         Контакты
       </ovc-link>
-      <ovc-link check-active to="/resume">
+      <ovc-link size="l" check-active to="/resume">
         Резюме
       </ovc-link>
     </div>
@@ -69,6 +69,8 @@ onMounted(() => {
 
 <style lang="scss" scoped>
 .menu-items {
+  margin-top: 20px;
+
   * {
     margin-left: 8px;
     margin-right: 8px;
@@ -84,7 +86,7 @@ onMounted(() => {
   height: 40px;
   background: var(--background-secondary);
 
-  right: 0;
+  right: 25px;
   top: 0;
   border-radius: 100px;
   transition: all .3s ease;
@@ -93,6 +95,28 @@ onMounted(() => {
   &:hover {
     color: var(--accent);
     box-shadow: 0 0 15px 4px var(--shadow-color);
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .menu-items {
+    padding-top: 60px;
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .menu-items {
+    overflow: auto;
+    flex-wrap: wrap;
+  }
+
+  .theme-switcher {
+    width: 32px;
+    height: 32px;
+
+    span {
+      font-size: 20px;
+    }
   }
 }
 </style>
