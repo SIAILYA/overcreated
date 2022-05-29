@@ -3,11 +3,13 @@
     <ovc-header/>
     <ovc-headline/>
 
-    <router-view v-slot="{ Component }">
-      <transition appear duration="300" mode="out-in" name="fade">
-        <component :is="Component"/>
-      </transition>
-    </router-view>
+    <suspense>
+      <router-view v-slot="{ Component }">
+        <transition appear duration="300" mode="out-in" name="fade">
+          <component :is="Component"/>
+        </transition>
+      </router-view>
+    </suspense>
   </div>
 </template>
 
