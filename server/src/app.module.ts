@@ -4,7 +4,10 @@ import {MongooseModule} from '@nestjs/mongoose';
 import {ServeStaticModule} from '@nestjs/serve-static';
 import {join} from 'path';
 import configuration from "../config/configuration";
-import {AppController} from './app.controller';
+import {ApiController} from './api/api.controller';
+import {TopicsModule} from "./topics/topics.module";
+import {AuthService} from "./auth/auth.service";
+import {JwtModule} from '@nestjs/jwt';
 
 @Module({
   imports: [
@@ -17,8 +20,11 @@ import {AppController} from './app.controller';
       exclude: ['/api*'],
     }),
     MongooseModule.forRoot(process.env.MONGO_URI),
+    TopicsModule,
+    JwtModule.register({secret: process.env.SECRET_KEY, signOptions: {expiresIn: process.env.JWT_EXPIRE}})
   ],
-  controllers: [AppController],
+  providers: [AuthService],
+  controllers: [ApiController],
 })
 export class AppModule {
 }
