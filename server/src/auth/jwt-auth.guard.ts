@@ -1,4 +1,4 @@
-import {ExecutionContext, Injectable, UnauthorizedException,} from '@nestjs/common';
+import {ExecutionContext, HttpException, HttpStatus, Injectable, UnauthorizedException,} from '@nestjs/common';
 import {JwtService} from '@nestjs/jwt';
 
 @Injectable()
@@ -13,10 +13,11 @@ export class JwtAuthGuard {
     const token = request.body?.token || request.headers?.authorization?.split(" ")[1] || request.headers?.cookie?.replace("token=", "")
 
     try {
-      this.jwtService.verify(token)
+      //FIXME: jwtService должен инжектиться (вместе с secret)
+      this.jwtService.verify(token, {secret: process.env.SECRET_KEY})
       return context
     } catch (e) {
-      new UnauthorizedException()
+      new HttpException(e, HttpStatus.FORBIDDEN);
     }
   }
 

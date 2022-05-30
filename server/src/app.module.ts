@@ -7,7 +7,7 @@ import configuration from "../config/configuration";
 import {ApiController} from './api/api.controller';
 import {TopicsModule} from "./topics/topics.module";
 import {AuthService} from "./auth/auth.service";
-import {JwtModule} from '@nestjs/jwt';
+import {JwtModule, JwtService} from '@nestjs/jwt';
 
 @Module({
   imports: [
@@ -20,10 +20,11 @@ import {JwtModule} from '@nestjs/jwt';
       exclude: ['/api*'],
     }),
     MongooseModule.forRoot(process.env.MONGO_URI),
+    JwtModule.register({secret: process.env.SECRET_KEY, signOptions: {expiresIn: process.env.JWT_EXPIRE}}),
     TopicsModule,
-    JwtModule.register({secret: process.env.SECRET_KEY, signOptions: {expiresIn: process.env.JWT_EXPIRE}})
   ],
-  providers: [AuthService],
+  providers: [AuthService, JwtService],
+  exports: [AuthService],
   controllers: [ApiController],
 })
 export class AppModule {
