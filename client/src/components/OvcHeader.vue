@@ -16,7 +16,7 @@
     </div>
 
     <div class="theme-switcher d-flex flex-column" @click="onClickThemeVariantSwitcher">
-      <transition-group name="slide-up" class="d-flex flex-column" duration="200">
+      <transition-group name="slide-up" class="d-flex flex-column" :duration="200">
         <span v-if="currentThemeVariant === 'dark'" class="material-icons-outlined m-auto">dark_mode</span>
         <span v-else class="material-icons-outlined m-auto">light_mode</span>
       </transition-group>
