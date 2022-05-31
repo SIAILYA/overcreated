@@ -1,15 +1,15 @@
 <template>
-  <router-link to="add" class="text-decoration-none">
+  <router-link class="text-decoration-none d-inline-block" to="add">
     <button class="ovc-btn d-flex">
       <span class="material-icons-round me-2">playlist_add</span>
       <span>Создать проект</span>
     </button>
-    <div class="row">
-      <div class="col-12 col-md-6 col-lg-4" v-for="p in projects" :key="p.id">
-        <ovc-project :project="p" :to="'edit/' + p.id"/>
-      </div>
-    </div>
   </router-link>
+  <div class="row mt-5">
+    <div v-for="p in projects" :key="p.id" class="col-12 col-md-6 col-lg-4">
+      <ovc-project :project="p" :to="'edit/' + p.id"/>
+    </div>
+  </div>
 </template>
 
 <script lang="ts" setup>

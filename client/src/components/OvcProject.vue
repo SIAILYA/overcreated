@@ -3,25 +3,25 @@
     <div>
       <h2
           :style="`color: ${project.color}`"
-          class="title"
+          class="title colored-brightness"
       >
         {{ project.title }}
       </h2>
 
       <p class="description">{{ project.description }}</p>
 
-      <div class="d-flex flex-column">
-        <div class="techs d-flex" v-if="project.techs.length">
-          <span class="material-icons-round">api</span>
-          <span>{{ project.techs.join(", ") }}</span>
+      <div class="d-flex flex-column overflow-hidden ellipsis">
+        <div v-if="project.techs.length" class="techs list d-flex">
+          <span :style="'color:' + project.color" class="material-icons-round colored-brightness">api</span>
+          <span class="content">{{ project.techs.join(", ") }}</span>
         </div>
-        <div class="develop-time d-flex" v-if="project.developTime">
-          <span class="material-icons-round">alarm_on</span>
-          <span>~{{ project.developTime }}hr</span>
+        <div v-if="project.developTime" class="develop-time list d-flex">
+          <span :style="'color:' + project.color" class="material-icons-round colored-brightness">alarm_on</span>
+          <span class="content">~{{ project.developTime }}hr</span>
         </div>
-        <div class="techs d-flex" v-if="project.link">
-          <span class="material-icons-round">public</span>
-          <a :href="project.link">{{ project.link }}</a>
+        <div v-if="project.link" class="link list d-flex">
+          <span :style="'color:' + project.color" class="material-icons-round colored-brightness">public</span>
+          <a :href="project.link" class="content">{{ project.link }}</a>
         </div>
       </div>
     </div>
@@ -56,9 +56,48 @@ const wrapper = computed(() => {
 .project__wrapper {
   color: var(--text-color);
   text-decoration: none;
-}
+  background: var(--background-secondary);
+  padding: 12px 20px;
+  border-radius: 25px;
+  transition: all .3s ease;
 
-.project-title {
-  font-size: 26px;
+  &:hover {
+    box-shadow: 0 0 10px -1px var(--shadow-color);
+  }
+
+  .list {
+    white-space: nowrap;
+    overflow: hidden;
+    align-content: center;
+    align-items: center;
+    width: 100%;
+    padding-right: 20px;
+    margin-bottom: 5px;
+
+    .content {
+      width: 100%;
+      overflow: hidden;
+      display: block;
+      text-overflow: ellipsis;
+      margin-left: 6px;
+      color: var(--text-color);
+    }
+  }
+
+  .title {
+    font-size: 26px;
+  }
+}
+</style>
+
+<style lang="scss">
+body[variant="light"] {
+  .project__wrapper {
+    box-shadow: 0 0 10px var(--shadow-color);
+
+    &:hover {
+      box-shadow: 0 0 15px 5px var(--shadow-color);
+    }
+  }
 }
 </style>

@@ -28,7 +28,7 @@ body {
 
 // Set light theme colors
 body[variant~='light'] {
-  $backgroundPrimary: #eaeaea;
+  $backgroundPrimary: #f0f0f0;
   $backgroundSecondary: #ffffff;
   $textColor: #1a1a1a;
   $shadowColor: rgba(0, 0, 0, .15);
@@ -49,6 +49,12 @@ body[variant~='light'] {
   --accent-purple: #{$accentPurple};
 
   --accent: #{$accentGreen};
+}
+
+body[variant="light"] {
+  .colored-brightness {
+    filter: brightness(.9);
+  }
 }
 
 html, body {
