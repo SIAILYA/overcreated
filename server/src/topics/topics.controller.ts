@@ -1,6 +1,6 @@
 import {Body, Controller, Delete, Get, Param, Patch, Post, Query, UseGuards} from '@nestjs/common';
 import {TopicsService} from './topics.service';
-import {TopicDto} from "./dto/Topic.dto";
+import {TopicDto} from "./dto/topic.dto";
 import {JwtAuthGuard} from "../auth/jwt-auth.guard";
 
 @Controller('api/topics')
