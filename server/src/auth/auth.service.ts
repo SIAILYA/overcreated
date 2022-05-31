@@ -15,6 +15,7 @@ export class AuthService {
     if (key === this.configService.get("admin.key")) {
       return this.jwtService.sign({username: "admin"}, {secret: process.env.SECRET_KEY})
     }
-    return new UnauthorizedException()
+
+    throw new UnauthorizedException()
   }
 }
