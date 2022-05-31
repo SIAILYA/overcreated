@@ -13,7 +13,7 @@ export class AuthService {
 
   login(key: string) {
     if (key === this.configService.get("admin.key")) {
-      return this.jwtService.sign({username: "admin"})
+      return this.jwtService.sign({username: "admin"}, {secret: process.env.SECRET_KEY})
     }
     return new UnauthorizedException()
   }

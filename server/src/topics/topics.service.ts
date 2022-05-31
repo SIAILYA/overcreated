@@ -21,4 +21,8 @@ export class TopicsService {
     }
     return await this.topicModel.find({})
   }
+
+  async delete(topicId: string) {
+    await this.topicModel.findByIdAndDelete(topicId)
+  }
 }
