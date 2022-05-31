@@ -1,4 +1,4 @@
-import {Body, Injectable} from "@nestjs/common";
+import {Injectable} from "@nestjs/common";
 
 import {InjectModel} from "@nestjs/mongoose";
 import {Model} from "mongoose";
@@ -9,7 +9,8 @@ import {TopicDto} from "./dto/Topic.dto";
 export class TopicsService {
   constructor(
     @InjectModel(Topic.name) private readonly topicModel: Model<TopicDocument>,
-  ) {}
+  ) {
+  }
 
   async create(createTopicDto: TopicDto): Promise<Topic> {
     return await this.topicModel.create(createTopicDto);
@@ -24,5 +25,9 @@ export class TopicsService {
 
   async delete(topicId: string) {
     await this.topicModel.findByIdAndDelete(topicId)
+  }
+
+  async update(topicId: string, updateTopicDto: TopicDto) {
+    await this.topicModel.findByIdAndUpdate(topicId, updateTopicDto)
   }
 }
