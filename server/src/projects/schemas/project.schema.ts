@@ -37,6 +37,9 @@ export class Project {
   photos: string[]
 
   @Prop()
+  link: string
+
+  @Prop()
   github: string
 
   @Prop()
