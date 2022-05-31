@@ -68,6 +68,25 @@ body {
   background-color: var(--accent);
 }
 
+::-webkit-scrollbar {
+  width: 8px;
+  height: 2px;
+  transition: all 0.3s ease;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--background-primary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--background-secondary);
+  border-radius: 50px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, .6);
+}
+
 body[theme~="blue"] {
   --accent: var(--accent-blue);
 }
@@ -82,4 +101,39 @@ body[theme~="green"] {
 
 body[theme~="purple"] {
   --accent: var(--accent-purple);
+}
+
+.ovc-btn {
+  background-color: var(--accent);
+  color: var(--background-primary);
+  border-radius: 5px;
+  border: none;
+  outline: none;
+  transition: all .3s ease;
+  padding: 8px 14px;
+
+  &:hover {
+    filter: brightness(0.9);
+  }
+
+  &:active {
+    filter: brightness(0.7);
+  }
+
+  &:disabled {
+    filter: grayscale(1);
+  }
+}
+
+.ovc-input {
+  background: none;
+  border: 1px solid var(--text-color);
+  border-radius: 5px;
+  padding: 4px 8px;
+  transition: all .3s ease;
+
+  &:focus {
+    outline: none;
+    border-color: var(--accent);
+  }
 }
