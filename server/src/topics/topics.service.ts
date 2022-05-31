@@ -16,7 +16,11 @@ export class TopicsService {
     return await this.topicModel.create(createTopicDto);
   }
 
-  async get(onlyVisible: boolean = true) {
+  async get(id: string = null, onlyVisible: boolean = true) {
+    if (id) {
+      return await this.topicModel.findById(id)
+    }
+
     if (onlyVisible) {
       return await this.topicModel.find({isVisible: onlyVisible})
     }

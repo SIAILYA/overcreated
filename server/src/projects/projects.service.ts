@@ -10,7 +10,11 @@ export class ProjectsService {
     @InjectModel(Project.name) private readonly projectModel: Model<ProjectDocument>,
   ) {}
 
-  async get(onlyVisible: boolean) {
+  async get(id: string = null, onlyVisible: boolean) {
+    if (id) {
+      return await this.projectModel.findById(id)
+    }
+
     if (onlyVisible) {
       return await this.projectModel.find({isVisible: true})
     }

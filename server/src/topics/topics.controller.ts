@@ -10,9 +10,9 @@ export class TopicsController {
   ) {
   }
 
-  @Get('get')
-  async get(@Query('onlyVisible') onlyVisible: string = 'true') {
-    return await this.topicsService.get(onlyVisible === 'true')
+  @Get('get/:id?')
+  async get(@Param('id') id: string = null, @Query('onlyVisible') onlyVisible: string = 'true') {
+    return await this.topicsService.get(id, onlyVisible === 'true')
   }
 
   @UseGuards(JwtAuthGuard)
