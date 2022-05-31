@@ -14,8 +14,8 @@
 <script lang="ts" setup>
 import {reactive, ref} from "vue";
 import axios from "axios";
-import {BACKEND} from "../../config";
-import router from "../router";
+import {BACKEND} from "../../../config";
+import router from "../../router";
 
 const loginData = reactive({
   login: "",
@@ -28,6 +28,7 @@ const onSubmit = () => {
 
   axios.post(BACKEND + "/api/login", loginData)
       .then(() => {
+        sessionStorage.setItem('login', 'true')
         router.push("/admin")
       })
       .catch(() => {
