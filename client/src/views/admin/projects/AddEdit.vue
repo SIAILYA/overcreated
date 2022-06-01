@@ -23,10 +23,10 @@
     <div class="col-12 col-md-6 mt-3">
       <h5>Топики проекта</h5>
 
-      <div class="d-flex fex-column">
-        <div class="d-flex">
-          <input id="c1" class="my-auto" type="checkbox">
-          <label class="my-auto ms-2" for="c1">Фронтенд</label>
+      <div class="d-flex flex-column">
+        <div class="d-flex" v-for="t in topics">
+          <input :id="t.id" class="my-auto" type="checkbox" :checked="project.topics.includes(t.id)" @input="() => onClickToggleTopic(t.id)">
+          <label class="my-auto ms-2" :for="t.id">{{ t.title }}</label>
         </div>
       </div>
     </div>
@@ -41,7 +41,7 @@
 
       <div class="d-flex flex-column mt-2">
         <div
-            v-for="(tech, index) in project.techs.reverse()"
+            v-for="(tech, index) in project.techs"
             :class="index !== (project.techs.length - 1) && 'border-bottom border-1 border-dark'"
             class="tech d-flex justify-content-end py-2"
         >
@@ -69,19 +69,22 @@
 <script lang="ts" setup>
 import {useRoute} from "vue-router";
 import {Project} from "../../../typings/project";
-import {computed, onMounted, reactive, ref} from "vue";
+import {computed, onMounted, reactive, Ref, ref} from "vue";
 
 //@ts-ignore
 import {marked} from 'marked';
 //@ts-ignore
 import {transliterate} from "@/utils/transliterate.js";
 import router from "../../../router";
+import axios from "axios";
+import {BACK_API} from "../../../../config";
+import {Topic} from "../../../typings/topic";
 
 const route = useRoute()
 const editMode = route.path.includes("edit")
 
 const project = reactive(new Project())
-
+const topics: Ref<Array<Topic>> = ref([])
 const addTech = ref("")
 
 const isValid = computed(() => {
@@ -123,11 +126,23 @@ const onClickDelete = () => {
   }).catch(() => {router.push("/login")})
 }
 
+const onClickToggleTopic = (topicId: string) => {
+  if (project.topics.includes(topicId)) {
+    project.topics.filter(t => t !== topicId)
+  } else {
+    project.topics.push(topicId)
+  }
+}
+
 onMounted(() => {
   if (editMode) {
     project.id = route.params.id.toString()
     project.load()
   }
+
+  axios.get(BACK_API + "topics/get?onlyVisible=false").then(r => {
+    topics.value = r.data.map((t: any) => new Topic(t))
+  })
 })
 </script>
 

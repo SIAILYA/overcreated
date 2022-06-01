@@ -9,8 +9,8 @@
   <div class="d-flex mt-3">
     <ovc-spinner :show="isLoadingTopics" class="mx-auto"/>
   </div>
-  <div class="d-flex mt-5 flex-wrap">
-    <div v-for="t in topics" :key="t.id" class="me-3">
+  <div class="d-flex mt-2 flex-wrap">
+    <div v-for="t in topics" :key="t.id" class="me-3 mt-2">
       <router-link :to="'edit/' + t.id" class="text-decoration-none">
         <ovc-topic :topic="t" class="topic-pill" is-selected/>
       </router-link>
