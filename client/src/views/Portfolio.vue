@@ -76,6 +76,7 @@ const loadProjects = () => {
 
 watch(selectedTopicsIds, () => {
   if (projectsLoadDebounce) {
+    //@ts-ignore
     clearTimeout(projectsLoadDebounce.value)
   }
 

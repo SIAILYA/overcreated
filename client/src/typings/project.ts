@@ -24,7 +24,7 @@ export class Project extends Model {
   description: string;
   topics: string[] = [];
 
-  topicsObjects: Array<Topic | Model> = []
+  topicsObjects: Array<Topic> = []
   color?: string = "#FFFFFF";
   isVisible?: boolean;
   techs?: string[] = [];
@@ -34,9 +34,4 @@ export class Project extends Model {
   github?: string;
   behance?: string;
   developTime?: number;
-
-  async loadTopics() {
-    this.topicsObjects = await Promise.all(this.topics.map(t => new Topic({id: t}).load()))
-    return this
-  }
 }
