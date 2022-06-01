@@ -24,9 +24,10 @@
       <h5>Топики проекта</h5>
 
       <div class="d-flex flex-column">
-        <div class="d-flex" v-for="t in topics">
-          <input :id="t.id" class="my-auto" type="checkbox" :checked="project.topics.includes(t.id)" @input="() => onClickToggleTopic(t.id)">
-          <label class="my-auto ms-2" :for="t.id">{{ t.title }}</label>
+        <div v-for="t in topics" class="d-flex">
+          <input :id="t.id" :checked="project.topics.includes(t.id)" class="my-auto" type="checkbox"
+                 @input="() => onClickToggleTopic(t.id)">
+          <label :for="t.id" class="my-auto ms-2">{{ t.title }}</label>
         </div>
       </div>
     </div>
@@ -52,6 +53,11 @@
         </div>
       </div>
     </div>
+  </div>
+
+  <div class="d-flex">
+    <input id="visible" v-model="project.isVisible" class="my-auto" type="checkbox">
+    <label class="ms-1 my-auto" for="visible">Отображать проект</label>
   </div>
 
   <div class="d-flex">
@@ -112,18 +118,24 @@ const onClickSubmit = () => {
   if (editMode) {
     project.update().then(() => {
       router.push("/admin/projects/list")
-    }).catch(() => {router.push("/login")})
+    }).catch(() => {
+      router.push("/login")
+    })
   } else {
     project.create().then(() => {
       router.push("/admin/projects/list")
-    }).catch(() => {router.push("/login")})
+    }).catch(() => {
+      router.push("/login")
+    })
   }
 }
 
 const onClickDelete = () => {
   project.delete().then(() => {
     router.push("/admin/projects/list")
-  }).catch(() => {router.push("/login")})
+  }).catch(() => {
+    router.push("/login")
+  })
 }
 
 const onClickToggleTopic = (topicId: string) => {

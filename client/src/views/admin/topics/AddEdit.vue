@@ -19,6 +19,11 @@
   <br>
 
   <div class="d-flex">
+    <input type="checkbox" id="visible" class="my-auto" v-model="topic.isVisible">
+    <label for="visible" class="ms-1 my-auto">Отображать топик</label>
+  </div>
+
+  <div class="d-flex">
     <button :disabled="!isValid" class="ovc-btn d-flex mt-4 mb-5" @click="onClickSubmit">
       <span class="material-icons-round my-auto">save</span>
       <span class="my-auto ms-2">Сохранить топик</span>
