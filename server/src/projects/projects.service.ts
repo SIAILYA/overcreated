@@ -11,15 +11,17 @@ export class ProjectsService {
   ) {}
 
   async get(id: string = null, onlyVisible: boolean) {
+    const getAllProjection = {fullDescription: 0, __v: 0}
+
     if (id) {
       return await this.projectModel.findById(id)
     }
 
     if (onlyVisible) {
-      return await this.projectModel.find({isVisible: true})
+      return  await this.projectModel.find({isVisible: true}, getAllProjection)
     }
 
-    return await this.projectModel.find({})
+    return await this.projectModel.find({}, getAllProjection)
   }
 
   async create(projectDto: ProjectDto) {
