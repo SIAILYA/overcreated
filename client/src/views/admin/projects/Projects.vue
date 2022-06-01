@@ -39,8 +39,4 @@ onMounted(() => {
 </script>
 
 <style scoped>
-.project-card {
-  width: 100%;
-  flex: 0 1 auto;
-}
 </style>

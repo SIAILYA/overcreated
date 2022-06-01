@@ -144,3 +144,9 @@ body[theme~="purple"] {
     border-color: var(--accent);
   }
 }
+
+.project-card {
+  width: 100%;
+  flex: 0 1 auto;
+  transition: all .3s ease;
+}

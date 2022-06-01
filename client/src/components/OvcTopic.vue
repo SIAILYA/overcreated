@@ -1,14 +1,14 @@
 <template>
   <div
       :class="isSelected && 'selected'"
-      :style="'border-color: ' + topic.color"
+      :style="'border-color: ' + topic.color + '; background: ' + topic.color"
       class="topic__wrapper position-relative"
       @click="emit('click', topic.slug)"
   >
-    <div class="topic__inner">
+    <div :style="'color: ' + topic.color" class="topic__inner">
       {{ topic.title }}
     </div>
-    <div :style="'background-color: ' + topic.color" class="topic__back"></div>
+    <div class="topic__back"></div>
   </div>
 </template>
 
@@ -36,32 +36,46 @@ const emit = defineEmits(['click'])
   overflow: hidden;
   user-select: none;
   cursor: pointer;
-  opacity: .7;
+  z-index: 10;
+  //opacity: .7;
   transition: all .3s ease;
 
-  &:hover {
+  &:not(.selected):hover {
     opacity: .8;
   }
 }
 
 .topic__back {
   position: absolute;
-  width: 0;
+  width: 100%;
   height: 100%;
+  transition: all .3s ease;
   left: 0;
   top: 0;
   z-index: -1;
+  background: var(--background-primary);
 }
+
 
 .topic__inner {
-  color: white;
+  transition: all .3s ease;
+  z-index: 10;
 }
 
-.topic__wrapper.selected {
+.selected {
   opacity: 1;
 
+  &:hover {
+    box-shadow: 0 0 10px var(--shadow-color);
+  }
+
+  .topic__inner {
+    color: white !important;
+  }
+
   .topic__back {
-    width: 100%;
+    right: 0;
+    width: 0;
   }
 }
 </style>

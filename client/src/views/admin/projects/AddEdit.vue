@@ -25,7 +25,7 @@
 
       <div class="d-flex flex-column">
         <div v-for="t in topics" class="d-flex">
-          <input :id="t.id" :checked="project.topics.includes(t.id)" class="my-auto" type="checkbox"
+          <input :id="t.id" :checked="project.topics && project.topics.includes(t.id)" class="my-auto" type="checkbox"
                  @input="() => onClickToggleTopic(t.id)">
           <label :for="t.id" class="my-auto ms-2">{{ t.title }}</label>
         </div>
@@ -139,7 +139,7 @@ const onClickDelete = () => {
 }
 
 const onClickToggleTopic = (topicId: string) => {
-  if (project.topics.includes(topicId)) {
+  if (project?.topics?.includes(topicId)) {
     project.topics.filter(t => t !== topicId)
   } else {
     project.topics.push(topicId)

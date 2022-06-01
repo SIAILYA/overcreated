@@ -33,17 +33,31 @@
   opacity: 0;
 }
 
+.child-view {
+  transition: all .3s ease;
+}
+
 .projects-list-enter, .projects-list-leave-to {
   opacity: 0;
   transform: translateY(10vh);
+  transition: all .5s ease;
 }
 
 .projects-list-leave-active {
   position: absolute;
+  transform: translateY(10vh);
+  opacity: 0;
+  transition: all .5s ease;
+}
+
+.projects-list-enter-active {
+  transform: translateY(10vh);
+  opacity: 0;
+  transition: all .5s ease;
 }
 
 .projects-list-move {
-  transition: transform .8s ease;
+  transition: all .5s ease;
 }
 
 .timeline-enter, .timeline-leave-to {

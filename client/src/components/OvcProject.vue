@@ -1,5 +1,9 @@
 <template>
-  <component :is="wrapper" :to="to || project.slug" class="d-block project__wrapper">
+  <component
+      :is="wrapperComponent"
+      :to="to || '/project/' + project.slug"
+      class="d-block project__wrapper"
+  >
     <div class="d-flex flex-column h-100">
       <h2
           :style="`color: ${project.color}`"
@@ -24,13 +28,17 @@
           <a :href="project.link" class="content">{{ project.link }}</a>
         </div>
       </div>
+
+      <div class="topics-indicators d-flex mt-3">
+        <div class="indicator me-1" v-for="t in project.topicsObjects" :style="{background: t.color}"></div>
+      </div>
     </div>
   </component>
 </template>
 
 <script lang="ts" setup>
 import {Project} from "../typings/project";
-import {computed, PropType} from "vue";
+import {computed, onMounted, PropType, Ref, ref} from "vue";
 
 const props = defineProps({
   project: {
@@ -38,12 +46,12 @@ const props = defineProps({
     required: true
   },
   to: {
-    type: String || Boolean,
-    default: false
+    type: String,
+    default: ""
   }
 })
 
-const wrapper = computed(() => {
+const wrapperComponent = computed(() => {
   if (!props.to && !props.project.slug) {
     return 'div'
   }
@@ -51,6 +59,7 @@ const wrapper = computed(() => {
   return 'router-link'
 })
 </script>
+
 
 <style lang="scss" scoped>
 .project__wrapper {
@@ -86,6 +95,14 @@ const wrapper = computed(() => {
 
   .title {
     font-size: 26px;
+  }
+}
+
+.topics-indicators {
+  .indicator {
+    width: 20px;
+    height: 10px;
+    border-radius: 100px;
   }
 }
 </style>
