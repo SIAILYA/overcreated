@@ -12,8 +12,17 @@ export class ProjectsController {
 
 
   @Get('get/:id?')
-  async get(@Param('id') id: string = null, @Query('onlyVisible') onlyVisible: string = 'true') {
-    return await this.projectsService.get(id, onlyVisible === 'true')
+  async get(
+    @Param('id') id: string = null,
+    @Query('onlyVisible') onlyVisible: string = 'true',
+    @Query('filter') filter: string = "",
+    @Query('populate') populate: string = null
+  ) {
+    return await this.projectsService.get(
+      id,
+      onlyVisible === 'true',
+      filter ? filter.split(",") : [],
+      populate === 'true')
   }
 
   @UseGuards(JwtAuthGuard)

@@ -14,7 +14,7 @@ export class Topic {
   @Prop()
   color: string;
 
-  @Prop()
+  @Prop({default: true})
   isVisible: boolean;
 }
 
