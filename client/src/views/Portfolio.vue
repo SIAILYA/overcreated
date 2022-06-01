@@ -6,7 +6,7 @@
 
     <div class="projects-topics d-flex justify-content-center">
         {{ JSON.stringify(topics) }}
-      <ovc-topic color="#F2B3A4" @click="() => selectTopic('123')">123</ovc-topic>
+<!--      <ovc-topic color="#F2B3A4" @click="() => selectTopic('123')">123</ovc-topic>-->
     </div>
 
     <div class="row">

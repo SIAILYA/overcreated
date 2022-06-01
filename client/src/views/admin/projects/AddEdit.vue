@@ -84,11 +84,6 @@ const project = reactive(new Project())
 
 const addTech = ref("")
 
-const slug = computed({
-  get: () => project.slug,
-  set: (v: string) => project.slug = v.replace("/", "")
-})
-
 const isValid = computed(() => {
   return project.title && project.description && project.slug && project.color
 })
@@ -114,18 +109,18 @@ const onClickSubmit = () => {
   if (editMode) {
     project.update().then(() => {
       router.push("/admin/projects/list")
-    })
+    }).catch(() => {router.push("/login")})
   } else {
     project.create().then(() => {
       router.push("/admin/projects/list")
-    })
+    }).catch(() => {router.push("/login")})
   }
 }
 
 const onClickDelete = () => {
   project.delete().then(() => {
     router.push("/admin/projects/list")
-  })
+  }).catch(() => {router.push("/login")})
 }
 
 onMounted(() => {

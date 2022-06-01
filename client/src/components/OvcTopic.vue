@@ -1,25 +1,30 @@
 <template>
   <div
-      :class="selected && 'selected'"
-      :style="'border-color: ' + color"
+      :class="isSelected && 'selected'"
+      :style="'border-color: ' + topic.color"
       class="topic__wrapper position-relative"
-      @click="emit('select', slug)"
+      @click="emit('click', topic.slug)"
   >
     <div class="topic__inner">
-      <slot/>
+      {{ topic.title }}
     </div>
-    <div :style="'background-color: ' + color" class="topic__back"></div>
+    <div :style="'background-color: ' + topic.color" class="topic__back"></div>
   </div>
 </template>
 
 <script lang="ts" setup>
+import {Topic} from "../typings/topic";
+import {PropType} from "vue";
+
 defineProps({
-  color: String,
-  slug: String,
-  selected: Boolean
+  topic: {
+    type: Object as PropType<Topic>,
+    required: true
+  },
+  isSelected: Boolean
 })
 
-const emit = defineEmits(['select'])
+const emit = defineEmits(['click'])
 </script>
 
 <style lang="scss" scoped>
@@ -46,6 +51,10 @@ const emit = defineEmits(['select'])
   left: 0;
   top: 0;
   z-index: -1;
+}
+
+.topic__inner {
+  color: white;
 }
 
 .topic__wrapper.selected {

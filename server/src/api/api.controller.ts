@@ -15,7 +15,7 @@ export class ApiController {
   login(@Body() loginData, @Res({passthrough: true}) response: Response) {
     const token = this.authService.login(loginData.key)
     // @ts-ignore
-    response.cookie("token", token, {maxAge: 60 * 60 * 1000, httpOnly: true})
+    response.cookie("token", token, {maxAge: 60 * 60 * 1000})
 
     return token
   }

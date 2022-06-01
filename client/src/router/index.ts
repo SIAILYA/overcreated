@@ -5,7 +5,6 @@ import Contacts from "@/views/Contacts.vue";
 
 import Admin from "@/views/admin/Admin.vue";
 import Login from "@/views/admin/Login.vue";
-import Topics from "@/views/admin/Topics.vue";
 
 import {createRouter, createWebHistory} from "vue-router"
 
@@ -37,19 +36,41 @@ const routes = [
     children: [
       {
         path: "topics",
-        component: Topics
+        component: () => import("@/views/admin/AdminProjectsTopicsLayout.vue"),
+        redirect: "topics/list",
+        children: [
+          {
+            path: "list",
+            component: () => import("@/views/admin/topics/Topics.vue"),
+          },
+          {
+            path: "add",
+            component: () => import("@/views/admin/topics/AddEdit.vue")
+          },
+          {
+            path: "edit/:id",
+            component: () => import("@/views/admin/topics/AddEdit.vue")
+          }
+        ]
       },
       {
-        path: "projects/list",
-        component: () => import("@/views/admin/projects/Projects.vue"),
-      },
-      {
-        path: "projects/add",
-        component: () => import("@/views/admin/projects/AddEdit.vue")
-      },
-      {
-        path: "projects/edit/:id",
-        component: () => import("@/views/admin/projects/AddEdit.vue")
+        path: "projects",
+        component: () => import("@/views/admin/AdminProjectsTopicsLayout.vue"),
+        redirect: "projects/list",
+        children: [
+          {
+            path: "list",
+            component: () => import("@/views/admin/projects/Projects.vue")
+          },
+          {
+            path: "add",
+            component: () => import("@/views/admin/projects/AddEdit.vue")
+          },
+          {
+            path: "edit/:id",
+            component: () => import("@/views/admin/projects/AddEdit.vue")
+          }
+        ]
       }
     ]
   }

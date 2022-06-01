@@ -4,7 +4,7 @@
       <div class="col-12 col-md-4 col-lg-3">
         <div class="side-menu d-flex flex-md-column flex-row mb-3">
           <router-link to="/admin/projects/list">Проекты</router-link>
-          <router-link class="mt-0 mt-md-2 ms-3 ms-md-0" to="/admin/topics">Топики</router-link>
+          <router-link class="mt-0 mt-md-2 ms-3 ms-md-0" to="/admin/topics/list">Топики</router-link>
         </div>
       </div>
       <div class="col-12 col-md-8 col-lg-9">

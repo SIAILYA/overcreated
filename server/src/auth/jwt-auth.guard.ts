@@ -10,7 +10,9 @@ export class JwtAuthGuard {
 
   canActivate(context: ExecutionContext) {
     const request = context.getArgByIndex(0);
-    const token = request.body?.token || request.headers?.authorization?.split(" ")[1] || request.headers?.cookie?.replace("token=", "")
+    const token = request.body?.token ||
+      request.headers?.authorization?.split(" ")[1] ||
+      request.headers?.cookie?.split("; ")?.find(c => c.startsWith("token"))?.replace("token=", "")
 
     try {
       //FIXME: jwtService должен инжектиться (вместе с secret)
