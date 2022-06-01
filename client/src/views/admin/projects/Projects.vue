@@ -6,8 +6,8 @@
     </button>
   </router-link>
   <div class="row mt-5">
-    <div v-for="p in projects" :key="p.id" class="col-12 col-md-6 col-lg-4">
-      <ovc-project :project="p" :to="'edit/' + p.id"/>
+    <div v-for="p in projects" :key="p.id" class="col-12 col-md-6 col-lg-4 d-flex">
+      <ovc-project :project="p" :to="'edit/' + p.id" class="project-card"/>
     </div>
   </div>
 </template>
@@ -31,5 +31,8 @@ onMounted(() => {
 </script>
 
 <style scoped>
-
+.project-card {
+  width: 100%;
+  flex: 0 1 auto;
+}
 </style>

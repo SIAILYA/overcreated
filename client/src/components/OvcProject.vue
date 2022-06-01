@@ -1,6 +1,6 @@
 <template>
   <component :is="wrapper" :to="to || project.slug" class="d-block project__wrapper">
-    <div>
+    <div class="d-flex flex-column h-100">
       <h2
           :style="`color: ${project.color}`"
           class="title colored-brightness"
@@ -8,9 +8,9 @@
         {{ project.title }}
       </h2>
 
-      <p class="description">{{ project.description }}</p>
+      <p class="description">{{ project.description.slice(0, 120) }}{{ project.description.length > 120 ? '...' : '' }}</p>
 
-      <div class="d-flex flex-column overflow-hidden ellipsis">
+      <div class="d-flex flex-column mt-auto overflow-hidden ellipsis">
         <div v-if="project.techs.length" class="techs list d-flex">
           <span :style="'color:' + project.color" class="material-icons-round colored-brightness">api</span>
           <span class="content">{{ project.techs.join(", ") }}</span>
