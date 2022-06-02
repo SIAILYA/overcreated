@@ -1,4 +1,4 @@
-import {Body, Controller, Delete, Param, Post} from '@nestjs/common';
+import {Body, Controller, Delete, Get, Param, Post} from '@nestjs/common';
 import {TimelineService} from "./timeline.service";
 import {TimelineEventDto} from "./dto/timeline.event.dto";
 import {TimelineCategoryDto} from "./dto/timeline.category.dto";
@@ -10,6 +10,11 @@ export class TimelineController {
   ) {
   }
 
+  @Get('event/get')
+  async getEvents() {
+    return await this.timelineService.getEvents()
+  }
+
   @Post('event/create')
   async createEvent(@Body() createTimelineEventDto: TimelineEventDto) {
     return await this.timelineService.createEvent(createTimelineEventDto)
@@ -18,6 +23,11 @@ export class TimelineController {
   @Delete('event/delete/:id')
   async deleteEvent(@Param('id') eventId: string) {
     return await this.timelineService.deleteEvent(eventId)
+  }
+
+  @Get('category/get')
+  async getCategories() {
+    return await this.timelineService.getCategories()
   }
 
   @Post('category/create')

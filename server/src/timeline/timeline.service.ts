@@ -14,12 +14,20 @@ export class TimelineService {
   ) {
   }
 
+  async getEvents() {
+    return await this.eventModel.find({}).sort({date: -1})
+  }
+
   async createEvent(eventDto: TimelineEventDto) {
     return await this.eventModel.create(eventDto)
   }
 
   async deleteEvent(eventId: string) {
     await this.eventModel.findByIdAndDelete(eventId)
+  }
+
+  async getCategories() {
+   return await this.categoryModel.find({})
   }
 
   async createCategory(categoryDto: TimelineCategoryDto) {

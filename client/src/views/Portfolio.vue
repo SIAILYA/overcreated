@@ -1,5 +1,5 @@
 <template>
-  <section class="mt-5">
+  <section class="mt-3">
     <div class="container">
       <h3 class="text-center">Витрина проектов</h3>
       <article class="text-center">Мои пет-проекты, учебные работы и разные фрилансные проекты, где я принимал учатие,
