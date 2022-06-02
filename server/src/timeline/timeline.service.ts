@@ -3,14 +3,14 @@ import {InjectModel} from '@nestjs/mongoose';
 import {Model} from 'mongoose';
 import {TimelineEvent, TimelineEventDocument} from "./schemas/timeline.event.schema";
 import {TimelineEventDto} from "./dto/timeline.event.dto";
-import {TimelineCategoryDto} from "./dto/timeline.category.dto";
-import {TimelineCategory, TimelineCategoryDocument} from "./schemas/timeline.category.schema";
+import {TimelineTopicDto} from "./dto/timeline.topic.dto";
+import {TimelineTopic, TimelineTopicDocument} from "./schemas/timelineTopicSchema";
 
 @Injectable()
 export class TimelineService {
   constructor(
     @InjectModel(TimelineEvent.name) private readonly eventModel: Model<TimelineEventDocument>,
-    @InjectModel(TimelineCategory.name) private readonly categoryModel: Model<TimelineCategoryDocument>,
+    @InjectModel(TimelineTopic.name) private readonly topicModel: Model<TimelineTopicDocument>,
   ) {
   }
 
@@ -26,15 +26,15 @@ export class TimelineService {
     await this.eventModel.findByIdAndDelete(eventId)
   }
 
-  async getCategories() {
-   return await this.categoryModel.find({})
+  async getTopics() {
+   return await this.topicModel.find({})
   }
 
-  async createCategory(categoryDto: TimelineCategoryDto) {
-    return await this.categoryModel.create(categoryDto)
+  async createTopic(topicDto: TimelineTopicDto) {
+    return await this.topicModel.create(topicDto)
   }
 
-  async deleteCategory(categoryId: string) {
-    await this.categoryModel.findByIdAndDelete(categoryId)
+  async deleteTopic(categoryId: string) {
+    await this.topicModel.findByIdAndDelete(categoryId)
   }
 }

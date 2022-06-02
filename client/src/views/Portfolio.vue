@@ -9,7 +9,7 @@
 
     <transition :duration="300" appear class="mt-3 mt-md-4 mt-lg-5 projects-topics" mode="out-in" name="fade">
       <div v-if="topics.length" class="container-fluid d-flex justify-content-center flex-wrap mt-4">
-        <ovc-topic v-for="t in topics" :is-selected="t.isSelected" :topic="t" class="mx-1 mt-2"
+        <ovc-project-topic v-for="t in topics" :is-selected="t.isSelected" :topic="t" class="mx-1 mt-2"
                    @click="t.toggleSelect()"/>
         <div class="clear-topics d-flex mt-2 mx-1" @click="onClickDeselectTopics">
           <span class="material-icons-round">clear</span>
@@ -43,7 +43,7 @@ import {computed, ComputedRef, onMounted, Ref, ref, watch} from "vue";
 import {Topic, topicAPI} from "../typings/topic";
 import axios from "axios";
 import {BACK_API} from "../../config";
-import OvcTopic from "../components/OvcTopic.vue";
+import OvcProjectTopic from "../components/OvcProjectTopic.vue";
 import {Project, projectAPI} from "../typings/project";
 import OvcProject from "../components/OvcProject.vue";
 import OvcSpinner from "../components/OvcSpinner.vue";

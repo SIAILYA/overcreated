@@ -1,25 +1,23 @@
 <template>
   <div
       :class="isSelected && 'selected'"
-      :style="'border-color: ' + topic.color + '; background: ' + topic.color"
+      :style="'border-color: ' + color + '; background: ' + color"
       class="topic__wrapper position-relative"
-      @click="emit('click', topic.slug)"
+      @click="emit('click')"
   >
-    <div :style="'color: ' + topic.color" class="topic__inner">
-      {{ topic.title }}
+    <div :style="'color: ' + color" class="topic__inner">
+      <slot></slot>
     </div>
     <div class="topic__back"></div>
   </div>
 </template>
 
 <script lang="ts" setup>
-import {Topic} from "../typings/topic";
-import {PropType} from "vue";
 
 defineProps({
-  topic: {
-    type: Object as PropType<Topic>,
-    required: true
+  color: {
+    type: String,
+    default: "#FF00000"
   },
   isSelected: Boolean
 })

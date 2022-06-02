@@ -14,7 +14,7 @@
 
   <br>
   <div class="d-flex">
-    <ovc-topic :topic="topic" is-selected/>
+    <ovc-project-topic :topic="topic" is-selected/>
   </div>
   <br>
 
@@ -43,7 +43,7 @@ import {Topic} from "../../../typings/topic";
 //@ts-ignore
 import {transliterate} from "@/utils/transliterate.js";
 import router from "../../../router";
-import OvcTopic from "../../../components/OvcTopic.vue";
+import OvcProjectTopic from "../../../components/OvcProjectTopic.vue";
 
 
 const route = useRoute()

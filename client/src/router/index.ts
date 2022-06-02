@@ -36,7 +36,7 @@ const routes = [
     children: [
       {
         path: "topics",
-        component: () => import("@/views/admin/AdminProjectsTopicsLayout.vue"),
+        component: () => import("@/views/admin/AdminLayout.vue"),
         redirect: "topics/list",
         children: [
           {
@@ -55,7 +55,7 @@ const routes = [
       },
       {
         path: "projects",
-        component: () => import("@/views/admin/AdminProjectsTopicsLayout.vue"),
+        component: () => import("@/views/admin/AdminLayout.vue"),
         redirect: "projects/list",
         children: [
           {
@@ -71,6 +71,10 @@ const routes = [
             component: () => import("@/views/admin/projects/AddEdit.vue")
           }
         ]
+      },
+      {
+        path: "timeline",
+        component: () => import("@/views/admin/Timeline.vue")
       }
     ]
   }

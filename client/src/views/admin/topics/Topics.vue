@@ -12,7 +12,7 @@
   <div class="d-flex mt-2 flex-wrap">
     <div v-for="t in topics" :key="t.id" class="me-3 mt-2">
       <router-link :to="'edit/' + t.id" class="text-decoration-none">
-        <ovc-topic :topic="t" class="topic-pill" is-selected/>
+        <ovc-project-topic :topic="t" class="topic-pill" is-selected/>
       </router-link>
     </div>
   </div>
@@ -24,7 +24,7 @@ import axios from "axios";
 import {BACK_API} from "../../../../config";
 import {Topic} from "../../../typings/topic";
 import OvcSpinner from "../../../components/OvcSpinner.vue";
-import OvcTopic from "../../../components/OvcTopic.vue";
+import OvcProjectTopic from "../../../components/OvcProjectTopic.vue";
 
 const topics: Ref<Array<Topic>> = ref([])
 const isLoadingTopics = ref(true)

@@ -1,7 +1,7 @@
 import {Body, Controller, Delete, Get, Param, Post} from '@nestjs/common';
 import {TimelineService} from "./timeline.service";
 import {TimelineEventDto} from "./dto/timeline.event.dto";
-import {TimelineCategoryDto} from "./dto/timeline.category.dto";
+import {TimelineTopicDto} from "./dto/timeline.topic.dto";
 
 @Controller('api/timeline')
 export class TimelineController {
@@ -25,18 +25,18 @@ export class TimelineController {
     return await this.timelineService.deleteEvent(eventId)
   }
 
-  @Get('category/get')
-  async getCategories() {
-    return await this.timelineService.getCategories()
+  @Get('topic/get')
+  async getTopics() {
+    return await this.timelineService.getTopics()
   }
 
-  @Post('category/create')
-  async createCategory(@Body() createTimelineCategoryDto: TimelineCategoryDto) {
-    return await this.timelineService.createCategory(createTimelineCategoryDto)
+  @Post('topic/create')
+  async createTopic(@Body() createTimelineTopicDto: TimelineTopicDto) {
+    return await this.timelineService.createTopic(createTimelineTopicDto)
   }
 
-  @Delete('category/delete/:id')
-  async deleteCategory(@Param('id') categoryId: string) {
-    return await this.timelineService.deleteCategory(categoryId)
+  @Delete('topic/delete/:id')
+  async deleteTopic(@Param('id') categoryId: string) {
+    return await this.timelineService.deleteTopic(categoryId)
   }
 }
