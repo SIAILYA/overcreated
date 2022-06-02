@@ -9,6 +9,7 @@ import {TopicsModule} from "./topics/topics.module";
 import {AuthService} from "./auth/auth.service";
 import {JwtModule, JwtService} from '@nestjs/jwt';
 import {ProjectsModule} from './projects/projects.module';
+import { TimelineModule } from './timeline/timeline.module';
 
 @Module({
   imports: [
@@ -24,6 +25,7 @@ import {ProjectsModule} from './projects/projects.module';
     JwtModule.register({secret: process.env.SECRET_KEY, signOptions: {expiresIn: process.env.JWT_EXPIRE}}),
     TopicsModule,
     ProjectsModule,
+    TimelineModule,
   ],
   providers: [AuthService, JwtService],
   exports: [AuthService],
