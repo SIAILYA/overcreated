@@ -4,6 +4,7 @@ import {TimelineService} from './timeline.service';
 import {MongooseModule} from '@nestjs/mongoose';
 import {TimelineTopic, TimelineTopicSchema} from "./schemas/timelineTopicSchema";
 import {TimelineEvent, TimelineEventSchema} from "./schemas/timeline.event.schema";
+import { JwtService } from '@nestjs/jwt';
 
 @Module({
   imports: [
@@ -11,7 +12,7 @@ import {TimelineEvent, TimelineEventSchema} from "./schemas/timeline.event.schem
     MongooseModule.forFeature([{name: TimelineEvent.name, schema: TimelineEventSchema}])
   ],
   controllers: [TimelineController],
-  providers: [TimelineService]
+  providers: [TimelineService, JwtService]
 })
 export class TimelineModule {
 }

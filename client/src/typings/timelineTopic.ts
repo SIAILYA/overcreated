@@ -19,4 +19,6 @@ export class TimelineTopic extends Model {
 
   title: string;
   color: string = "#ffffff";
+
+  isSelected: boolean = true;
 }
