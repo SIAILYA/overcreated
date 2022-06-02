@@ -9,8 +9,8 @@
   <div class="d-flex mt-3">
     <ovc-spinner class="mx-auto" :show="isLoadingProjects"/>
   </div>
-  <div class="row mt-5">
-    <div v-for="p in projects" :key="p.id" class="col-12 col-md-6 col-lg-4 d-flex">
+  <div class="row mt-3">
+    <div v-for="p in projects" :key="p.id" class="col-12 col-md-6 col-lg-4 d-flex mt-3">
       <ovc-project :project="p" :to="'edit/' + p.id" class="project-card"/>
     </div>
   </div>
