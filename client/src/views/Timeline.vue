@@ -5,43 +5,47 @@
       Разные события из моей жизни и профессиональной деятельности
     </article>
 
-    <div class="mt-4 mt-3 mt-md-4 mt-lg-5 d-flex justify-content-center flex-wrap">
-      <ovc-topic
-          v-for="topic in topics"
-          :key="topic.id"
-          :color="topic.color"
-          :is-selected="topic.isSelected"
-          class="mx-1 mt-2"
-          @click="onClickTopicSelect(topic)"
-      >
-        {{ topic.title }}
-      </ovc-topic>
-    </div>
+    <transition :duration="300" name="fade">
+      <div class="mt-4 mt-3 mt-md-4 mt-lg-5 d-flex justify-content-center flex-wrap" v-if="topics.length">
+        <ovc-topic
+            v-for="topic in topics"
+            :key="topic.id"
+            :color="topic.color"
+            :is-selected="topic.isSelected"
+            class="mx-1 mt-2"
+            @click="onClickTopicSelect(topic)"
+        >
+          {{ topic.title }}
+        </ovc-topic>
+      </div>
+    </transition>
 
-    <div class="mt-4 mt-lg-5">
-      <transition-group :duration="300" appear class="row child-view projects-list position-relative"
-                        name="projects-list" tag="div">
+    <transition :duration="300" name="fade">
+      <div v-if="filteredEvents.length" class="mt-4 mt-lg-5">
+        <transition-group :duration="300" appear class="row child-view projects-list position-relative"
+                          name="projects-list" tag="div">
+          <ovc-timeline-event
+              v-for="(event, index) in filteredEvents"
+              :key="event.id"
+              :caption="event.description"
+              :color="getTopicColorById(event.topic)"
+              :dates="event.dateString"
+              :line-top="index !== 0"
+              :title="event.title"
+              class="timeline-event"
+          />
+        </transition-group>
         <ovc-timeline-event
-            v-for="(event, index) in filteredEvents"
-            :key="event.id"
-            :caption="event.description"
-            :color="getTopicColorById(event.topic)"
-            :dates="event.dateString"
-            :line-top="index !== 0"
-            :title="event.title"
-            class="timeline-event"
+            big-line
+            caption="Всем привет!"
+            color="rgb(77, 130, 255)"
+            dashed
+            dates="Февраль'02"
+            line-top
+            title="Я родился!"
         />
-      </transition-group>
-      <ovc-timeline-event
-          big-line
-          caption="Всем привет!"
-          color="rgb(77, 130, 255)"
-          dashed
-          dates="Февраль'02"
-          line-top
-          title="Я родился!"
-      />
-    </div>
+      </div>
+    </transition>
   </section>
 </template>
 
@@ -102,6 +106,7 @@ onMounted(() => {
 <style lang="scss">
 .timeline-event {
   transition: all .5s ease, color 0s ease;
+
   .timeline-event-card {
     transition: all .5s ease, color 0s ease;
   }
