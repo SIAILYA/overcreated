@@ -10,7 +10,7 @@
     <transition :duration="300" appear class="mt-3 mt-md-4 mt-lg-5 projects-topics" mode="out-in" name="fade">
       <div v-if="topics.length" class="container-fluid d-flex justify-content-center flex-wrap mt-4">
         <ovc-project-topic v-for="t in topics" :is-selected="t.isSelected" :topic="t" class="mx-1 mt-2"
-                   @click="t.toggleSelect()"/>
+                           @click="t.toggleSelect()"/>
         <div class="clear-topics d-flex mt-2 mx-1" @click="onClickDeselectTopics">
           <span class="material-icons-round">clear</span>
         </div>
@@ -52,6 +52,7 @@ const topics: Ref<Array<Topic>> = ref([])
 const projects: Ref<Array<Project>> = ref([])
 const projectsLoadDebounce: Ref<ReturnType<typeof setTimeout> | null> = ref(null)
 const isProjectsLoading: Ref<Boolean> = ref(true)
+const coldStart = ref(true)
 
 const selectedTopicsIds: ComputedRef<string[]> = computed(() => {
   return topics.value.filter(t => t.isSelected).map(t => t.id)
@@ -80,9 +81,14 @@ watch(selectedTopicsIds, () => {
     clearTimeout(projectsLoadDebounce.value)
   }
 
-  projectsLoadDebounce.value = setTimeout(() => {
+  if (!coldStart.value) {
+    projectsLoadDebounce.value = setTimeout(() => {
+      loadProjects()
+    }, 500)
+  } else {
     loadProjects()
-  }, 500)
+    coldStart.value = true
+  }
 })
 
 const onClickDeselectTopics = () => {
