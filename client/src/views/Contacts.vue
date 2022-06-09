@@ -6,7 +6,7 @@
     </article>
     <div class="row">
 
-      <div class="col-12 col-md-6">
+      <div class="col-12 col-md-7">
         <h4>Приоритетные способы связи</h4>
 
         <div class="row">
@@ -23,7 +23,7 @@
               </template>
               @siailya
               <template #caption>
-                t.me/siailya
+                <ovc-link to="https://t.me/siailya" external>t.me/siailya</ovc-link>
               </template>
             </ovc-contact-card>
           </div>
@@ -39,7 +39,7 @@
               </template>
               Илья Самойлов
               <template #caption>
-                vk.com/siailya
+                <ovc-link to="https://vk.com/siailya" external>vk.com/siailya</ovc-link>
               </template>
             </ovc-contact-card>
           </div>
@@ -62,7 +62,7 @@
               </template>
               Позвонить
               <template #caption>
-                +7-999-516-63-83
+                <ovc-link to="tel:+7-999-516-63-83" external>+7-999-516-63-83</ovc-link>
               </template>
             </ovc-contact-card>
           </div>
@@ -78,13 +78,13 @@
               </template>
               Написать
               <template #caption>
-                sia.ilya.dev@gmail.com
+                <ovc-link to="mailto:sia.ilya.dev@gmail.com" target="_blank" external>sia.ilya.dev@gmail.com</ovc-link>
               </template>
             </ovc-contact-card>
           </div>
         </div>
       </div>
-      <div class="col-12 col-md-6 border-start border-1 border-hr mt-3 mt-md-0">
+      <div class="col-12 col-md-5 border-start border-1 border-hr mt-3 mt-md-0">
         <h4>Ещё я обитаю тут</h4>
 
         <div class="row">
@@ -100,7 +100,7 @@
               Мой канал
 
               <template #caption>
-                t.me/samolyev
+                <ovc-link to="https://t.me/samolyev" target="_blank" external>t.me/samolyev</ovc-link>
               </template>
             </ovc-contact-card>
           </div>
@@ -121,7 +121,7 @@
               GitHub
 
               <template #caption>
-                github.com/siailya
+                <ovc-link to="https://github.com/siailya" target="_blank" external>github.com/siailya</ovc-link>
               </template>
             </ovc-contact-card>
           </div>
@@ -143,7 +143,7 @@
               Behance
 
               <template #caption>
-                behance.net/siailya
+                <ovc-link to="https://behance.net/siailya" target="_blank" external>behance.net/siailya</ovc-link>
               </template>
             </ovc-contact-card>
           </div>
@@ -154,7 +154,8 @@
 </template>
 
 <script lang="ts" setup>
-import OvcContactCard from "../components/OvcContactCard.vue";</script>
+import OvcContactCard from "../components/OvcContactCard.vue";
+import OvcLink from "../components/OvcLink.vue";</script>
 
 <style scoped>
 .border-hr {

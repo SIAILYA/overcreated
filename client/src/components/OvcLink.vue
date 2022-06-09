@@ -1,8 +1,8 @@
 <template>
   <div :class="(checkActive && $route.path === to ? 'active ' : ' ') + ' ' + size" class="ovc-link">
-    <router-link :to="to" class="ovc-link__inner" v-bind="$attrs">
+    <component :is="external ? 'a' : 'router-link'" :href="to" :to="to" :target="external ? '_blank' : ''" class="ovc-link__inner" v-bind="$attrs">
       <slot/>
-    </router-link>
+    </component>
     <div class="underline"></div>
   </div>
 </template>
@@ -11,6 +11,7 @@
 defineProps({
   to: {type: String, required: true},
   checkActive: Boolean,
+  external: Boolean,
   size: {type: String, default: "default"}
 })
 </script>
@@ -35,6 +36,7 @@ defineProps({
 
 .ovc-link {
   position: relative;
+  display: inline-block;
   transition: all .3s ease;
   color: var(--text-color);
 

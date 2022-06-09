@@ -1,7 +1,7 @@
 <template>
   <div class="row">
-    <div class="col-2 col-md-3">
-      <slot name="icon" class="w-100"></slot>
+    <div class="col-2 col-md-3 icon">
+      <slot name="icon"></slot>
     </div>
 
     <div class="col-10 col-md-9">
@@ -18,6 +18,8 @@
 <script lang="ts" setup>
 </script>
 
-<style scoped>
-
+<style>
+.icon svg{
+  max-width: 60px;
+}
 </style>
