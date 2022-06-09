@@ -39,32 +39,21 @@
               других сферах жизни
             </li>
             <li> Хорошо владею русским языком – грамотно пишу, соблюдая грамматические и пунктуационные правила</li>
-            <li> Английским владею на среднем уровне – могу читать большинство текстов, понимаю четкую речь, могу
-              поддержать разговор на повседневные темы
-            </li>
+            <li> Английским владею на среднем уровне – могу читать большинство текстов, понимаю четкую речь, могу поддержать разговор на повседневные темы</li>
           </ul>
           <ul ref="soft_collapse" :class="skills.softCollapsed ? 'collapsed' : ''" :style="{height: skills.softClientHeight}"
               class="overflow-hidden skills">
             <li> Умею быстро принимать решения и брать на себя ответственность</li>
-            <li> Когда что-то не получается, не психую и не бросаю задачу, а пытаюсь подойти к ней с другой стороны или
-              решить её иными методами
-            </li>
-            <li> Легко могу одновременно держать в голове множество задач и работать над ними – например делать макет в
-              фигме, ожидая сборки проекта или разговаривать по телефону, попутно готовя ужин
-            </li>
-            <li> Нацелен на результат и достижение цели. А если задача объемная, могу разбить её на подзадачи и работать
-              над ними
-            </li>
-            <li> Когда требуется, могу поддержать разговор на множество тем – от серебрянного века до устройства ДВС
-            </li>
+            <li> Когда что-то не получается, не психую и не бросаю задачу, а пытаюсь подойти к ней с другой стороны или решить её иными методами</li>
+            <li> Легко могу одновременно держать в голове множество задач и работать над ними – например делать макет в фигме, ожидая сборки проекта или разговаривать по телефону, попутно готовя ужин</li>
+            <li> Нацелен на результат и достижение цели. А если задача объемная, могу разбить её на подзадачи и работать над ними</li>
+            <li> Когда требуется, могу поддержать разговор на множество тем – от серебрянного века до устройства ДВС</li>
             <li> Имею права категории B – умею водить машину и делаю это с удовольствием</li>
             <li> В любой сфере жизни руководствуюсь правилом «семь раз проверь – один раз отрежь»</li>
           </ul>
-          <div class="justify-content-center d-flex pointer" style="color: var(--accent)"
-               @click="skills.softCollapsed = !skills.softCollapsed">
+          <div class="justify-content-center d-flex pointer" style="color: var(--accent)" @click="skills.softCollapsed = !skills.softCollapsed">
             <div class="d-flex mx-auto">
-              <span class="material-icons-round">{{ skills.softCollapsed ? "expand_more" : "expand_less" }}</span>
-              Показать {{ skills.softCollapsed ? "больше" : "меньше" }}
+              <span class="material-icons-round">{{ skills.softCollapsed ? "expand_more" : "expand_less" }}</span> Показать {{ skills.softCollapsed ? "больше" : "меньше" }}
             </div>
           </div>
 
@@ -92,11 +81,9 @@
               интерфейсы
             </li>
           </ul>
-          <div class="justify-content-center d-flex pointer" style="color: var(--accent)"
-               @click="skills.hardCollapsed = !skills.hardCollapsed">
+          <div class="justify-content-center d-flex pointer" style="color: var(--accent)" @click="skills.hardCollapsed = !skills.hardCollapsed">
             <div class="d-flex mx-auto">
-              <span class="material-icons-round">{{ skills.hardCollapsed ? "expand_more" : "expand_less" }}</span>
-              Показать {{ skills.hardCollapsed ? "больше" : "меньше" }}
+              <span class="material-icons-round">{{ skills.hardCollapsed ? "expand_more" : "expand_less" }}</span> Показать {{ skills.hardCollapsed ? "больше" : "меньше" }}
             </div>
           </div>
         </div>
@@ -158,7 +145,7 @@ onMounted(() => {
 }
 
 .skills.collapsed {
-  height: 0 !important;
+  height: 0!important;
 }
 
 .pointer {

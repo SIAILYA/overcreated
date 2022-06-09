@@ -17,7 +17,7 @@
           <span class="circle__inner"></span>
         </span>
       <div class="description">
-        <div v-if="title" class="title">{{ title }}</div>
+        <div v-if="title" class="title" v-html="title"></div>
         <div v-if="caption" class="caption" v-html="caption"></div>
       </div>
     </div>
@@ -86,6 +86,11 @@ defineProps({
     margin-left: 12px;
     margin-right: 12px;
     position: relative;
+
+    @media screen and (max-width: 768px) {
+      width: 30px;
+      height: 30px;
+    }
 
     .circle__inner {
       width: 0;
