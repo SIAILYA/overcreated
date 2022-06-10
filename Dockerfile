@@ -1,27 +1,22 @@
 FROM node:16.13.0 as builder
 
-WORKDIR /app
+WORKDIR /app/client
 
-COPY frontend /app/frontend
+COPY client /app/client
 
-RUN cd frontend && npm i
-
-RUN cd frontend && npm run build
+RUN yarn && yarn build
 
 FROM node:16.13.0-alpine3.13
 
-WORKDIR /app
+WORKDIR /app/server
 
-COPY --from=builder /app/dist /app/dist
+COPY --from=builder /app/client/dist /app/client/dist
 
-COPY index.js /app/index.js
-COPY package.json /app/package.json
-COPY views /app/views
-COPY database /app/database
-COPY static /app/static
-
-RUN npm i
+COPY server /app/server
+RUN yarn && yarn build
 
 EXPOSE 5088
 
-CMD ["node", "index.js"]
+WORKDIR /app/server
+
+CMD ["yarn", "start"]

@@ -1,0 +1,162 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap');
+@import "animations";
+
+// Set default theme colors
+body {
+  $backgroundPrimary: #151515;
+  $backgroundSecondary: #2c2c2c;
+  $textColor: #FFF;
+  $shadowColor: rgba(255, 255, 255, .3);
+
+  $accentOrange: #ff8800;
+  $accentGreen: #00FF57;
+  $accentBlue: #00BDC9;
+  $accentPurple: #df006a;
+
+  --background-primary: #{$backgroundPrimary};
+  --background-secondary: #{$backgroundSecondary};
+  --text-color: #{$textColor};
+  --shadow-color: #{$shadowColor};
+
+  --accent-orange: #{$accentOrange};
+  --accent-green: #{$accentGreen};
+  --accent-blue: #{$accentBlue};
+  --accent-purple: #{$accentPurple};
+
+  --accent: #{$accentGreen};
+  --accent-project: #{$accentGreen};
+}
+
+// Set light theme colors
+body[variant~='light'] {
+  $backgroundPrimary: #f0f0f0;
+  $backgroundSecondary: #ffffff;
+  $textColor: #1a1a1a;
+  $shadowColor: rgba(0, 0, 0, .15);
+
+  $accentOrange: #c92500;
+  $accentGreen: #08b200;
+  $accentBlue: #00BDC9;
+  $accentPurple: #C7005F;
+
+  --background-primary: #{$backgroundPrimary};
+  --background-secondary: #{$backgroundSecondary};
+  --text-color: #{$textColor};
+  --shadow-color: #{$shadowColor};
+
+  --accent-orange: #{$accentOrange};
+  --accent-green: #{$accentGreen};
+  --accent-blue: #{$accentBlue};
+  --accent-purple: #{$accentPurple};
+
+  --accent: #{$accentGreen};
+  --accent-project: #{$accentGreen};
+}
+
+body[variant="light"] {
+  .colored-brightness {
+    filter: brightness(.9);
+  }
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: var(--background-primary);
+  color: var(--text-color);
+  font-family: 'Montserrat', sans-serif;
+
+  transition: background-color .3s ease, color .3s ease;
+}
+
+::selection {
+  background-color: var(--accent);
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 2px;
+  transition: all 0.3s ease;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--background-primary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--background-secondary);
+  border-radius: 50px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, .6);
+}
+
+body[theme~="blue"] {
+  --accent: var(--accent-blue);
+}
+
+body[theme~="orange"] {
+  --accent: var(--accent-orange);
+}
+
+body[theme~="green"] {
+  --accent: var(--accent-green);
+}
+
+body[theme~="purple"] {
+  --accent: var(--accent-purple);
+}
+
+body[theme~="project"] {
+  --accent: var(--accent-project);
+}
+
+.ovc-btn {
+  background-color: var(--accent);
+  color: var(--background-primary);
+  border-radius: 5px;
+  border: none;
+  outline: none;
+  transition: all .3s ease;
+  padding: 8px 14px;
+
+  &:hover {
+    filter: brightness(0.9);
+  }
+
+  &:active {
+    filter: brightness(0.7);
+  }
+
+  &:disabled {
+    filter: grayscale(1);
+  }
+}
+
+.ovc-input {
+  background: none;
+  border: 1px solid var(--text-color);
+  border-radius: 5px;
+  padding: 4px 8px;
+  transition: all .3s ease;
+  color: var(--text-color);
+
+  &:focus {
+    outline: none;
+    border-color: var(--accent);
+  }
+
+  &[type="color"] {
+    height: 34px;
+  }
+}
+
+.project-card {
+  width: 100%;
+  flex: 0 1 auto;
+  transition: all .3s ease;
+}
