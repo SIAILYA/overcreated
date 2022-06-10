@@ -35,4 +35,12 @@ jobs:
             docker pull ${{secrets.DOCKER_HUB_LOGIN}}/overcreated:latest
             docker stop overcreated
             docker system prune -f
-            docker run --name overcreated -dit -p 5088:5088 --restart=always siailyadev/overcreated:latest
+            docker run --name overcreated -dit -p 5088:5088 --restart=always \
+            -e PORT=5088 \
+            -e MONGO_URI='${{ secrets.MONGO_URI }}' \
+            -e CLIENT_DIST=../../../client/dist \
+            -e ADMIN_KEY=${{ secrets.ADMIN_KEY }} \
+            -e SECRET_KEY='${{ secrets.JWT_SECRET }}' \
+            -e JWT_EXPIRE=1h \
+            -e UPLOAD_FOLDER=../../public \
+            siailyadev/overcreated:latest
