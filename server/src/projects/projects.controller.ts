@@ -25,6 +25,14 @@ export class ProjectsController {
       populate === 'true')
   }
 
+  @Get('getBySlug/:slug')
+  async getBySlug(
+    @Param('slug') slug: string = null,
+    @Query('populate') populate: string = null
+  ) {
+    return await this.projectsService.getBySlug(slug, populate === 'true')
+  }
+
   @UseGuards(JwtAuthGuard)
   @Post('create')
   async create(@Body() createProjectDto: ProjectDto) {

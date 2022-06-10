@@ -29,6 +29,10 @@ export class ProjectsService {
     return await this.projectModel.find({topicsFilter}, getAllProjection).populate(populate ? "topics" : "")
   }
 
+  async getBySlug(slug: string, populate: boolean) {
+    return await this.projectModel.findOne({slug: slug}).populate(populate ? "topics" : "")
+  }
+
   async create(projectDto: ProjectDto) {
     return await this.projectModel.create(projectDto)
   }
