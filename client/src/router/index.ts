@@ -2,6 +2,7 @@ import Portfolio from "@/views/Portfolio.vue";
 import Resume from "@/views/Resume.vue";
 import Timeline from "@/views/Timeline.vue";
 import Contacts from "@/views/Contacts.vue";
+import Project from "@/views/Project.vue";
 
 import Admin from "@/views/admin/Admin.vue";
 import Login from "@/views/admin/Login.vue";
@@ -28,6 +29,10 @@ const routes = [
   {
     path: "/login",
     component: Login
+  },
+  {
+    path: "/project/:slug",
+    component: Project
   },
   {
     path: "/admin",
