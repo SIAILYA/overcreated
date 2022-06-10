@@ -24,6 +24,7 @@ body {
   --accent-purple: #{$accentPurple};
 
   --accent: #{$accentGreen};
+  --accent-project: #{$accentGreen};
 }
 
 // Set light theme colors
@@ -49,6 +50,7 @@ body[variant~='light'] {
   --accent-purple: #{$accentPurple};
 
   --accent: #{$accentGreen};
+  --accent-project: #{$accentGreen};
 }
 
 body[variant="light"] {
@@ -107,6 +109,10 @@ body[theme~="green"] {
 
 body[theme~="purple"] {
   --accent: var(--accent-purple);
+}
+
+body[theme~="project"] {
+  --accent: var(--accent-project);
 }
 
 .ovc-btn {

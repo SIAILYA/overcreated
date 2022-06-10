@@ -28,6 +28,7 @@ const setTheme = (theme: String) => {
 }
 
 watch(() => route.path, (current, _) => {
+  console.log(current)
   switch (current) {
     case "/":
       theme = "green";
@@ -43,6 +44,10 @@ watch(() => route.path, (current, _) => {
       break
     default:
       theme = "red"
+  }
+
+  if (current.includes("/project")) {
+    theme = "project"
   }
 
   setTheme(theme)

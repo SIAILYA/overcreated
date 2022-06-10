@@ -3,6 +3,7 @@
       :is="wrapperComponent"
       :to="to || '/project/' + project.slug"
       class="d-block project__wrapper"
+      @click="onProjectClick"
   >
     <div class="d-flex flex-column h-100">
       <h2
@@ -68,6 +69,11 @@ const props = defineProps({
     default: ""
   }
 })
+
+const onProjectClick = () => {
+  document.body.style.setProperty("--accent-project", props.project.color || "var(--accent)")
+}
+
 
 const wrapperComponent = computed(() => {
   if (!props.to && !props.project.slug) {

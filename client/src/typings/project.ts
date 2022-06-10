@@ -39,9 +39,14 @@ export class Project extends Model {
 
   async loadBySlug() {
     const projectResponse = (await axios.get(BACK_API + projectAPI.path + projectAPI.getPath.slice(0, projectAPI.getPath.length - 1) + "BySlug/" + this.slug + "?populate=true")).data
+    console.log(projectResponse.topics)
     projectResponse.topicsObjects = projectResponse.topics.map((t: any) => new Topic(t))
-    projectResponse.topics = projectResponse.topics.map((t: any) => t.id)
+    projectResponse.topics = projectResponse.topicsObjects.map((t: Topic) => t.id)
+    console.log(projectResponse.topics)
+    console.log(projectResponse.topicsObjects)
 
     this.setFromObject(projectResponse)
+
+    return this
   }
 }
