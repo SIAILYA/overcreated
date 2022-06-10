@@ -122,7 +122,6 @@ const onClickDeleteTopic = (topic: TimelineTopic) => {
 }
 
 const onClickDeleteEvent = (event: TimelineEvent) => {
-  console.log(event)
   event.delete().then(loadEvents)
 }
 

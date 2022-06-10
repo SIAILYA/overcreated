@@ -14,9 +14,7 @@
     "sass": "^1.52.1",
     "vue": "^3.2.25",
     "vue-chart-3": "^3.1.8",
-    "vue-class-component": "^7.2.6",
-    "vue-router": "^4.0.15",
-    "vuex": "^4.0.2"
+    "vue-router": "^4.0.15"
   },
   "devDependencies": {
     "@types/marked": "^4.0.3",

@@ -24,8 +24,6 @@ const loginData = reactive({
 const loginError = ref(false)
 
 const onSubmit = () => {
-  console.log(loginData)
-
   axios.post(BACKEND + "/api/login", loginData)
       .then(() => {
         sessionStorage.setItem('login', 'true')

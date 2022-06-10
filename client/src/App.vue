@@ -28,7 +28,6 @@ const setTheme = (theme: String) => {
 }
 
 watch(() => route.path, (current, _) => {
-  console.log(current)
   switch (current) {
     case "/":
       theme = "green";
