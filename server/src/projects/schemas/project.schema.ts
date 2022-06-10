@@ -34,7 +34,7 @@ export class Project {
   fullDescription: string
 
   @Prop()
-  photos: string[]
+  pictures: string[]
 
   @Prop()
   link: string

@@ -9,7 +9,7 @@ export class ProjectDto {
   readonly techs: string[]
   readonly description: string
   readonly fullDescription: string
-  readonly photos: string
+  readonly pictures: string[]
   readonly link: string
   readonly github: string
   readonly behance: string
