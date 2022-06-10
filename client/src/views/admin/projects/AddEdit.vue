@@ -52,6 +52,26 @@
           </button>
         </div>
       </div>
+
+      <h5 class="mt-4">Картинки</h5>
+      <div class="d-flex">
+        <input id="pictures_upload" ref="picturesUpload" accept="image/*" class="d-none" type="file"
+               @input="onPictureSelected"/>
+        <label class="upload-btn ovc-btn d-flex w-100" for="pictures_upload">
+          <span class="mx-auto">Загрузить картинку</span>
+        </label>
+      </div>
+
+      <div class="row mt-3">
+        <div v-for="(pic, i) in project.pictures" class="col-6 mt-2">
+          <a :href="BACKEND + '/' + pic" class="d-block position-relative picture" target="_blank">
+            <img :src="BACKEND + '/' + pic" alt="" class="w-100">
+            <button class="ovc-btn remove-pic bg-danger" @click.prevent="removePicture(i)">
+              Удалить
+            </button>
+          </a>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -83,7 +103,7 @@ import {marked} from 'marked';
 import {transliterate} from "@/utils/transliterate.js";
 import router from "../../../router";
 import axios from "axios";
-import {BACK_API} from "../../../../config";
+import {BACK_API, BACKEND} from "../../../../config";
 import {Topic} from "../../../typings/topic";
 
 const route = useRoute()
@@ -92,6 +112,7 @@ const editMode = route.path.includes("edit")
 const project = reactive(new Project())
 const topics: Ref<Array<Topic>> = ref([])
 const addTech = ref("")
+const picturesUpload = ref(null)
 
 const isValid = computed(() => {
   return project.title && project.description && project.slug && project.color
@@ -112,6 +133,19 @@ const onClickAddTech = () => {
 
 const onClickRemoveTech = (tech: string) => {
   project.techs = project.techs?.filter(t => t !== tech)
+}
+
+const onPictureSelected = () => {
+  const data = new FormData()
+  //@ts-ignore
+  data.append("file", picturesUpload.value?.files[0])
+  axios.post(BACK_API + "upload_picture" + "?fileName=" + project.slug, data, {headers: {'Content-Type': 'multipart/form-data'}}).then(r => {
+    project.pictures?.push(r.data)
+  })
+}
+
+const removePicture = (index: number) => {
+  project.pictures?.splice(index, 1)
 }
 
 const onClickSubmit = () => {
@@ -158,6 +192,34 @@ onMounted(() => {
 })
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+.upload-btn {
+  cursor: pointer;
+}
+
+.picture {
+  &:hover {
+    .remove-pic {
+      height: 36px;
+    }
+  }
+
+  &:not(:hover) {
+    .remove-pic {
+      padding: 0;
+    }
+  }
+}
+
+.remove-pic {
+  font-size: 12px !important;
+  height: 0;
+  overflow: hidden;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  left: 0;
+}
+
 
 </style>
