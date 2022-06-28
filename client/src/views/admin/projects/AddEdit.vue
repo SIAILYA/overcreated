@@ -174,7 +174,7 @@ const onClickDelete = () => {
 
 const onClickToggleTopic = (topicId: string) => {
   if (project?.topics?.includes(topicId)) {
-    project.topics.filter(t => t !== topicId)
+    project.topics = project.topics.filter(t => t !== topicId)
   } else {
     project.topics.push(topicId)
   }

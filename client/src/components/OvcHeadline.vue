@@ -12,12 +12,14 @@
 </template>
 
 <script lang="ts" setup>
-import quotesList from "../assets/quotes.json"
-import {Ref, ref} from "vue";
+import {onMounted, Ref, ref} from "vue";
+import axios from "axios";
+import {BACK_API} from "../../config";
 
 const isQuoteActive: Ref<Boolean> = ref(false)
 const quote: Ref<String | null> = ref(null)
 const quoteElement: Ref<HTMLElement | null> = ref(null)
+const quotesList = ref([])
 let quoteTimer: ReturnType<typeof setTimeout> | null = null
 
 
@@ -53,14 +55,20 @@ function hideQuote() {
 }
 
 function getRandomQuote(): String {
-  let generatedQuote: String = quotesList[Math.floor(Math.random() * quotesList.length)]
+  let generatedQuote: String = quotesList.value[Math.floor(Math.random() * quotesList.value.length)]
 
   while (generatedQuote === quote.value) {
-    generatedQuote = quotesList[Math.floor(Math.random() * quotesList.length)]
+    generatedQuote = quotesList.value[Math.floor(Math.random() * quotesList.value.length)]
   }
 
   return generatedQuote
 }
+
+onMounted(() => {
+  axios.get(BACK_API + "quotes").then(r => {
+    quotesList.value = r.data?.map((q: any) => q.quote)
+  })
+})
 </script>
 
 <style lang="scss" scoped>

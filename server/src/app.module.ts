@@ -11,6 +11,7 @@ import {JwtModule, JwtService} from '@nestjs/jwt';
 import {ProjectsModule} from './projects/projects.module';
 import {TimelineModule} from './timeline/timeline.module';
 import {MulterModule} from '@nestjs/platform-express';
+import { QuotesModule } from './quotes/quotes.module';
 
 @Module({
   imports: [
@@ -32,6 +33,7 @@ import {MulterModule} from '@nestjs/platform-express';
     TopicsModule,
     ProjectsModule,
     TimelineModule,
+    QuotesModule,
   ],
   providers: [AuthService, JwtService],
   exports: [AuthService],

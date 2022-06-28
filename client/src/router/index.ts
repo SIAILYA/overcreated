@@ -35,6 +35,10 @@ const routes = [
     component: Project
   },
   {
+    path: "/quotes",
+    component: () => import("@/views/Quotes.vue")
+  },
+  {
     path: "/admin",
     component: Admin,
     redirect: "/admin/projects/list",
@@ -80,6 +84,10 @@ const routes = [
       {
         path: "timeline",
         component: () => import("@/views/admin/Timeline.vue")
+      },
+      {
+        path: "quotes",
+        component: () => import("@/views/admin/Quotes.vue")
       }
     ]
   }

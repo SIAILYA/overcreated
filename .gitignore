@@ -32,3 +32,4 @@ server/yarn.lock
 /server/node_modules/
 /server/.env
 /server/public
+package-lock.json
