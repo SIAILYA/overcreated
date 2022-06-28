@@ -2,12 +2,14 @@
   <section>
     <h3 class="text-center">Сборник цитат</h3>
 
-    <div class="mt-5 row">
-      <div class="col-12 col-md-8 col-lg-6 offset-0 offset-md-2 offset-lg-3">
-        <div class="quote d-flex flex-column" v-for="q in quotes" :key="q._id">
-          <p>{{q.quote}}</p>
-          <div class="ms-auto author" v-if="q.author">
-            {{q.author}}
+    <div class="container">
+      <div class="mt-5 row">
+        <div class="col-12 col-md-8 col-lg-6 offset-0 offset-md-2 offset-lg-3">
+          <div class="quote d-flex flex-column" v-for="q in quotes" :key="q._id">
+            <p>{{q.quote}}</p>
+            <div class="ms-auto author" v-if="q.author">
+              {{q.author}}
+            </div>
           </div>
         </div>
       </div>
