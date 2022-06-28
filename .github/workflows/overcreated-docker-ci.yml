@@ -36,6 +36,7 @@ jobs:
             docker stop overcreated
             docker system prune -f
             docker run --name overcreated -dit -p 5088:5088 --restart=always \
+            --mount source=my_test_volume,target=/app/server/public \
             -e PORT=5088 \
             -e MONGO_URI='${{ secrets.MONGO_URI }}' \
             -e CLIENT_DIST=../../../client/dist \
