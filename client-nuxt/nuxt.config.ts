@@ -2,6 +2,15 @@
 export default defineNuxtConfig({
     modules: [
         '@nuxtjs/tailwindcss',
-        '@pinia/nuxt'
-    ]
+        '@nuxtjs/color-mode',
+        '@pinia/nuxt',
+    ],
+    app: {
+        pageTransition: { name: 'page', mode: 'out-in' },
+        head: {
+            link: [
+                { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Round'}
+            ]
+        }
+    }
 })

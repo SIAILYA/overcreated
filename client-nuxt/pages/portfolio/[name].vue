@@ -1,5 +1,7 @@
 <template>
-  {{route.params.name}}
+  <div>
+    {{route.params.name}}
+  </div>
 </template>
 
 <script setup lang="ts">
