@@ -13,6 +13,6 @@
 
 <style scoped>
 .view {
-  min-height: 90vh;
+  min-height: 100vh;
 }
 </style>

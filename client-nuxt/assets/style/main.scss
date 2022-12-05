@@ -95,23 +95,23 @@ body {
   background: rgba(255, 255, 255, .6);
 }
 
-body[theme~="blue"] {
+.blue-variant body {
   --accent: var(--accent-blue);
 }
 
-body[theme~="orange"] {
+.orange-variant body {
   --accent: var(--accent-orange);
 }
 
-body[theme~="green"] {
+.green-variant body {
   --accent: var(--accent-green);
 }
 
-body[theme~="purple"] {
+.purple-variant body {
   --accent: var(--accent-purple);
 }
 
-body[theme~="project"] {
+.project-variant body {
   --accent: var(--accent-project);
 }
 
