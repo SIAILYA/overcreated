@@ -188,8 +188,11 @@
 </div>
 </template>
 
-<script>
-
+<script setup lang="ts">
+definePageMeta({
+  middleware: "accent-color-client",
+  variant: "green"
+})
 </script>
 
 <style scoped>

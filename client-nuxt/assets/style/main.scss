@@ -27,7 +27,7 @@ body {
   --accent-blue: #{$accentBlue};
   --accent-purple: #{$accentPurple};
 
-  --accent: #{$accentGreen};
+  --accent: #{$textColor};
   --accent-project: #{$accentGreen};
 }
 
@@ -53,7 +53,7 @@ body {
   --accent-blue: #{$accentBlue};
   --accent-purple: #{$accentPurple};
 
-  --accent: #{$accentGreen};
+  --accent: #{$textColor};
   --accent-project: #{$accentGreen};
 }
 

@@ -1,27 +1,31 @@
 <template>
   <header :class="{'scrolled': isScrolled}" class="ovc-header mx-auto">
     <div class="ovc-header__menu fixed w-full py-3.5">
-      <div class="container flex justify-between relative">
-        <div class="hidden lg:block"/>
+      <client-only>
+        <transition appear name="slide-down">
+          <div class="container flex justify-between relative">
+            <div class="hidden lg:block"/>
 
-        <nuxt-link class="logo h-full flex my-auto lg:absolute md:static" to="/">
-          <ovc-logo-sm :extended="isScrolled"/>
-        </nuxt-link>
+            <nuxt-link class="logo h-full flex my-auto lg:absolute md:static" to="/">
+              <ovc-logo-sm :extended="isScrolled"/>
+            </nuxt-link>
 
-        <menu class="nav hidden md:flex">
-          <ovc-menu-item v-for="menuItem in navigationMenu" :href="menuItem.href" class="mx-1.5">
-            {{ menuItem.title }}
-          </ovc-menu-item>
-        </menu>
+            <menu class="nav hidden md:flex">
+              <ovc-menu-item v-for="menuItem in navigationMenu" :href="menuItem.href" class="mx-1.5">
+                {{ menuItem.title }}
+              </ovc-menu-item>
+            </menu>
 
-        <theme-switcher class="hidden md:block"/>
+            <theme-switcher class="hidden md:block"/>
 
-        <div class="flex md:hidden">
-          <span class="material-icons-round flex my-auto cursor-pointer" @click="onMobileMenuOpen">
-            menu
-          </span>
-        </div>
-      </div>
+            <div class="flex md:hidden">
+              <span class="material-icons-round flex my-auto cursor-pointer" @click="onMobileMenuOpen">
+                menu
+              </span>
+            </div>
+          </div>
+        </transition>
+      </client-only>
     </div>
 
     <transition name="fade">
@@ -45,11 +49,11 @@
       </div>
 
       <menu class="nav flex flex-col mt-8">
-        <div v-for="menuItem in navigationMenu">
+        <li v-for="menuItem in navigationMenu" class="block">
           <ovc-menu-item :href="menuItem.href" class="mr-auto inline-block pt-3 text-xl">
             {{ menuItem.title }}
           </ovc-menu-item>
-        </div>
+        </li>
       </menu>
     </div>
   </header>
@@ -58,12 +62,12 @@
 <script lang="ts" setup>
 import type {ComputedRef, Ref} from "vue";
 
-import ThemeSwitcher from "~/components/theme-switcher";
+import ThemeSwitcher from "~/components/ovc-theme-switcher";
 import {navigationMenu} from "~/data/static/navigation-menu";
 
 const scrollTop: Ref<number> = ref(0)
 const isMobileMenuOpen: Ref<boolean> = ref(false)
-
+const a = ref(false)
 const route = useRoute()
 
 const onMobileMenuOpen = () => {
@@ -95,7 +99,7 @@ onMounted(() => {
 
 </script>
 
-<style scoped lang="scss">
+<style lang="scss" scoped>
 .ovc-header.scrolled .ovc-header__menu {
   backdrop-filter: blur(7px);
 }
@@ -141,6 +145,6 @@ onMounted(() => {
 
   &.open {
     transform: translateX(0);
-   }
+  }
 }
 </style>

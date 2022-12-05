@@ -5,7 +5,21 @@ import {useColorMode} from "#imports";
 export const useThemeStore = defineStore("theme", {
     state: () => ({
         variant: "green" as Variant,
-        theme: useColorMode(),
-        accentColor: ""
-    })
+        theme: useColorMode()
+    }),
+    actions: {
+        setVariant(v: Variant) {
+            if (process.client) {
+                document.documentElement.classList.remove(`${this.variant}-variant`)
+                document.documentElement.classList.add(`${v}-variant`)
+            }
+
+            this.variant = v
+        },
+        setProjectAccentColor(color: string) {
+            if (process.client) {
+                document.documentElement.style.setProperty("--accent-project", color)
+            }
+        }
+    }
 })

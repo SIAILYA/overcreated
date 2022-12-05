@@ -5,8 +5,12 @@
 </template>
 
 <script setup lang="ts">
-const route = useRoute()
+definePageMeta({
+  middleware: "accent-color-client",
+  variant: "project"
+})
 
+const route = useRoute()
 </script>
 
 <style scoped>
