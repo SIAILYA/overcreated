@@ -12,7 +12,6 @@
 </template>
 
 <script lang="ts" setup>
-import {ref} from "vue";
 import type {Ref} from "vue";
 
 const isQuoteActive: Ref<Boolean> = ref(false)
@@ -20,7 +19,6 @@ const quote: Ref<String | null> = ref(null)
 const quoteElement: Ref<HTMLElement | null> = ref(null)
 const quotesList = ref([])
 let quoteTimer: ReturnType<typeof setTimeout> | null = null
-
 
 function onHeadlineClick() {
   if (isQuoteActive.value) {

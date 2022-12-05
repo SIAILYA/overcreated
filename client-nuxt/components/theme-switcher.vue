@@ -1,10 +1,14 @@
 <template>
   <div class="theme-switcher">
     <div class="theme-switcher__button" @click="onThemeSwitcherClick">
-      <button class="theme-switcher__button__icon flex relative flex-col cursor-pointer w-[40px] h-[40px]
-          transition ease-in-out duration-300 rounded-full">
+      <button
+          :class="{btn}"
+          class="theme-switcher__button__icon flex relative flex-col cursor-pointer
+                 w-[28px] h-[28px] md:w-[40px] md:h-[40px]
+                 transition ease-in-out duration-300 rounded-full"
+      >
         <client-only>
-          <transition-group name="slide-up" :duration="200">
+          <transition-group :duration="200" name="slide-up">
             <span v-if="!theme.unknown && theme.value === 'dark'" class="material-icons-round m-auto">dark_mode</span>
             <span v-else-if="!theme.unknown" class="material-icons-round m-auto">light_mode</span>
           </transition-group>
@@ -14,8 +18,15 @@
   </div>
 </template>
 
-<script setup>
-import {useThemeStore} from "../stores/themeStore";
+<script lang="ts" setup>
+interface Props {
+  btn?: boolean
+}
+
+defineProps<Props>()
+
+
+import {useThemeStore} from "~/stores/themeStore";
 
 const {theme} = useThemeStore()
 
@@ -28,16 +39,27 @@ const onThemeSwitcherClick = () => {
 }
 </script>
 
-<style scoped lang="scss">
+<style lang="scss" scoped>
+.theme-switcher__button__icon.btn {
+  background: var(--background-secondary);
+  box-shadow: 0 0 7px var(--shadow-color);
+}
+
 .theme-switcher__button__icon {
   overflow: hidden;
   user-select: none;
-  background: var(--background-secondary);
-  box-shadow: 0 0 10px var(--shadow-color);
 
-  &:hover {
+  &:hover span {
     color: var(--accent);
-    box-shadow: 0 0 15px 4px var(--shadow-color);
+  }
+
+  span {
+    font-size: 20px;
+    transition: color .3s ease-in-out;
+
+    @media screen and (max-width: 768px) {
+      font-size: 18px;
+    }
   }
 }
 </style>

@@ -4,7 +4,7 @@
       :color="isActive ? 'var(--accent)' : 'var(--text-color)'"
       :href="href"
       check-active
-      class="ovc-menu-item my-auto md:text-xl text-lg"
+      class="ovc-menu-item font-light my-auto text-md md:text-lg lg:text-xl"
       underline="smooth"
   >
     <slot/>

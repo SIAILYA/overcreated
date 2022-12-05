@@ -1,31 +1,88 @@
 <template>
   <header :class="{'scrolled': isScrolled}" class="ovc-header mx-auto">
     <div class="ovc-header__menu fixed w-full py-3.5">
-      <div class="container flex justify-between">
-        <div class="logo">
-          ovc
-        </div>
+      <div class="container flex justify-between relative">
+        <div class="hidden lg:block"/>
 
-        <menu class="nav flex">
+        <nuxt-link class="logo h-full flex my-auto lg:absolute md:static" to="/">
+          <ovc-logo-sm :extended="isScrolled"/>
+        </nuxt-link>
+
+        <menu class="nav hidden md:flex">
           <ovc-menu-item v-for="menuItem in navigationMenu" :href="menuItem.href" class="mx-1.5">
             {{ menuItem.title }}
           </ovc-menu-item>
         </menu>
 
-        <theme-switcher/>
+        <theme-switcher class="hidden md:block"/>
+
+        <div class="flex md:hidden">
+          <span class="material-icons-round flex my-auto cursor-pointer" @click="onMobileMenuOpen">
+            menu
+          </span>
+        </div>
       </div>
+    </div>
+
+    <transition name="fade">
+      <div
+          v-if="isMobileMenuOpen"
+          class="menu-backdrop bg-black bg-opacity-40 fixed z-10 w-full h-full transition"
+          @click="onMobileMenuClose"
+      />
+    </transition>
+
+    <div
+        :class="{'open': isMobileMenuOpen}"
+        class="mobile-menu flex flex-col fixed h-full z-20 px-6 pt-4"
+    >
+      <div class="flex justify-between">
+        <theme-switcher btn/>
+
+        <div class="material-icons-round cursor-pointer" @click="onMobileMenuClose">
+          close
+        </div>
+      </div>
+
+      <menu class="nav flex flex-col mt-8">
+        <div v-for="menuItem in navigationMenu">
+          <ovc-menu-item :href="menuItem.href" class="mr-auto inline-block pt-3 text-xl">
+            {{ menuItem.title }}
+          </ovc-menu-item>
+        </div>
+      </menu>
     </div>
   </header>
 </template>
 
 <script lang="ts" setup>
+import type {ComputedRef, Ref} from "vue";
+
 import ThemeSwitcher from "~/components/theme-switcher";
 import {navigationMenu} from "~/data/static/navigation-menu";
 
 const scrollTop: Ref<number> = ref(0)
+const isMobileMenuOpen: Ref<boolean> = ref(false)
+
+const route = useRoute()
+
+const onMobileMenuOpen = () => {
+  isMobileMenuOpen.value = true
+  document.body.style.overflow = "hidden"
+}
+
+const onMobileMenuClose = () => {
+  isMobileMenuOpen.value = false
+  document.body.style.overflow = "auto"
+}
+
+watch(route, () => {
+  onMobileMenuClose()
+})
 
 const isScrolled: ComputedRef<boolean> = computed(() => {
   return scrollTop.value > 5
+
 })
 
 onMounted(() => {
@@ -35,9 +92,10 @@ onMounted(() => {
 
   scrollTop.value = window.scrollY
 })
+
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .ovc-header.scrolled .ovc-header__menu {
   backdrop-filter: blur(7px);
 }
@@ -49,18 +107,40 @@ onMounted(() => {
 
 .dark-mode body .ovc-header.scrolled .ovc-header__menu {
   background: rgba(21, 21, 21, .6);
-  border-bottom: rgba(120, 120, 120, .4) solid 1px;
+  /*border-bottom: rgba(120, 120, 120, .2) solid 1px;*/
 }
 
 .light-mode body .ovc-header.scrolled .ovc-header__menu {
   background: rgba(240, 240, 240, .5);
-  border-bottom: rgba(120, 120, 120, .4) solid 1px;
+  /*border-bottom: rgba(120, 120, 120, .15) solid 1px;*/
 }
 
 .ovc-header .ovc-header__menu {
-  transition: background .1s ease-in-out,
-  backdrop-filter .1s ease-in-out,
-  border-bottom-color .1s ease-in-out,
-  border-bottom-width .1s ease-in-out;
+  transition: background .2s ease-in-out,
+  backdrop-filter .2s ease-in-out,
+  border-bottom-color .2s ease-in-out,
+  border-bottom-width .2s ease-in-out;
+}
+
+.dark-mode body .mobile-menu {
+  background: rgba(44, 44, 44, .7);
+}
+
+.light-mode body .mobile-menu {
+  background: rgba(255, 255, 255, .7);
+}
+
+
+.mobile-menu {
+  transform: translateX(100%);
+  transition: transform .3s ease-in-out;
+  backdrop-filter: blur(5px);
+  right: 0;
+  min-width: 300px;
+  max-width: 350px;
+
+  &.open {
+    transform: translateX(0);
+   }
 }
 </style>
