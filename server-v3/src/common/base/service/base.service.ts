@@ -5,8 +5,7 @@ import {BaseModel} from '../base.model';
 
 @Injectable()
 export class BaseService<M extends BaseModel> implements IBaseService<M> {
-    constructor(private readonly repository: Repository<M>) {
-    }
+    constructor(private readonly repository: Repository<M>) {}
 
     create(entity: M): Promise<M> {
         return this.repository.save(entity)

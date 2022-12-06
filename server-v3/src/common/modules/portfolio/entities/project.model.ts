@@ -1,17 +1,24 @@
 import {BaseModel} from "../../../base/base.model";
-import {Column, Entity} from "typeorm";
+import {Column, Entity, JoinTable, ManyToMany} from "typeorm";
+import {PictureModel} from "../../common/picture.model";
+import {Field, ObjectType} from "@nestjs/graphql";
 
-@Entity()
+@ObjectType({description: 'Project'})
+@Entity({name: 'projects'})
 export class ProjectModel extends BaseModel {
+    @Field(type => String)
     @Column({type: 'varchar', length: 255, nullable: false})
-    title: string
+    title!: string
 
+    @Field()
     @Column({type: 'varchar', length: 255, nullable: false})
-    slug: string
+    slug!: string
 
+    @Field()
     @Column({type: 'varchar', length: 7, nullable: false})
-    color: string
+    color!: string
 
+    @Field()
     @Column({type: 'boolean', default: false})
     isVisible: boolean
 
@@ -21,24 +28,32 @@ export class ProjectModel extends BaseModel {
     // @Column()
     // techs: string[]
 
+    @Field()
     @Column({type: 'varchar', length: 1024, nullable: false})
-    description: string
+    description!: string
 
+    @Field({nullable: true})
     @Column({type: 'text', nullable: true})
-    fullDescription: string
+    fullDescription?: string
 
-    // @Column()
-    // pictures: string[]
+    @Field(type => [PictureModel], {nullable: true})
+    @ManyToMany(() => PictureModel)
+    @JoinTable()
+    pictures?: PictureModel[]
 
+    @Field({nullable: true})
     @Column({type: 'varchar', length: 4096, nullable: true})
-    link: string
+    link?: string
 
+    @Field({nullable: true})
     @Column({type: 'varchar', length: 4096, nullable: true})
-    github: string
+    github?: string
 
+    @Field({nullable: true})
     @Column({type: 'varchar', length: 4096, nullable: true})
-    behance: string
+    behance?: string
 
+    @Field({nullable: true})
     @Column({type: 'integer', nullable: true})
-    developTime: number
+    developTime?: number
 }

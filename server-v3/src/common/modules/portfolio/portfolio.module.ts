@@ -1,8 +1,8 @@
 import {Module} from "@nestjs/common";
-import {ProjectsHttpModule} from "./modules/projects.http.module";
+import {ProjectsModule} from "./modules/projects.module";
 
 @Module({
-    imports: [ProjectsHttpModule],
+    imports: [ProjectsModule],
     providers: [],
     controllers: []
 })
