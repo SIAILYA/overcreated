@@ -1,6 +1,6 @@
 import {TypeOrmModule} from "@nestjs/typeorm";
 import {Module} from "@nestjs/common";
-import {PictureModel} from "../common/picture.model";
+import {PictureModel} from "../picture.model";
 
 @Module({
     imports: [
