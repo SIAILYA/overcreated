@@ -1,9 +1,8 @@
-import {Body, Controller, Get, HttpException, Post, UseGuards} from "@nestjs/common";
+import {Body, Controller, HttpException, Post} from "@nestjs/common";
 import {AuthService} from "./auth.service";
 import {LoginDto} from "./dto/login.dto";
-import {AuthGuard} from "./auth.guard";
 
-@Controller('auth')
+@Controller('api/v3/auth')
 export class AuthController {
     constructor(private readonly authService: AuthService) {
     }
@@ -15,11 +14,5 @@ export class AuthController {
         }
 
         throw new HttpException('Invalid credentials', 401);
-    }
-
-    @UseGuards(AuthGuard)
-    @Get('check')
-    async check() {
-        return 'ok';
     }
 }
