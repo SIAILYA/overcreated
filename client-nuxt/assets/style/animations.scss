@@ -117,7 +117,7 @@
 
 .slide-down-enter-active,
 .slide-down-leave-active {
-  transition: all 0.3s ease-out;
+  transition: all 0.3s ease-in-out;
 }
 .slide-down-leave-from,
 .slide-down-enter-to {
@@ -128,4 +128,13 @@
 .slide-down-enter-from {
   opacity: 0;
   transform: translateY(-100%);
+}
+
+.line-grow-enter-from,
+.line-grow-leave-to {
+  transform: scaleX(0);
+}
+.line-grow-enter-to,
+.line-grow-leave-from {
+  transform: scaleX(100%);
 }

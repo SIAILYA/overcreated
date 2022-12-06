@@ -1,6 +1,6 @@
 <template>
   <header :class="{'scrolled': isScrolled}" class="ovc-header mx-auto">
-    <div class="ovc-header__menu fixed w-full py-3.5">
+    <div class="ovc-header__menu z-10 fixed w-full py-3.5">
       <client-only>
         <transition appear name="slide-down">
           <div class="container flex justify-between relative">
@@ -38,7 +38,7 @@
 
     <div
         :class="{'open': isMobileMenuOpen}"
-        class="mobile-menu flex flex-col fixed h-full z-20 px-6 pt-4"
+        class="mobile-menu flex flex-col md:hidden fixed h-full z-20 px-6 pt-4"
     >
       <div class="flex justify-between">
         <theme-switcher btn/>
@@ -56,6 +56,9 @@
         </li>
       </menu>
     </div>
+
+
+    <ovc-logo class="pt-20 container flex"/>
   </header>
 </template>
 
