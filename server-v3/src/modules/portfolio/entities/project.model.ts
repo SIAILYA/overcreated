@@ -1,7 +1,7 @@
-import {BaseModel} from "../../../base/base.model";
 import {Column, Entity, JoinTable, ManyToMany} from "typeorm";
 import {PictureModel} from "../../common/picture.model";
 import {Field, ObjectType} from "@nestjs/graphql";
+import {BaseModel} from "../../../common/base/base.model";
 
 @ObjectType({description: 'Project'})
 @Entity({name: 'projects'})

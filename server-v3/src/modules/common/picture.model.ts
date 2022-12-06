@@ -1,4 +1,4 @@
-import {BaseModel} from "../../base/base.model";
+import {BaseModel} from "../../common/base/base.model";
 import {Column, Entity} from "typeorm";
 import {Field, ObjectType} from "@nestjs/graphql";
 

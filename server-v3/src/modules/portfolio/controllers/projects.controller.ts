@@ -1,7 +1,7 @@
 import {Controller} from "@nestjs/common";
-import {BaseCRUDController} from "../../../base/controller/baseCRUD.controller";
 import {ProjectModel} from "../entities/project.model";
 import {ProjectsService} from "../services/projects.service";
+import {BaseCRUDController} from "../../../common/base/controller/baseCRUD.controller";
 
 @Controller('portfolio/projects')
 export class ProjectsController extends BaseCRUDController<ProjectModel> {
