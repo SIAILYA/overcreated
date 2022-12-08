@@ -15,6 +15,7 @@ import {ProjectTopicsAdminService} from "../services/projectTopics.admin.service
 import {TechModel} from "../entities/tech.model";
 import {TechsController} from "../controllers/techs.controller";
 import {TechsService} from "../services/techs.service";
+import {TechsAdminController} from "../controllers/techs.admin.controller";
 
 @Module({
     imports: [
@@ -32,7 +33,7 @@ import {TechsService} from "../services/techs.service";
     controllers: [
         ProjectsController, ProjectsAdminController,
         ProjectTopicsController, ProjectTopicsAdminController,
-        TechsController
+        TechsController, TechsAdminController
     ]
 })
 export class ProjectsModule {
