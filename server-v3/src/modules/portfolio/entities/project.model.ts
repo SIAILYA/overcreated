@@ -2,6 +2,7 @@ import {Column, Entity, JoinTable, ManyToMany} from "typeorm";
 import {PictureModel} from "../../common/picture.model";
 import {Field, ObjectType} from "@nestjs/graphql";
 import {BaseModel} from "../../../common/base/base.model";
+import {ProjectTopicModel} from "./projectTopic.model";
 
 @ObjectType({description: 'Project'})
 @Entity({name: 'projects'})
@@ -22,9 +23,11 @@ export class ProjectModel extends BaseModel {
     @Column({type: 'boolean', default: false})
     isVisible: boolean
 
-    // @Column()
-    // topics: string[]
-    //
+    // @Field(type => [ProjectTopicModel])
+    @ManyToMany(type => ProjectTopicModel)
+    @JoinTable({joinColumn: {name: 'project_id'}, inverseJoinColumn: {name: 'project_topic_id'}})
+    topics: ProjectTopicModel[]
+
     // @Column()
     // techs: string[]
 
@@ -38,7 +41,7 @@ export class ProjectModel extends BaseModel {
 
     @Field(type => [PictureModel], {nullable: true})
     @ManyToMany(() => PictureModel)
-    @JoinTable()
+    @JoinTable({joinColumn: {name: 'project_id'}, inverseJoinColumn: {name: 'picture_id'}})
     pictures?: PictureModel[]
 
     @Field({nullable: true})
