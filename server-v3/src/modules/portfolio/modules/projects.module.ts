@@ -9,16 +9,30 @@ import {ProjectsAdminController} from "../controllers/projects.admin.controller"
 import {ProjectTopicModel} from "../entities/projectTopic.model";
 import {ProjectTopicsController} from "../controllers/projectTopics.controller";
 import {ProjectsAdminService} from "../services/projects.admin.service";
+import {ProjectTopicsAdminController} from "../controllers/projectTopics.admin.controller";
+import {ProjectTopicsService} from "../services/projectTopics.service";
+import {ProjectTopicsAdminService} from "../services/projectTopics.admin.service";
+import {TechModel} from "../entities/tech.model";
+import {TechsController} from "../controllers/techs.controller";
+import {TechsService} from "../services/techs.service";
 
 @Module({
     imports: [
-        TypeOrmModule.forFeature([ProjectModel, PictureModel, ProjectTopicModel]),
+        TypeOrmModule.forFeature([ProjectModel, PictureModel, ProjectTopicModel, TechModel]),
     ],
     exports: [TypeOrmModule],
-    providers: [ProjectsService, ProjectsResolver, ProjectsAdminService],
+    providers: [
+        ProjectsResolver,
+        ProjectsService,
+        ProjectsAdminService,
+        ProjectTopicsService,
+        ProjectTopicsAdminService,
+        TechsService
+    ],
     controllers: [
         ProjectsController, ProjectsAdminController,
-        ProjectTopicsController
+        ProjectTopicsController, ProjectTopicsAdminController,
+        TechsController
     ]
 })
 export class ProjectsModule {

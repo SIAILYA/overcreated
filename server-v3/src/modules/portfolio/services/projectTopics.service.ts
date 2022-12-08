@@ -7,7 +7,7 @@ import {ProjectTopicModel} from "../entities/projectTopic.model";
 
 @Injectable()
 export class ProjectTopicsService extends BaseService<ProjectTopicModel> {
-    constructor(@InjectRepository(ProjectModel) protected readonly projectTopicModelRepository: Repository<ProjectTopicModel>) {
+    constructor(@InjectRepository(ProjectTopicModel) protected readonly projectTopicModelRepository: Repository<ProjectTopicModel>) {
         super(projectTopicModelRepository);
     }
 

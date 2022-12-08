@@ -1,6 +1,3 @@
-import {BaseService} from "../../../common/base/service/base.service";
-import {InjectRepository} from "@nestjs/typeorm";
-import {Repository} from "typeorm";
 import {Injectable} from "@nestjs/common";
 import {ProjectModel} from "../entities/project.model";
 import {ProjectsService} from "./projects.service";
