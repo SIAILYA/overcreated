@@ -1,11 +1,8 @@
 <template>
-  projects
+
 </template>
 
-<script>
-export default {
-  name: "Projects"
-}
+<script setup lang="ts">
 </script>
 
 <style scoped>
