@@ -1,5 +1,5 @@
 <template>
-  <p class="mb-2">To expire token: {{ formatTime(untilExpire / 1000) }}</p>
+  <p class="mb-2">To expire token: {{ formatMinutesSeconds(untilExpire / 1000) }}</p>
   <!--  TODO: Renew token <button class="btn btn-warning w-100">Renew</button>-->
   <button class="btn btn-danger w-100 mt-2" @click="onClickLogout">Logout</button>
 </template>
@@ -9,16 +9,11 @@ import {storeToRefs} from "pinia";
 import {useTokenStore} from "../stores/tokenStore";
 import {ref} from "vue";
 import {useRouter} from "vue-router";
+import {formatMinutesSeconds} from "../utils"
 
 const {expireAt} = storeToRefs(useTokenStore())
 const untilExpire = ref(0)
 const router = useRouter()
-
-const formatTime = (time: number) => {
-  const minutes = Math.floor(time / 60)
-  const seconds = time % 60
-  return `${minutes}:${seconds < 10 ? "0" : ""}${seconds.toFixed(0)}`
-}
 
 const onClickLogout = () => {
   localStorage.removeItem("token")
