@@ -1,20 +1,24 @@
 import {TypeOrmModule} from "@nestjs/typeorm";
 import {Module} from "@nestjs/common";
-import {PictureModel} from "../picture.model";
+import {ConfigModule, ConfigService} from "@nestjs/config";
 
 @Module({
     imports: [
-        TypeOrmModule.forRoot({
-            type: 'postgres',
-            host: 'localhost',
-            port: 49154,
-            username: 'postgres',
-            password: 'postgrespw',
-            database: 'ovc',
-            entities: [PictureModel],
-            synchronize: true,
-            autoLoadEntities: true
-        }),
+        TypeOrmModule.forRootAsync({
+            imports: [ConfigModule],
+            inject: [ConfigService],
+            useFactory: (configService: ConfigService) => ({
+                type: 'postgres',
+                host: configService.get('DB_HOST'),
+                port: configService.get('DB_PORT'),
+                username: configService.get('DB_USERNAME'),
+                password: configService.get('DB_PASSWORD'),
+                database: configService.get('DB_DATABASE_NAME'),
+                entities: [],
+                synchronize: true,
+                autoLoadEntities: true
+            })
+        })
     ],
     exports: [TypeOrmModule]
 })

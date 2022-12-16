@@ -1,11 +1,11 @@
 {
   "private": true,
   "scripts": {
-    "build": "nuxt build",
-    "dev": "nuxt dev",
-    "generate": "nuxt generate",
-    "preview": "nuxt preview",
-    "postinstall": "nuxt prepare"
+    "client:build": "nuxt build",
+    "client:dev": "nuxt dev",
+    "client:generate": "nuxt generate",
+    "client:preview": "nuxt preview",
+    "client:postinstall": "nuxt prepare"
   },
   "devDependencies": {
     "nuxt": "3.0.0",
