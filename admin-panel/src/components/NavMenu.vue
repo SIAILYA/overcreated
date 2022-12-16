@@ -2,27 +2,31 @@
   <menu class="p-0 m-0 d-flex flex-row flex-wrap flex-md-column justify-content-center">
     <router-link
         v-for="m in menuItems"
-                 :to="m.href"
-        tag="li"
-        class="d-block btn btn-primary mb-2 mx-2 mx-md-0"
+        :to="m.href"
+        class="btn btn-primary mb-2 mx-2 mx-md-0"
     >
-      {{m.title}}
+      {{ m.title }}
     </router-link>
   </menu>
 
-  <until-expire/>
+  <hr>
+
+  <token-controls/>
 </template>
 
-<script setup lang="ts">
-import UntilExpire from "./UntilExpire.vue";
+<script lang="ts" setup>
+import TokenControls from "./TokenControls.vue";
 
-const menuItems = [
+type menuItem = { href: string, title: string }
+
+const menuItems: menuItem[] = [
   {href: "/", title: "Home"},
   {href: "/projects", title: "Projects"},
   {href: "/projectTopics", title: "Project Topics"},
   {href: "/techs", title: "Techs"},
   {href: "/timeline", title: "Timeline"},
-  {href: "/timelineTopics", title: "Timeline Topics"}
+  {href: "/timelineTopics", title: "Timeline Topics"},
+  {href: "/quotes", title: "Quotes"}
 ]
 </script>
 

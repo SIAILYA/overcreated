@@ -5,41 +5,33 @@
       <span class="fw-light">(скорее всего тебе нечего тут делать...)</span>
 
       <div class="d-flex flex-column mt-4">
-        <input type="text" class="form-control" v-model="loginData.login">
-        <input type="password" class="form-control mt-2" v-model="loginData.password">
+        <input v-model="loginData.login" class="form-control" type="text">
+        <input v-model="loginData.password" class="form-control mt-2" type="password">
         <button class="btn btn-primary mt-2" @click="onClickLoginSubmit">Вход</button>
       </div>
     </div>
   </div>
 </template>
 
-<script setup lang="ts">
-import {onMounted, ref} from "vue";
-import {axiosInstance, parseJwt} from "../data/network";
+<script lang="ts" setup>
+import {ref} from "vue";
+import {axiosInstance} from "../data/network";
 import {useRouter} from "vue-router";
-import {storeToRefs} from "pinia";
 import {useTokenStore} from "../stores/tokenStore";
 
 const loginData = ref({
   login: "",
   password: ""
 })
+
 const router = useRouter()
-const {expireAt} = storeToRefs(useTokenStore())
+const {setToken} = useTokenStore()
 
-const onClickLoginSubmit = () => {
-  axiosInstance.post("/auth/login", loginData.value)
-    .then(response => {
-      expireAt.value = parseJwt(response.data).exp * 1000
-      axiosInstance.defaults.headers.common['Authorization'] = response.data
-      localStorage.setItem("token", response.data)
-      router.push("/")
-    })
+const onClickLoginSubmit = async () => {
+  const response = await axiosInstance.post("/auth/login", loginData.value)
+  await setToken(response.data)
+  await router.push("/")
 }
-
-onMounted(() => {
-
-})
 </script>
 
 <style scoped>
