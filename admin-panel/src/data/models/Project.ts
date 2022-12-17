@@ -1,9 +1,9 @@
 import {Picture} from "./Picture";
 import {ApiModel} from "./ApiModel";
-import {ModelApi} from "./ModelApi";
+import {API} from "./API";
 
 export class Project extends ApiModel {
-    static api = new ModelApi("/portfolio/projects")
+    api = new API("/portfolio/projects")
 
     constructor(
         public id: string,
