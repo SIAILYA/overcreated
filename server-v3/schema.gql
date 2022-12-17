@@ -5,8 +5,8 @@
 """Picture"""
 type PictureModel {
   id: String!
-  created_at: DateTime!
-  updated_at: DateTime!
+  _created_at: DateTime!
+  _updated_at: DateTime!
   url: String!
   caption: String
 }
@@ -19,8 +19,8 @@ scalar DateTime
 """Project"""
 type ProjectModel {
   id: String!
-  created_at: DateTime!
-  updated_at: DateTime!
+  _created_at: DateTime!
+  _updated_at: DateTime!
   title: String!
   slug: String!
   color: String!

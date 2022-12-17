@@ -3,5 +3,5 @@ export interface Picture {
     created_at: Date,
     updated_at: Date,
     url: string,
-    caption: string,
+    caption?: string,
 }

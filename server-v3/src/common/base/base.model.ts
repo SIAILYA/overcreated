@@ -9,9 +9,9 @@ export class BaseModel {
 
     @Field(type => Date)
     @CreateDateColumn({type: "timestamp", default: () => "CURRENT_TIMESTAMP(6)"})
-    public created_at!: Date;
+    public _created_at!: Date;
 
     @Field(type => Date)
     @UpdateDateColumn({type: "timestamp", default: () => "CURRENT_TIMESTAMP(6)", onUpdate: "CURRENT_TIMESTAMP(6)"})
-    public updated_at!: Date;
+    public _updated_at!: Date;
 }
