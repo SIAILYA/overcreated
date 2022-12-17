@@ -26,10 +26,10 @@ export class ProjectModel extends BaseModel {
 
     // @Field(type => [ProjectTopicModel])
     @ManyToMany(type => ProjectTopicModel)
-    @JoinTable({joinColumn: {name: 'project_id'}, inverseJoinColumn: {name: 'project_topic_id'}})
+    @JoinTable({joinColumn: {name: 'project_id'}, inverseJoinColumn: {name: 'project_topic_id'}, name: 'projects_to_project_topics'})
     topics?: ProjectTopicModel[]
 
-    @ManyToMany(type => TechModel)
+    @ManyToMany(type => TechModel, {eager: true})
     @JoinTable({joinColumn: {name: 'project_id'}, inverseJoinColumn: {name: 'tech_id'}})
     techs: TechModel[]
 
@@ -42,8 +42,8 @@ export class ProjectModel extends BaseModel {
     fullDescription?: string
 
     @Field(type => [PictureModel], {nullable: true})
-    @ManyToMany(() => PictureModel)
-    @JoinTable({joinColumn: {name: 'project_id'}, inverseJoinColumn: {name: 'picture_id'}})
+    @ManyToMany(() => PictureModel, {onDelete: "NO ACTION", eager: true})
+    @JoinTable({joinColumn: {name: 'project_id'}, inverseJoinColumn: {name: 'picture_id'}, name: 'projects_to_pictures'})
     pictures?: PictureModel[]
 
     @Field({nullable: true})
