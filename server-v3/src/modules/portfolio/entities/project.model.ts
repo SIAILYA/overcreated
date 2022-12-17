@@ -25,7 +25,7 @@ export class ProjectModel extends BaseModel {
     isVisible: boolean
 
     // @Field(type => [ProjectTopicModel])
-    @ManyToMany(type => ProjectTopicModel)
+    @ManyToMany(type => ProjectTopicModel, {eager: true})
     @JoinTable({joinColumn: {name: 'project_id'}, inverseJoinColumn: {name: 'project_topic_id'}, name: 'projects_to_project_topics'})
     topics?: ProjectTopicModel[]
 
