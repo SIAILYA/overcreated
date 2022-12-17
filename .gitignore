@@ -35,3 +35,5 @@ server/yarn.lock
 /server/public
 package-lock.json
 /admin-panel/.env
+
+server-v3/uploads

@@ -8,11 +8,13 @@ import {AuthGuard} from "../../../modules/auth/auth.guard";
 export class BaseCRUDController<M extends BaseModel> implements IReadController<M>, IWriteController<M> {
     constructor(private readonly IBaseService: IBaseService<M>) {}
 
+    @UseGuards(AuthGuard)
     @Get('/getAll')
     async getAll(): Promise<M[]> {
         return this.IBaseService.getAll()
     }
 
+    @UseGuards(AuthGuard)
     @Get('/getById/:id')
     async get(@Param('id') id: string): Promise<M> {
         return this.IBaseService.get(id)

@@ -1,5 +1,5 @@
 import {Column, Entity, JoinTable, ManyToMany} from "typeorm";
-import {PictureModel} from "../../common/picture.model";
+import {PictureModel} from "../../common/pictures/picture.model";
 import {Field, ObjectType} from "@nestjs/graphql";
 import {BaseModel} from "../../../common/base/base.model";
 import {ProjectTopicModel} from "./projectTopic.model";

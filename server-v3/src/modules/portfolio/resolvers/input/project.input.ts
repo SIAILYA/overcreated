@@ -1,6 +1,6 @@
 import {Field, InputType} from "@nestjs/graphql";
-import {PictureModel} from "../../../common/picture.model";
-import {PictureInput} from "../../../common/picture.input";
+import {PictureModel} from "../../../common/pictures/picture.model";
+import {PictureInput} from "../../../common/pictures/picture.input";
 
 @InputType()
 export class ProjectInput {
