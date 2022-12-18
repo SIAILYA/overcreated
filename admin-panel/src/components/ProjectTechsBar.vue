@@ -8,7 +8,7 @@
           :key="t.id"
           :selected="true"
           :tech-item="t"
-          @update:selected="onTechSelected(t)"
+          @update:selected="onClickToggleTech(t)"
       />
     </li>
   </ul>
@@ -22,9 +22,9 @@
     <li v-for="t in filteredTechs">
       <tech-item
           :key="t.id"
-          :selected="projectItem.techs.includes(t)"
+          :selected="projectItem.hasTopic(t)"
           :tech-item="t"
-          @update:selected="onTechSelected(t)"
+          @update:selected="onClickToggleTech(t)"
       />
     </li>
   </ul>
@@ -52,11 +52,11 @@ const filteredTechs = computed(() => {
   return searchTechs(techSearch.value).filter(t => !projectItem.techs.includes(t))
 })
 
-const onTechSelected = (tech: Tech) => {
-  if (!projectItem.techs.includes(tech)) {
-    projectItem.techs.push(tech)
-  } else {
+const onClickToggleTech = (tech: Tech) => {
+  if (projectItem.hasTech(tech)) {
     projectItem.techs = projectItem.techs.filter(_ => _.id !== tech.id)
+  } else {
+    projectItem.techs.push(tech)
   }
 }
 </script>

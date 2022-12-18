@@ -1,5 +1,7 @@
 type ColumnOptions = {
-    type?: any
+    type?: any,
+    excludeFromJSON?: boolean,
+    jsonKey?: string
 }
 
 export const Column = (options: ColumnOptions = {}): PropertyDecorator => {

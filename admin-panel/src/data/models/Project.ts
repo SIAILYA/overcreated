@@ -49,4 +49,12 @@ export class Project extends ApiModel {
 
     @Column({type: [ProjectTopic]})
     topics: ProjectTopic[] = []
+
+    hasTech(tech: Tech) {
+        return this.techs.some(t => t.id === tech.id)
+    }
+
+    hasTopic(topic: ProjectTopic) {
+        return this.topics.some(t => t.id === topic.id)
+    }
 }

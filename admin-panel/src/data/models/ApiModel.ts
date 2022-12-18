@@ -3,9 +3,15 @@ import {Column} from "../decorators/Column";
 
 
 export abstract class ApiModel {
+    // Definition to specify api path and methods
     protected api!: Partial<API<ApiModel>>
+    // Definition to use $api from models prototype
     public static $api: API<ApiModel>
+    // Uses for indicate loading of instance
+    @Column({excludeFromJSON: true})
+    public fetching: boolean = false
 
+    // Uses as inner api to work with instance
     get _api() {
         // @ts-ignore
         const __api = this.constructor.$api
@@ -74,6 +80,8 @@ export abstract class ApiModel {
             const _propType = _propMetadata?.type
             const _propValue = this[thisProp]
 
+            if (_propMetadata?.excludeFromJSON) continue
+
             if (_propType) {
                 if (Array.isArray(_propValue)) {
                     json[thisProp] = _propValue.map((item: any) => item.json)
@@ -96,16 +104,21 @@ export abstract class ApiModel {
             return Promise.reject(new Error("Model id is not defined"))
         }
 
+        this.fetching = true
         this.fromJSON(await this._api.getById!(this.id))
+        this.fetching = false
+
         return this
     }
 
     async create() {
-        return this.fromJSON(await this._api.create!(this))
+        const _r = await this._api.create!(this)
+
+        return this.fromJSON(_r)
     }
 
     async update() {
-        await this._api.update!(this)
+        return await this._api.update!(this)
     }
 
     async delete() {

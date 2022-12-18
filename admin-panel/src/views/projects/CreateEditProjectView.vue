@@ -77,7 +77,7 @@
       <div class="d-flex flex-column">
         <div v-for="pt in projectTopics" class="d-flex">
           <input
-              :id="pt.id" :checked="projectItem.topics.includes(pt)"
+              :id="pt.id" :checked="projectItem.hasTopic(pt)"
               class="form-check-input my-auto"
               type="checkbox"
               @input="() => onClickToggleTopic(pt)"
@@ -114,11 +114,21 @@
 
   <div class="d-flex">
     <button
+        v-if="!editMode"
         :disabled="!isValid"
         class="btn btn-success d-flex mt-4 mb-5"
         @click="onClickCreateProject"
     >
       Create project
+    </button>
+
+    <button
+        v-else
+        :disabled="!isValid"
+        class="btn btn-success d-flex mt-4 mb-5"
+        @click="onClickUpdateProject"
+    >
+      Update project
     </button>
 
     <button
@@ -171,9 +181,15 @@ const descriptionPreview = computed(() => {
 const onTitleInput = (ev: any) => {
 }
 
-const onClickCreateProject = () => {
+const onClickCreateProject = async () => {
   if (isValid.value) {
-    createProject(projectItem)
+    await createProject(projectItem)
+  }
+}
+
+const onClickUpdateProject = async () => {
+  if (isValid.value) {
+    await projectItem.update()
   }
 }
 
@@ -181,15 +197,23 @@ const onClickDelete = () => {
 }
 
 const onClickToggleTopic = (pt: ProjectTopic) => {
-  if (projectItem.topics.includes(pt)) {
+  if (projectItem.hasTopic(pt)) {
     projectItem.topics = projectItem.topics.filter(t => t.id !== pt.id)
   } else {
     projectItem.topics.push(pt)
   }
 }
 
+const fetchCurrentProject = async () => {
+  if (editMode) {
+    projectItem.id = route.params.id as string
+    await projectItem.load()
+  }
+}
+
 onMounted(() => {
   if (editMode) {
+    fetchCurrentProject()
   }
 })
 
