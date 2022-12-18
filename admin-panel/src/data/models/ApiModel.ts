@@ -1,22 +1,54 @@
-import {BaseModel} from "./BaseModel";
 import {API} from "./API";
+import {Column} from "../decorators/Column";
 
-export abstract class ApiModel extends BaseModel {
+
+export abstract class ApiModel {
     abstract api: API<ApiModel>
 
-    protected constructor(
-        public id: string,
-        public created_at: Date,
-        public updated_at: Date,
-    ) {
-        super();
+
+    constructor() {
     }
 
-    get json() {
-        return JSON.stringify(this)
+    public fromJSON(json: object): this {
+        const unknownJson: unknown = json;
+        const __metadata = Reflect.getMetadata("columns", this.constructor)
+
+        if (unknownJson === null ||
+            Array.isArray(unknownJson) ||
+            typeof unknownJson !== "object") {
+
+            return this
+        }
+
+        for (const thisProp in this) {
+            if (thisProp === "api") continue
+
+            const _propMetadata = __metadata[thisProp]
+            const _propType = _propMetadata?.type
+            const _propValue = (unknownJson as any)[thisProp]
+
+            if (_propType) {
+                if (Array.isArray(_propValue)) {
+                    this[thisProp] = _propValue.map((item: any) => new _propType[0]().fromJSON(item)) as any
+                } else if (_propType() instanceof ApiModel) {
+                    this[thisProp] = new _propType().fromJSON(_propValue)
+                } else if (_propValue !== undefined) {
+                    this[thisProp] = new _propType(_propValue)
+                }
+            } else {
+                this[thisProp] = _propValue
+            }
+        }
+
+        return this
     }
 
-    load() {
-        return this.api.getById(this.id)
-    }
+    @Column()
+    id!: string
+
+    @Column({type: Date})
+    _created_at!: Date
+
+    @Column()
+    _updated_at!: Date
 }

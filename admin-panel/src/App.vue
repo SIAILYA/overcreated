@@ -26,7 +26,7 @@ const layoutComponent = computed(() => {
 
 checkSavedToken()
     .then(() => {
-      router.push("/")
+      // router.push(router.currentRoute.value.fullPath)
     })
     .catch(() => {
       router.replace("/login")
