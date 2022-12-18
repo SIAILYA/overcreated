@@ -29,9 +29,7 @@
       <textarea v-model="projectItem.fullDescription" class="form-control w-100" rows="8"></textarea>
 
       <hr>
-
       <div class="fd-preview" v-html="descriptionPreview"></div>
-
       <hr>
     </div>
 

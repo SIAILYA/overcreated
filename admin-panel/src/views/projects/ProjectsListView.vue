@@ -1,5 +1,5 @@
 <template>
-  <router-link to="/projects/create" class="mb-3 btn btn-primary">Add project</router-link>
+  <router-link class="mb-3 btn btn-primary" to="/projects/create">Add project</router-link>
 
   <div class="row">
     <div
@@ -24,9 +24,7 @@ import ProjectCard from "../../components/ProjectCard.vue";
 const {fetchProjects} = useProjectsStore()
 const {projects} = storeToRefs(useProjectsStore())
 
-fetchProjects().then(() => {
-  console.log(projects.value)
-})
+fetchProjects()
 </script>
 
 <style scoped>

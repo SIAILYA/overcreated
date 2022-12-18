@@ -20,8 +20,6 @@ interface Props {
 }
 
 const {projectItem} = defineProps<Props>()
-
-console.log(projectItem)
 </script>
 
 <style lang="scss" scoped>

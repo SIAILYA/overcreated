@@ -1,11 +1,14 @@
 import {Picture} from "./Picture";
 import {ApiModel} from "./ApiModel";
-import {API} from "./API";
 import {Column} from "../decorators/Column";
+import {Tech} from "./Tech";
+import {ProjectTopic} from "./ProjectTopic";
+import {Entity} from "../decorators/Entity";
 
 
+@Entity
 export class Project extends ApiModel {
-    api = new API("/portfolio/projects")
+    api = {path: "/portfolio/projects"}
 
     @Column()
     title!: string
@@ -13,14 +16,15 @@ export class Project extends ApiModel {
     @Column()
     slug!: string
 
+    @Column({type: [Picture]})
+    pictures: Picture[] = []
+
     @Column()
     color!: string
 
     @Column()
     description!: string
 
-    @Column({type: [Picture]})
-    pictures: Picture[] = []
 
     @Column()
     fullDescription?: string
@@ -40,9 +44,9 @@ export class Project extends ApiModel {
     @Column()
     developTime?: number
 
-    // @Column()
-    // topics
-    //
-    // @Column()
-    // techs
+    @Column({type: [Tech]})
+    techs: Tech[] = []
+
+    @Column({type: [ProjectTopic]})
+    topics: ProjectTopic[] = []
 }

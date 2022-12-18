@@ -3,7 +3,8 @@ import {Column} from "../decorators/Column";
 
 
 export abstract class ApiModel {
-    abstract api: API<ApiModel>
+    api: Partial<API<ApiModel>> = new API(this.constructor.name.toLowerCase())
+    public static $api: API<ApiModel>
 
     @Column()
     id!: string
@@ -62,7 +63,7 @@ export abstract class ApiModel {
             return Promise.reject(new Error("Model id is not defined"))
         }
 
-        this.fromJSON(await this.api.getById(this.id))
+        this.fromJSON(await this.api.getById!(this.id))
         return this
     }
 }

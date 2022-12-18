@@ -51,6 +51,14 @@ const routes = [
                 }
             }
         ]
+    },
+    {
+        path: "/techs",
+        name: "techs",
+        component: () => import("../views/projects/TechsView.vue"),
+        meta: {
+            layout: "main",
+        }
     }
 ]
 
