@@ -6,7 +6,7 @@
         ref="picturesUpload"
         accept="image/*"
         class="d-none"
-        multiple="multiple"
+        :multiple="true"
         type="file"
         @input="onPictureSelected"
     />

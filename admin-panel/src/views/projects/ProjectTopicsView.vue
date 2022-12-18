@@ -36,7 +36,11 @@
     </div>
   </div>
 
-  <modal-window :show="showEditProjectTopicWindow" @close="closeEditProjectTopicModal">
+  <modal-window
+      v-if="projectTopicEdit"
+      :show="showEditProjectTopicWindow"
+      @close="closeEditProjectTopicModal"
+  >
     <project-topic-form
         :project-topic-item="projectTopicEdit"
         isDelete

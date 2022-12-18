@@ -109,6 +109,7 @@ const projectItem = reactive<Project>(new Project())
 
 
 const isValid = computed(() => {
+  return true
 })
 
 const descriptionPreview = computed(() => {
