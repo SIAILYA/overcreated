@@ -146,6 +146,7 @@
 import {computed, onMounted, reactive} from "vue";
 
 import ProjectTechsBar from "../../components/ProjectTechsBar.vue";
+import ProjectPicturesBar from "../../components/ProjectPicturesBar.vue";
 
 import {useRoute} from "vue-router";
 import {storeToRefs} from "pinia";
@@ -155,7 +156,6 @@ import {Project} from "../../data/models/Project";
 import {useTechStore} from "../../stores/techStore";
 import {useProjectTopicStore} from "../../stores/projectTopicStore";
 import {ProjectTopic} from "../../data/models/ProjectTopic";
-import ProjectPicturesBar from "../../components/ProjectPicturesBar.vue";
 import {useProjectsStore} from "../../stores/projectsStore";
 
 

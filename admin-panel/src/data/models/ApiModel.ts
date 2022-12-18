@@ -10,7 +10,6 @@ export abstract class ApiModel {
     // Uses for indicate loading of instance
     @Column({excludeFromJSON: true})
     public fetching: boolean = false
-
     // Uses as inner api to work with instance
     get _api() {
         // @ts-ignore
