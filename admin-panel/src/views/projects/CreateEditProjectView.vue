@@ -144,7 +144,7 @@
 </template>
 
 <script lang="ts" setup>
-import {computed, onMounted, reactive, Ref} from "vue";
+import {computed, onActivated, onMounted, reactive, ref, Ref, watch, watchEffect} from "vue";
 
 import ProjectTechsBar from "../../components/ProjectTechsBar.vue";
 import ProjectPicturesBar from "../../components/ProjectPicturesBar.vue";
@@ -173,8 +173,9 @@ const {fetchTechs} = useTechStore()
 const {fetchProjectTopics} = useProjectTopicStore()
 
 const editMode = route.path.includes("edit")
-
 const projectItem = reactive<Project>(new Project())
+const unsavedChanges = ref(false)
+
 
 const isValid = computed(() => {
 //  TODO: валидация
@@ -199,6 +200,7 @@ const onClickCreateProject = async () => {
 const onClickUpdateProject = async () => {
   if (isValid.value) {
     projectItem.update().then(() => {
+      unsavedChanges.value = false
       message.success("Project updated")
     }).catch(() => {
       message.danger("Project update error")
@@ -232,8 +234,24 @@ const fetchCurrentProject = async () => {
       message.danger("Project not found")
       router.push("/projects")
     })
+    unsavedChanges.value = false
   }
 }
+
+// Хэндлер для несохраненных изменений
+//
+// watch(projectItem, () => {
+//   unsavedChanges.value = true
+// }, {deep: true})
+//
+// onActivated(() => {
+//   if (editMode && unsavedChanges.value) {
+//     useConfirm("There is unsaved. Do you want to reload project?")
+//         .then(() => {
+//           fetchCurrentProject()
+//         })
+//   }
+// })
 
 onMounted(() => {
   if (editMode) {

@@ -25,10 +25,9 @@
     </div>
   </div>
 
-  <modal-window v-if="editTech" :show="showTechEditWindow" @close="onCloseUpdateTech">
-    <h4 class="my-auto">Edit tech</h4>
-
+  <modal-window :show="showTechEditWindow" @close="onCloseUpdateTech">
     <tech-form
+        v-if="editTech"
         :tech-form="editTech"
         is-delete
         @create="onSubmitUpdateTech"
@@ -48,6 +47,7 @@ import {reactive, ref} from "vue";
 import ModalWindow from "../../components/ModalWindow.vue";
 import TechForm from "../../components/TechForm.vue";
 import {Tech} from "../../data/models/Tech";
+import {useConfirm} from "../../utils/useConfirm";
 
 const {techs} = storeToRefs(useTechStore());
 const {fetchTechs, createTech} = useTechStore();
@@ -65,7 +65,6 @@ const onClickAddTech = async () => {
 
 const onClickUpdateTech = async (techItem: Tech) => {
   editTech.value = techItem;
-  console.log(editTech.value)
   showTechEditWindow.value = true;
 }
 
@@ -76,9 +75,12 @@ const onCloseUpdateTech = () => {
 
 // FIXME: Сделать удаление через передачу внешного параметра в событии
 const onClickDeleteTech = async () => {
-  await editTech.value!.delete()
-  await fetchTechs()
-  showTechEditWindow.value = false;
+  await useConfirm("Are you sure you want to delete this tech?")
+      .then(async () => {
+        await editTech.value!.delete()
+        await fetchTechs()
+        showTechEditWindow.value = false;
+      })
 }
 
 const onSubmitUpdateTech = async () => {
