@@ -8,9 +8,9 @@ export class Project extends ApiModel {
     api = new API("/portfolio/projects")
 
     @Column()
-    name!: string
+    title!: string
 
-    @Column({type: String})
+    @Column()
     description!: string
 
     @Column({type: [Picture]})

@@ -5,8 +5,18 @@ import {Column} from "../decorators/Column";
 export abstract class ApiModel {
     abstract api: API<ApiModel>
 
+    @Column()
+    id!: string
 
-    constructor() {
+    @Column({type: Date})
+    _created_at!: Date
+
+    @Column({type: Date})
+    _updated_at!: Date
+
+
+    constructor(id: string = null as unknown as string) {
+        this.id = id
     }
 
     public fromJSON(json: object): this {
@@ -32,7 +42,7 @@ export abstract class ApiModel {
                     this[thisProp] = _propValue.map((item: any) => new _propType[0]().fromJSON(item)) as any
                 } else if (_propType() instanceof ApiModel) {
                     this[thisProp] = new _propType().fromJSON(_propValue)
-                } else if (_propValue !== undefined) {
+                } else if (_propValue !== undefined && _propType !== String) {
                     this[thisProp] = new _propType(_propValue)
                 }
             } else {
@@ -43,12 +53,16 @@ export abstract class ApiModel {
         return this
     }
 
-    @Column()
-    id!: string
+    get json() {
+        return JSON.stringify(this)
+    }
 
-    @Column({type: Date})
-    _created_at!: Date
+    async load() {
+        if (!this.id) {
+            return Promise.reject(new Error("Model id is not defined"))
+        }
 
-    @Column()
-    _updated_at!: Date
+        this.fromJSON(await this.api.getById(this.id))
+        return this
+    }
 }

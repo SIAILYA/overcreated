@@ -18,7 +18,7 @@ export class API<T extends ApiModel> {
             return Promise.reject(new Error("Method getById are not available"))
         }
 
-        return axiosInstance.get(this.path + "/getById" + id)
+        return (await axiosInstance.get(this.path + "/getById" + id)).data
     }
 
     async getAll() {
@@ -26,7 +26,7 @@ export class API<T extends ApiModel> {
             return Promise.reject(new Error("Method getAll are not available"))
         }
 
-        return axiosInstance.get(this.path + "/getAll")
+        return (await axiosInstance.get(this.path + "/getAll")).data
     }
 
     async create(data: T) {
@@ -34,7 +34,7 @@ export class API<T extends ApiModel> {
             return Promise.reject(new Error("Method create are not available"))
         }
 
-        return axiosInstance.post(this.path + "/create", data.json)
+        return (await axiosInstance.post(this.path + "/create", data.json)).data
     }
 
     async update(data: T) {
@@ -42,7 +42,7 @@ export class API<T extends ApiModel> {
             return Promise.reject(new Error("Method update are not available"))
         }
 
-        return axiosInstance.put(this.path + "/update/" + data.id, data.json)
+        return (await axiosInstance.put(this.path + "/update/" + data.id, data.json)).data
     }
 
     async delete(id: string) {
@@ -50,6 +50,6 @@ export class API<T extends ApiModel> {
             return Promise.reject(new Error("Method delete are not available"))
         }
 
-        return axiosInstance.delete(this.path + "/delete/" + id)
+        return (await axiosInstance.delete(this.path + "/delete/" + id)).data
     }
 }
