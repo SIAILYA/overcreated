@@ -20,7 +20,7 @@ const routes = [
     {
         path: "/projects",
         name: "projects",
-        component: () => import("../views/ProjectsView.vue"),
+        component: () => import("../views/projects/ProjectsView.vue"),
         meta: {
             layout: "main",
         },
@@ -29,7 +29,7 @@ const routes = [
             {
                 path: "list",
                 name: "projects-list",
-                component: () => import("../views/ProjectsListView.vue"),
+                component: () => import("../views/projects/ProjectsListView.vue"),
                 meta: {
                     layout: "main",
                 }
@@ -37,7 +37,7 @@ const routes = [
             {
                 path: "create",
                 name: "create-project",
-                component: () => import("../views/CreateProjectView.vue"),
+                component: () => import("../views/projects/CreateEditProjectView.vue"),
                 meta: {
                     layout: "main",
                 }
@@ -45,7 +45,7 @@ const routes = [
             {
                 path: "edit/:id",
                 name: "edit-project",
-                component: () => import("../views/EditProjectView.vue"),
+                component: () => import("../views/projects/CreateEditProjectView.vue"),
                 meta: {
                     layout: "main",
                 }

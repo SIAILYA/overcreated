@@ -17,9 +17,9 @@
 </template>
 
 <script lang="ts" setup>
-import {useProjectsStore} from "../stores/projectsStore";
+import {useProjectsStore} from "../../stores/projectsStore";
 import {storeToRefs} from "pinia";
-import ProjectCard from "../components/ProjectCard.vue";
+import ProjectCard from "../../components/ProjectCard.vue";
 
 const {fetchProjects} = useProjectsStore()
 const {projects} = storeToRefs(useProjectsStore())

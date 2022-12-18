@@ -11,8 +11,38 @@ export class Project extends ApiModel {
     title!: string
 
     @Column()
+    slug!: string
+
+    @Column()
+    color!: string
+
+    @Column()
     description!: string
 
     @Column({type: [Picture]})
     pictures: Picture[] = []
+
+    @Column()
+    fullDescription?: string
+
+    @Column()
+    isVisible: boolean = false
+
+    @Column()
+    link?: string
+
+    @Column()
+    github?: string
+
+    @Column()
+    behance?: string
+
+    @Column()
+    developTime?: number
+
+    // @Column()
+    // topics
+    //
+    // @Column()
+    // techs
 }
