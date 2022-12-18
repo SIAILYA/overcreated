@@ -34,3 +34,10 @@ export const transliterate = (word: string) => {
 
     return answer;
 };
+
+
+export function negate(predicate: (...args: any[]) => boolean) {
+    return function (this: typeof predicate, ...args_in: any[]): boolean {
+        return !predicate.apply(this, args_in)
+    }
+}

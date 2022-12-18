@@ -177,6 +177,7 @@ const editMode = route.path.includes("edit")
 const projectItem = reactive<Project>(new Project())
 
 const isValid = computed(() => {
+//  TODO: валидация
   return true
 })
 

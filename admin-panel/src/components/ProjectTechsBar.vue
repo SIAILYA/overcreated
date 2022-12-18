@@ -16,9 +16,14 @@
   <hr>
 
   <span class="mb-2 fw-bold d-block">Search</span>
-  <input v-model="techSearch" class="form-control w-100 mb-2" placeholder="Search techs" type="text">
+  <div class="d-flex mb-2">
+    <input v-model="techSearch" class="form-control w-100" placeholder="Search techs" type="text">
+    <button class="btn btn-secondary ms-1" @click="fetchTechs">
+      R
+    </button>
+  </div>
 
-  <ul v-if="techSearch" class="tech-list">
+  <ul class="tech-list">
     <li v-for="t in filteredTechs">
       <tech-item
           :key="t.id"
@@ -26,6 +31,12 @@
           :tech-item="t"
           @update:selected="onClickToggleTech(t)"
       />
+    </li>
+
+    <li v-if="filteredTechs.length === 0">
+      <a class="btn btn-success" href="/techs" target="_blank">
+        Add new tech
+      </a>
     </li>
   </ul>
 </template>
@@ -46,10 +57,14 @@ const {projectItem} = defineProps<Props>()
 const techSearch = ref<string>("")
 
 const {searchTechs} = useTechStore()
-const {techs} = useTechStore()
+const {fetchTechs} = useTechStore()
 
 const filteredTechs: ComputedRef<Tech[]> = computed(() => {
-  return searchTechs(techSearch.value).filter(t => !projectItem.techs.includes(t))
+  if (!techSearch.value) {
+    return useTechStore().techs.filter(t => !projectItem.hasTech(t)).slice(0, 10)
+  }
+
+  return searchTechs(techSearch.value).filter(t => !projectItem.hasTech(t))
 })
 
 const onClickToggleTech = (tech: Tech) => {
