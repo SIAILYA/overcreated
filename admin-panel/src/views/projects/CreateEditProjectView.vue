@@ -9,19 +9,57 @@
 
   <div class="row">
     <div class="b-col-12 col-md-6">
-      <input v-model="projectItem.title" class="form-control w-100" placeholder="Title" type="text"
-             @input="onTitleInput">
-      <input v-model="projectItem.description" class="form-control w-100 mt-2" placeholder="Description"
-             type="text">
-      <input v-model="projectItem.link" class="form-control w-100 mt-2" placeholder="Demo link" type="text">
-      <input v-model="projectItem.github" class="form-control w-100 mt-2" placeholder="Github" type="text">
+      <input
+          v-model="projectItem.title"
+          class="form-control w-100"
+          placeholder="Title"
+          type="text"
+
+          @input="onTitleInput"
+      >
+      <input
+          v-model="projectItem.description"
+          class="form-control w-100 mt-2"
+          placeholder="Description"
+          type="text">
+      <input
+          v-model="projectItem.link"
+          class="form-control w-100 mt-2"
+          placeholder="Demo link"
+          type="text"
+      >
+      <input
+          v-model="projectItem.github"
+          class="form-control w-100 mt-2"
+          placeholder="Github"
+          type="text"
+      >
     </div>
     <div class="b-col-12 col-md-6 mt-2 mt-md-0">
-      <input v-model="projectItem.slug" class="form-control w-100" placeholder="Slug" type="text">
-      <input v-model="projectItem.color" class="form-control form-control-color w-100 mt-2" placeholder="Color"
-             type="color">
-      <input v-model="projectItem.developTime" class="form-control w-100 mt-2" placeholder="Develop time" type="number">
-      <input v-model="projectItem.behance" class="form-control w-100 mt-2" placeholder="Behance" type="text">
+      <input
+          v-model="projectItem.slug"
+          class="form-control w-100"
+          placeholder="Slug"
+          type="text"
+      >
+      <input
+          v-model="projectItem.color"
+          class="form-control form-control-color w-100 mt-2"
+          placeholder="Color"
+          type="color"
+      >
+      <input
+          v-model="projectItem.developTime"
+          class="form-control w-100 mt-2"
+          placeholder="Develop time"
+          type="number"
+      >
+      <input
+          v-model="projectItem.behance"
+          class="form-control w-100 mt-2"
+          placeholder="Behance"
+          type="text"
+      >
     </div>
 
     <div class="col-12 mt-3">
@@ -63,26 +101,39 @@
   </div>
 
   <div class="d-flex form-check">
-    <input id="visible" v-model="projectItem.isVisible" class="my-auto form-check-input" type="checkbox">
-    <label class="ms-1 my-auto form-check-label" for="visible">Отображать проект</label>
+    <input
+        id="visible"
+        v-model="projectItem.isVisible"
+        class="my-auto form-check-input"
+        type="checkbox"
+    >
+    <label class="ms-1 my-auto form-check-label" for="visible">
+      Отображать проект
+    </label>
   </div>
 
   <div class="d-flex">
-    <button :disabled="!isValid" class="btn btn-success d-flex mt-4 mb-5" @click="onClickSubmit">
-      <span class="material-icons-round my-auto">save</span>
-      <span class="my-auto ms-2">Сохранить проект</span>
+    <button
+        :disabled="!isValid"
+        class="btn btn-success d-flex mt-4 mb-5"
+        @click="onClickCreateProject"
+    >
+      Create project
     </button>
 
-    <button v-if="editMode" :disabled="!isValid" class="btn btn-danger ms-3 ovc-btn d-flex mt-4 mb-5"
-            @click="onClickDelete">
-      <span class="material-icons-round my-auto">remove</span>
-      <span class="my-auto ms-2">Удалить проект</span>
+    <button
+        v-if="editMode"
+        :disabled="!isValid"
+        class="btn btn-danger ms-3 ovc-btn d-flex mt-4 mb-5"
+        @click="onClickDelete"
+    >
+      Delete project
     </button>
   </div>
 </template>
 
 <script lang="ts" setup>
-import {computed, onMounted, reactive, ref} from "vue";
+import {computed, onMounted, reactive} from "vue";
 
 import ProjectTechsBar from "../../components/ProjectTechsBar.vue";
 
@@ -95,10 +146,12 @@ import {useTechStore} from "../../stores/techStore";
 import {useProjectTopicStore} from "../../stores/projectTopicStore";
 import {ProjectTopic} from "../../data/models/ProjectTopic";
 import ProjectPicturesBar from "../../components/ProjectPicturesBar.vue";
+import {useProjectsStore} from "../../stores/projectsStore";
 
 
 const route = useRoute()
 
+const {createProject} = useProjectsStore()
 const {projectTopics} = storeToRefs(useProjectTopicStore())
 const {fetchTechs} = useTechStore()
 const {fetchProjectTopics} = useProjectTopicStore()
@@ -106,7 +159,6 @@ const {fetchProjectTopics} = useProjectTopicStore()
 const editMode = route.path.includes("edit")
 
 const projectItem = reactive<Project>(new Project())
-
 
 const isValid = computed(() => {
   return true
@@ -119,7 +171,10 @@ const descriptionPreview = computed(() => {
 const onTitleInput = (ev: any) => {
 }
 
-const onClickSubmit = () => {
+const onClickCreateProject = () => {
+  if (isValid.value) {
+    createProject(projectItem)
+  }
 }
 
 const onClickDelete = () => {
