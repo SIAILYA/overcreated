@@ -6,7 +6,7 @@ import {ProjectTopic} from "./ProjectTopic";
 import {Entity} from "../decorators/Entity";
 
 
-@Entity
+@Entity()
 export class Project extends ApiModel {
     api = {path: "/portfolio/projects"}
 

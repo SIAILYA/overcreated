@@ -8,7 +8,11 @@ export abstract class ApiModel {
 
     get _api() {
         // @ts-ignore
-        return this.constructor.$api as API<ApiModel>
+        const __api = this.constructor.$api
+
+        if (!__api) throw new Error(`API is not defined for ${this.constructor.name}`)
+
+        return __api as API<ApiModel>
     }
 
     @Column()

@@ -4,7 +4,7 @@ import {Entity} from "../decorators/Entity";
 import {IClearable} from "./IClearable";
 
 
-@Entity
+@Entity()
 export class Tech extends ApiModel implements IClearable {
     api = {path: "/portfolio/techs"}
 

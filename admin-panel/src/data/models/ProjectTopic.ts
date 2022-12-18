@@ -5,7 +5,7 @@ import {IClearable} from "./IClearable";
 import {Entity} from "../decorators/Entity";
 
 
-@Entity
+@Entity()
 export class ProjectTopic extends ApiModel implements IClearable {
     api = new API("/portfolio/projectTopics")
 
