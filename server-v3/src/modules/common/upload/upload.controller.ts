@@ -12,7 +12,7 @@ export class UploadController {
 
     @UseGuards(AuthGuard)
     @Post('/pictures')
-    @UseInterceptors(FilesInterceptor('files', 10, {
+    @UseInterceptors(FilesInterceptor('file', 10, {
         fileFilter(req, file, cb) {
             if (file.originalname.match(/\.(png|jpg|jpeg|webp|svg)$/)) {
                 cb(null, true)
