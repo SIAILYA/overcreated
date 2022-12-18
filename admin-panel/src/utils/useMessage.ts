@@ -29,5 +29,5 @@ export const useMessage = () => {
         _show(message, options, "danger");
     }
 
-    return {success, danger}
+    return {success, danger, error: danger}
 }

@@ -8,19 +8,41 @@
         name="messages-list"
         tag="div"
     >
-      <component :is="m" v-for="m in useRootStore().messages" :key="m.props.key"/>
+      <component :is="m" v-for="m in useRootStore().messages" :key="m.props?.key"/>
     </transition-group>
   </div>
+
+  <modal-window :show="useRootStore().confirm.visible">
+    <span class="mb-2 fw-bold d-block">{{ useRootStore().confirm.question }}</span>
+
+    <div class="d-flex">
+      <button
+          class="btn w-100 btn-success me-1"
+          @click="useRootStore().confirm.onConfirm()"
+      >
+        Yes
+      </button>
+      <button
+          class="btn w-100 btn-danger ms-1"
+          @click="useRootStore().confirm.onCancel()"
+      >
+        No
+      </button>
+    </div>
+  </modal-window>
 </template>
 
 <script lang="ts" setup>
 import {computed} from "vue";
-import {useRouter} from "vue-router";
-import {useTokenStore} from "./stores/tokenStore";
 
 import EmptyLayout from "./layout/EmptyLayout.vue"
 import MainLayout from "./layout/MainLayout.vue"
+import ModalWindow from "./components/ModalWindow.vue";
+
+import {useRouter} from "vue-router";
+import {useTokenStore} from "./stores/tokenStore";
 import {useRootStore} from "./stores/rootStore";
+import {useMessage} from "./utils/useMessage";
 
 const router = useRouter()
 
@@ -40,6 +62,7 @@ checkSavedToken()
     })
     .catch(() => {
       router.replace("/login")
+      useMessage().error("You are not authorized")
     })
 </script>
 

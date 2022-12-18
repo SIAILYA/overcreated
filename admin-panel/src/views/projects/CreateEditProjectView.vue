@@ -96,6 +96,7 @@
 
       <project-pictures-bar
           :project-item="projectItem"
+          @update="onClickUpdateProject"
       />
     </div>
   </div>
@@ -148,7 +149,7 @@ import {computed, onMounted, reactive} from "vue";
 import ProjectTechsBar from "../../components/ProjectTechsBar.vue";
 import ProjectPicturesBar from "../../components/ProjectPicturesBar.vue";
 
-import {useRoute} from "vue-router";
+import {useRoute, useRouter} from "vue-router";
 import {storeToRefs} from "pinia";
 import {marked} from 'marked';
 
@@ -157,9 +158,14 @@ import {useTechStore} from "../../stores/techStore";
 import {useProjectTopicStore} from "../../stores/projectTopicStore";
 import {ProjectTopic} from "../../data/models/ProjectTopic";
 import {useProjectsStore} from "../../stores/projectsStore";
+import {useMessage} from "../../utils/useMessage";
+import {transliterate} from "../../utils/utils";
+import {useConfirm} from "../../utils/useConfirm";
 
 
 const route = useRoute()
+const router = useRouter()
+const message = useMessage()
 
 const {createProject} = useProjectsStore()
 const {projectTopics} = storeToRefs(useProjectTopicStore())
@@ -179,21 +185,35 @@ const descriptionPreview = computed(() => {
 })
 
 const onTitleInput = (ev: any) => {
+  projectItem.slug = transliterate(ev.target.value.toLowerCase().replace(/( |-|\/\\)/g, "_"))
 }
 
 const onClickCreateProject = async () => {
   if (isValid.value) {
     await createProject(projectItem)
+    message.success("Project created")
   }
 }
 
 const onClickUpdateProject = async () => {
   if (isValid.value) {
-    await projectItem.update()
+    projectItem.update().then(() => {
+      message.success("Project updated")
+    }).catch(() => {
+      message.danger("Project update error")
+    })
   }
 }
 
-const onClickDelete = () => {
+const onClickDelete = async () => {
+  useConfirm("Delete project?")
+      .then(async () => {
+        await projectItem.delete()
+        message.danger("Project deleted")
+        await router.push("/projects")
+      })
+      .catch(() => {
+      })
 }
 
 const onClickToggleTopic = (pt: ProjectTopic) => {
@@ -207,7 +227,10 @@ const onClickToggleTopic = (pt: ProjectTopic) => {
 const fetchCurrentProject = async () => {
   if (editMode) {
     projectItem.id = route.params.id as string
-    await projectItem.load()
+    projectItem.load().catch(() => {
+      message.danger("Project not found")
+      router.push("/projects")
+    })
   }
 }
 
@@ -220,35 +243,3 @@ onMounted(() => {
 fetchTechs()
 fetchProjectTopics()
 </script>
-
-<style lang="scss" scoped>
-.upload-btn {
-  cursor: pointer;
-}
-
-.picture {
-  &:hover {
-    .remove-pic {
-      height: 36px;
-    }
-  }
-
-  &:not(:hover) {
-    .remove-pic {
-      padding: 0;
-    }
-  }
-}
-
-.remove-pic {
-  font-size: 12px !important;
-  height: 0;
-  overflow: hidden;
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  left: 0;
-}
-
-
-</style>

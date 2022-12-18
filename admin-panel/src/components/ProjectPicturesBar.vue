@@ -4,9 +4,9 @@
     <input
         id="pictures_upload"
         ref="picturesUpload"
+        :multiple="true"
         accept="image/*"
         class="d-none"
-        :multiple="true"
         type="file"
         @input="onPictureSelected"
     />
@@ -33,12 +33,14 @@
 import {Project} from "../data/models/Project";
 import {ref} from "vue";
 import {Picture} from "../data/models/Picture";
+import {useConfirm} from "../utils/useConfirm";
 
 interface Props {
   projectItem: Project
 }
 
 const {projectItem} = defineProps<Props>();
+const emit = defineEmits(["update"]);
 
 const picturesUpload = ref<HTMLInputElement>()
 
@@ -47,14 +49,52 @@ const onPictureSelected = async () => {
   if (picturesUpload.value?.files?.length) {
     const r = await Picture.upload(Array.from(picturesUpload.value.files))
     projectItem.pictures = projectItem.pictures.concat(r)
+    emit("update")
   }
 }
 
 
-const removePicture = (pic: Picture) => {
+const removePicture = async (pic: Picture) => {
+  await useConfirm("Are you sure you want to delete this picture?")
+  projectItem.pictures = projectItem.pictures.filter(p => p.id !== pic.id)
+  emit("update")
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+.picture {
+  overflow: hidden;
+  border-radius: 5px;
+  position: relative;
+  height: 100%;
+  min-height: 120px;
+
+  img {
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .remove-pic {
+    transition: all .3s ease;
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+  }
+
+  &:hover {
+    .remove-pic {
+      height: 36px;
+    }
+  }
+
+  &:not(:hover) {
+    .remove-pic {
+      padding: 0;
+      border: none;
+      height: 0;
+    }
+  }
+}
 
 </style>
