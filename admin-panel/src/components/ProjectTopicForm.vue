@@ -33,6 +33,19 @@
         <slot name="create">Create</slot>
       </button>
     </div>
+
+    <div v-if="isDelete" class="my-2">
+      <label class="form-check-label">
+        <input
+            v-model="projectTopicItem.isVisible"
+            class="form-check-input"
+            type="checkbox"
+        >
+
+        Is visible
+      </label>
+    </div>
+
     <div v-if="isDelete" class="col-12">
       <button class="btn btn-danger mt-2 w-100" @click="emit('delete', projectTopicItem)">
         Delete

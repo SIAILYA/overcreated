@@ -75,7 +75,7 @@
       <h5>Project topics</h5>
 
       <div class="d-flex flex-column">
-        <div v-for="pt in projectTopics" class="d-flex">
+        <div v-for="pt in projectTopics" :class="pt.isVisible ? '' : 'opacity-50'" class="d-flex">
           <input
               :id="pt.id" :checked="projectItem.hasTopic(pt)"
               class="form-check-input my-auto"
@@ -144,7 +144,7 @@
 </template>
 
 <script lang="ts" setup>
-import {computed, onMounted, reactive} from "vue";
+import {computed, onMounted, reactive, Ref} from "vue";
 
 import ProjectTechsBar from "../../components/ProjectTechsBar.vue";
 import ProjectPicturesBar from "../../components/ProjectPicturesBar.vue";
@@ -168,7 +168,7 @@ const router = useRouter()
 const message = useMessage()
 
 const {createProject} = useProjectsStore()
-const {projectTopics} = storeToRefs(useProjectTopicStore())
+const {projectTopics}: { projectTopics: Ref<ProjectTopic[]> } = storeToRefs(useProjectTopicStore())
 const {fetchTechs} = useTechStore()
 const {fetchProjectTopics} = useProjectTopicStore()
 

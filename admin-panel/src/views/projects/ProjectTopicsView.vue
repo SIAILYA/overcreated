@@ -10,7 +10,7 @@
   <hr>
 
   <div class="row">
-    <div v-for="projectTopicItem in projectTopics" class="col-6 col-md-4 mt-3">
+    <div v-for="projectTopicItem in projectTopics" class="col-6 col-md-4 mt-3" :class="projectTopicItem.isVisible ? '' : 'opacity-50'">
       <div :style="'color:' + projectTopicItem.color" class="card p-2 text-center">
         <!--        TODO: Изменение порядка -->
         <!--        <div class="d-flex justify-content-between">-->
@@ -37,11 +37,11 @@
   </div>
 
   <modal-window
-      v-if="projectTopicEdit"
       :show="showEditProjectTopicWindow"
       @close="closeEditProjectTopicModal"
   >
     <project-topic-form
+        v-if="projectTopicEdit"
         :project-topic-item="projectTopicEdit"
         isDelete
         @create="onProjectTopicUpdateSubmit"
@@ -61,6 +61,7 @@ import ProjectTopicForm from "../../components/ProjectTopicForm.vue";
 import {useProjectTopicStore} from "../../stores/projectTopicStore";
 import {storeToRefs} from "pinia";
 import ModalWindow from "../../components/ModalWindow.vue";
+import {useConfirm} from "../../utils/useConfirm";
 
 const {fetchProjectTopics, createProjectTopic} = useProjectTopicStore();
 const {projectTopics} = storeToRefs(useProjectTopicStore());
@@ -86,9 +87,11 @@ const onProjectTopicCreate = async () => {
 }
 
 const onProjectTopicDelete = async (projectTopicDelete: ProjectTopic) => {
-  await projectTopicDelete.delete()
-  await fetchProjectTopics()
-  closeEditProjectTopicModal()
+  await useConfirm("Are you sure you want to delete this project topic?").then(async () => {
+    await projectTopicDelete.delete()
+    await fetchProjectTopics()
+    closeEditProjectTopicModal()
+  })
 }
 
 const onProjectTopicUpdateSubmit = async (projectTopicItem: ProjectTopic) => {

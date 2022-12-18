@@ -9,8 +9,8 @@
         v-for="project in filteredProjects"
         :key="project.id"
         class="col-12 col-md-6 col-lg-4"
+        :class="!project.isVisible ? 'opacity-50' : ''"
     >
-
       <project-card
           :key="project.id"
           :project-item="project"
@@ -20,19 +20,20 @@
 </template>
 
 <script lang="ts" setup>
-import {computed, ref} from "vue";
+import {computed, ComputedRef, ref} from "vue";
 
 import {storeToRefs} from "pinia";
 
 import ProjectCard from "../../components/ProjectCard.vue";
 import {useProjectsStore} from "../../stores/projectsStore";
+import {Project} from "../../data/models/Project";
 
 const {fetchProjects} = useProjectsStore()
 const {projects} = storeToRefs(useProjectsStore())
 
 const projectsSearch = ref<string>("")
 
-const filteredProjects = computed(() => {
+const filteredProjects: ComputedRef<Project[]> = computed(() => {
   if (!projectsSearch.value) {
     return projects.value
   }

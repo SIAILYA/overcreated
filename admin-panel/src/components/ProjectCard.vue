@@ -1,7 +1,8 @@
 <template>
   <router-link
       :to="'/projects/edit/' + projectItem.id"
-      class="project-card d-block"
+      class="project-card d-block h-100"
+      :style="{color: projectItem.color}"
   >
     <h2 class="title text-center">
       {{ projectItem.title }}

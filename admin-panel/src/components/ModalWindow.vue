@@ -1,10 +1,12 @@
 <template>
-  <div class="modal-window" v-if="show">
-    <div class="modal-window__overlay" @click="onClickOverlay"></div>
-    <div class="modal-window__content">
-      <slot></slot>
+  <transition name="fade">
+    <div v-if="show" class="modal-window">
+      <div class="modal-window__overlay" @click="onClickOverlay"></div>
+      <div class="modal-window__content">
+        <slot></slot>
+      </div>
     </div>
-  </div>
+  </transition>
 </template>
 
 <script lang="ts" setup>
@@ -24,10 +26,10 @@ const onClickOverlay = () => {
 <style lang="scss" scoped>
 .modal-window {
   position: fixed;
-  top: 0;
+  top: -50px;
   left: 0;
   width: 100%;
-  height: 100%;
+  height: calc(100% + 50px);
   z-index: 1000;
 
   &__overlay {

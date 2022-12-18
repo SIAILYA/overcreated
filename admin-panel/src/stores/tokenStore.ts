@@ -5,7 +5,6 @@ type tokenDataType = { login: string, iat: number, exp: number }
 
 export const useTokenStore = defineStore("token", {
     state: () => ({
-        expireAt: null as null | number,
         token: null as null | string,
         tokenData: {} as tokenDataType
     }),
