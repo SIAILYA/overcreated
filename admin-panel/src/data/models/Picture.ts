@@ -14,6 +14,9 @@ export class Picture extends ApiModel {
     caption?: string
 
     get fullUrl(): string {
+        // FIXME: Изменить модель, поле url переименовать в path,
+        //  в геррере url (клиент) делать проверку на наличие http и если его нет,
+        //  то добавлять к нему адрес сервера из конфига
         return `http://localhost:5000/${this.url}`
     }
 
