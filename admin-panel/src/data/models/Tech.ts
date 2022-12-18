@@ -12,4 +12,9 @@ export class Tech extends ApiModel {
 
     @Column()
     slug!: string
+
+    clear() {
+        this.title = ""
+        this.slug = ""
+    }
 }

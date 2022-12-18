@@ -44,7 +44,7 @@
 <script lang="ts" setup>
 import {storeToRefs} from "pinia";
 import {useTechStore} from "../../stores/techStore";
-import {ref} from "vue";
+import {reactive, ref} from "vue";
 import ModalWindow from "../../components/ModalWindow.vue";
 import TechForm from "../../components/TechForm.vue";
 import {Tech} from "../../data/models/Tech";
@@ -54,20 +54,13 @@ const {fetchTechs, createTech} = useTechStore();
 
 const showTechEditWindow = ref(false);
 
-const addTechForm = ref({
-  title: "",
-  slug: "",
-});
+let addTechForm = reactive(new Tech());
 const editTech = ref<Tech | null>(null);
 
 
 const onClickAddTech = async () => {
-  await createTech(addTechForm.value);
-
-  addTechForm.value = {
-    title: "",
-    slug: "",
-  }
+  await createTech(addTechForm);
+  addTechForm.clear()
 }
 
 const onClickUpdateTech = async (techItem: Tech) => {

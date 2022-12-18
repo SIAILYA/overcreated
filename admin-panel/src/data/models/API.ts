@@ -34,7 +34,10 @@ export class API<T extends ApiModel> {
             return Promise.reject(new Error("Method create are not available"))
         }
 
-        return (await axiosInstance.post(this.path + "/create", data.json)).data
+        const _t = data.json
+        delete _t.id
+
+        return (await axiosInstance.post(this.path + "/create", _t)).data
     }
 
     async update(data: T) {
