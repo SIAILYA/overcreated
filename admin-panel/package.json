@@ -13,6 +13,7 @@
     "bootstrap": "5.2.3",
     "pinia": "^2.0.27",
     "reflect-metadata": "^0.1.13",
+    "sass": "^1.57.0",
     "vue": "^3.2.41",
     "vue-router": "4"
   },
