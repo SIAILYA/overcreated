@@ -7,9 +7,6 @@ export abstract class ApiModel {
     protected api!: Partial<API<ApiModel>>
     // Definition to use $api from models prototype
     public static $api: API<ApiModel>
-    // Uses for indicate loading of instance
-    @Column({excludeFromJSON: true})
-    public fetching: boolean = false
     // Uses as inner api to work with instance
     get _api() {
         // @ts-ignore
@@ -103,9 +100,9 @@ export abstract class ApiModel {
             return Promise.reject(new Error("Model id is not defined"))
         }
 
-        this.fetching = true
+        this.api.fetching = true
         this.fromJSON(await this._api.getById!(this.id))
-        this.fetching = false
+        this.api.fetching = false
 
         return this
     }

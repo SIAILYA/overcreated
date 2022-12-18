@@ -6,7 +6,8 @@ type method = "all" | "create" | "update" | "delete" | "getAll" | "getById"
 export class API<T extends ApiModel> {
     constructor(
         public path: string,
-        public methods: "all" | method[] = "all"
+        public methods: "all" | method[] = "all",
+        public fetching: boolean = false,
     ) {
         if (methods === "all") {
             this.methods = ["create", "update", "getById", "getAll", "delete"]
