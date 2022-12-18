@@ -1,7 +1,6 @@
 import {Module} from '@nestjs/common';
 import {PortfolioModule} from "../modules/portfolio/portfolio.module";
 import {DatabaseModule} from "../modules/common/database/database.module";
-import {GraphQLCustomModule} from "../modules/common/graphql/graphql.module";
 import {AuthModule} from "../modules/auth/auth.module";
 import {ConfigModule, ConfigService} from "@nestjs/config";
 import {UploadModule} from "../modules/common/upload/upload.module";
@@ -28,7 +27,6 @@ import {join} from 'path';
             }
         }),
         DatabaseModule,
-        GraphQLCustomModule,
         PortfolioModule,
         AuthModule,
         UploadModule
