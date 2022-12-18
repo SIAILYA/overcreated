@@ -42,7 +42,7 @@ export class API<T extends ApiModel> {
             return Promise.reject(new Error("Method update are not available"))
         }
 
-        return (await axiosInstance.put(this.path + "/update/" + data.id, data.json)).data
+        return (await axiosInstance.put(this.path + "/update", data.json)).data
     }
 
     async delete(id: string) {

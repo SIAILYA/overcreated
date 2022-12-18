@@ -4,7 +4,7 @@ import {API} from "../data/models/API";
 
 export const useTechStore = defineStore("techStore", {
     state: () => ({
-        techs: [],
+        techs: [] as Tech[],
         $api: Tech.$api as API<Tech>
     }),
     actions: {

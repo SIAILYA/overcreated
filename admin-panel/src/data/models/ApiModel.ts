@@ -3,12 +3,12 @@ import {Column} from "../decorators/Column";
 
 
 export abstract class ApiModel {
-    api!: Partial<API<ApiModel>>
+    protected api!: Partial<API<ApiModel>>
     public static $api: API<ApiModel>
 
     get _api() {
         // @ts-ignore
-        return this.constructor.$api
+        return this.constructor.$api as API<ApiModel>
     }
 
     @Column()
@@ -98,5 +98,13 @@ export abstract class ApiModel {
 
     async create() {
         return this.fromJSON(await this._api.create!(this))
+    }
+
+    async update() {
+        await this._api.update!(this)
+    }
+
+    async delete() {
+        await this._api.delete!(this.id)
     }
 }

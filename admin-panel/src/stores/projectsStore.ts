@@ -5,7 +5,7 @@ import {API} from "../data/models/API";
 export const useProjectsStore = defineStore("projects", {
     state: () => {
         return {
-            projects: [],
+            projects: [] as Project[],
             $api: Project.$api as API<Project>
         }
     },
