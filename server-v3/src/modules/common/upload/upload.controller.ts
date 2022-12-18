@@ -32,6 +32,6 @@ export class UploadController {
         })
     }))
     async upload(@UploadedFiles() files: Array<Express.Multer.File>, @Req() req: Request) {
-        files.forEach(file => this.uploadService.savePicture(file))
+        return await Promise.all(files.map(async file => await this.uploadService.savePicture(file)))
     }
 }

@@ -7,7 +7,7 @@ export class UploadService {
     constructor(private readonly picturesService: PicturesService) {
     }
 
-    savePicture(file: Express.Multer.File) {
-        return this.picturesService.create({url: file.path} as PictureModel)
+    async savePicture(file: Express.Multer.File) {
+        return await this.picturesService.create({url: file.path} as PictureModel)
     }
 }
