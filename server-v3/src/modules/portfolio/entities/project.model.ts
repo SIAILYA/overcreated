@@ -1,13 +1,13 @@
 import {Column, Entity, JoinTable, ManyToMany} from "typeorm";
 import {PictureModel} from "../../common/pictures/picture.model";
 import {Field, ObjectType} from "@nestjs/graphql";
-import {BaseModel} from "../../../common/base/base.model";
 import {ProjectTopicModel} from "./projectTopic.model";
 import {TechModel} from "./tech.model";
+import {OrderableModel} from "../../../common/base/orderable.model";
 
 @ObjectType({description: 'Project'})
 @Entity({name: 'projects'})
-export class ProjectModel extends BaseModel {
+export class ProjectModel extends OrderableModel {
     @Field(type => String)
     @Column({type: 'varchar', length: 255, nullable: false})
     title!: string
@@ -26,7 +26,11 @@ export class ProjectModel extends BaseModel {
 
     // @Field(type => [ProjectTopicModel])
     @ManyToMany(type => ProjectTopicModel, {eager: true})
-    @JoinTable({joinColumn: {name: 'project_id'}, inverseJoinColumn: {name: 'project_topic_id'}, name: 'projects_to_project_topics'})
+    @JoinTable({
+        joinColumn: {name: 'project_id'},
+        inverseJoinColumn: {name: 'project_topic_id'},
+        name: 'projects_to_project_topics'
+    })
     topics?: ProjectTopicModel[]
 
     @ManyToMany(type => TechModel, {eager: true})
@@ -43,7 +47,11 @@ export class ProjectModel extends BaseModel {
 
     @Field(type => [PictureModel], {nullable: true})
     @ManyToMany(() => PictureModel, {onDelete: "NO ACTION", eager: true})
-    @JoinTable({joinColumn: {name: 'project_id'}, inverseJoinColumn: {name: 'picture_id'}, name: 'projects_to_pictures'})
+    @JoinTable({
+        joinColumn: {name: 'project_id'},
+        inverseJoinColumn: {name: 'picture_id'},
+        name: 'projects_to_pictures'
+    })
     pictures?: PictureModel[]
 
     @Field({nullable: true})
