@@ -11,7 +11,7 @@
 
   <div class="row">
     <div v-for="projectTopicItem in projectTopics" class="col-6 col-md-4 mt-3">
-      <div class="card p-2 text-center">
+      <div :style="'color:' + projectTopicItem.color" class="card p-2 text-center">
         <!--        TODO: Изменение порядка -->
         <!--        <div class="d-flex justify-content-between">-->
         <!--          <button class="btn p-0">◀️</button>-->
@@ -24,7 +24,13 @@
         <span>{{ projectTopicItem.slug }}</span>
 
         <div class="d-flex mt-3">
-          <button class="btn btn-primary w-100" @click="onClickUpdateProjectTopic(projectTopicItem)">Update</button>
+          <button
+              :style="'background-color:' + projectTopicItem.color"
+              class="btn btn-primary w-100 border-0"
+              @click="onClickUpdateProjectTopic(projectTopicItem)"
+          >
+            Update
+          </button>
         </div>
       </div>
     </div>

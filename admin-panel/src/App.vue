@@ -34,4 +34,7 @@ checkSavedToken()
 </script>
 
 <style>
+.btn-current-color {
+  background-color: currentColor!important;
+}
 </style>
