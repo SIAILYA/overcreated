@@ -9,7 +9,7 @@ import {storeToRefs} from "pinia";
 import {useTokenStore} from "../stores/tokenStore";
 import {ref} from "vue";
 import {useRouter} from "vue-router";
-import {formatMinutesSeconds} from "../utils"
+import {formatMinutesSeconds} from "../utils/utils"
 
 const {expireAt} = storeToRefs(useTokenStore())
 const untilExpire = ref(0)

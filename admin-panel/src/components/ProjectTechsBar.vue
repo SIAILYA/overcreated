@@ -22,7 +22,7 @@
     <li v-for="t in filteredTechs">
       <tech-item
           :key="t.id"
-          :selected="projectItem.hasTopic(t)"
+          :selected="projectItem.hasTech(t)"
           :tech-item="t"
           @update:selected="onClickToggleTech(t)"
       />
@@ -33,7 +33,7 @@
 <script lang="ts" setup>
 import {Project} from "../data/models/Project";
 import {useTechStore} from "../stores/techStore";
-import {computed, ref} from "vue";
+import {computed, ComputedRef, ref} from "vue";
 import TechItem from "./TechItem.vue";
 import {Tech} from "../data/models/Tech";
 
@@ -48,7 +48,7 @@ const techSearch = ref<string>("")
 const {searchTechs} = useTechStore()
 const {techs} = useTechStore()
 
-const filteredTechs = computed(() => {
+const filteredTechs: ComputedRef<Tech[]> = computed(() => {
   return searchTechs(techSearch.value).filter(t => !projectItem.techs.includes(t))
 })
 

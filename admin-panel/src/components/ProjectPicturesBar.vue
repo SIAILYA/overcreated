@@ -51,7 +51,7 @@ const onPictureSelected = async () => {
 }
 
 
-const removePicture = (index: number) => {
+const removePicture = (pic: Picture) => {
 }
 </script>
 

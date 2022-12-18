@@ -43,7 +43,7 @@
 
 <script lang="ts" setup>
 import {ProjectTopic} from "../data/models/ProjectTopic";
-import {transliterate} from "../utils";
+import {transliterate} from "../utils/utils";
 
 interface Props {
   projectTopicItem: ProjectTopic;
