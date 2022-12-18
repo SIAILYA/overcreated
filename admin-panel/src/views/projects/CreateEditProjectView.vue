@@ -56,7 +56,9 @@
 
       <hr>
 
-<!--      <project-pictures-bar/>-->
+      <project-pictures-bar
+          :project-item="projectItem"
+      />
     </div>
   </div>
 
@@ -92,6 +94,7 @@ import {Project} from "../../data/models/Project";
 import {useTechStore} from "../../stores/techStore";
 import {useProjectTopicStore} from "../../stores/projectTopicStore";
 import {ProjectTopic} from "../../data/models/ProjectTopic";
+import ProjectPicturesBar from "../../components/ProjectPicturesBar.vue";
 
 
 const route = useRoute()
@@ -103,7 +106,6 @@ const {fetchProjectTopics} = useProjectTopicStore()
 const editMode = route.path.includes("edit")
 
 const projectItem = reactive<Project>(new Project())
-const picturesUpload = ref<HTMLInputElement>()
 
 
 const isValid = computed(() => {
@@ -114,25 +116,6 @@ const descriptionPreview = computed(() => {
 })
 
 const onTitleInput = (ev: any) => {
-}
-
-const onClickAddTech = () => {
-}
-
-const onClickRemoveTech = (tech: string) => {
-
-}
-
-const onPictureSelected = () => {
-  const data = new FormData()
-  console.log(typeof picturesUpload.value)
-
-  if (picturesUpload.value?.files?.length) {
-    console.log(Array.from(picturesUpload.value.files))
-  }
-}
-
-const removePicture = (index: number) => {
 }
 
 const onClickSubmit = () => {
