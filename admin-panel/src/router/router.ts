@@ -53,6 +53,14 @@ const routes = [
         ]
     },
     {
+        path: "/projectTopics",
+        name: "project-topics",
+        component: () => import("../views/projects/ProjectTopicsView.vue"),
+        meta: {
+            layout: "main",
+        }
+    },
+    {
         path: "/techs",
         name: "techs",
         component: () => import("../views/projects/TechsView.vue"),

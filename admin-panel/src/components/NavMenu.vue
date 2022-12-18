@@ -22,7 +22,7 @@ type menuItem = { href: string, title: string }
 const menuItems: menuItem[] = [
   {href: "/", title: "Home"},
   {href: "/projects", title: "Projects"},
-  // {href: "/projectTopics", title: "Project Topics"},
+  {href: "/projectTopics", title: "Project Topics"},
   {href: "/techs", title: "Techs"},
   // {href: "/timeline", title: "Timeline"},
   // {href: "/timelineTopics", title: "Timeline Topics"},

@@ -74,6 +74,7 @@ const onCloseUpdateTech = () => {
   showTechEditWindow.value = false;
 }
 
+// FIXME: Сделать удаление через передачу внешного параметра в событии
 const onClickDeleteTech = async () => {
   await editTech.value!.delete()
   await fetchTechs()

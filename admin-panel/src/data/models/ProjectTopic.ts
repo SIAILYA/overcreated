@@ -1,8 +1,12 @@
 import {ApiModel} from "./ApiModel";
 import {API} from "./API";
 import {Column} from "../decorators/Column";
+import {IClearable} from "./IClearable";
+import {Entity} from "../decorators/Entity";
 
-export class ProjectTopic extends ApiModel {
+
+@Entity
+export class ProjectTopic extends ApiModel implements IClearable {
     api = new API("/portfolio/projectTopics")
 
     @Column()
@@ -16,4 +20,11 @@ export class ProjectTopic extends ApiModel {
 
     @Column()
     isVisible: boolean = false
+
+    clear() {
+        this.title = ""
+        this.slug = ""
+        this.color = ""
+        this.isVisible = false
+    }
 }
