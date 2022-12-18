@@ -18,8 +18,8 @@
 
   <div class="row mt-3">
     <div v-for="(pic, i) in projectItem.pictures" class="col-6 mt-2">
-      <a :href="'/' + pic.url" class="d-block position-relative picture" target="_blank">
-        <img :src="'/' + pic.url" alt="" class="w-100">
+      <a :href="pic.fullUrl" class="d-block position-relative picture" target="_blank">
+        <img :src="pic.fullUrl" alt="" class="w-100">
 
         <button class="btn btn-danger remove-pic bg-danger" @click.prevent="removePicture(i)">
           Delete
@@ -32,6 +32,7 @@
 <script lang="ts" setup>
 import {Project} from "../data/models/Project";
 import {ref} from "vue";
+import {Picture} from "../data/models/Picture";
 
 interface Props {
   projectItem: Project
@@ -42,12 +43,10 @@ const {projectItem} = defineProps<Props>();
 const picturesUpload = ref<HTMLInputElement>()
 
 
-const onPictureSelected = () => {
-  const data = new FormData()
-  console.log(typeof picturesUpload.value)
-
+const onPictureSelected = async () => {
   if (picturesUpload.value?.files?.length) {
-    console.log(Array.from(picturesUpload.value.files))
+    const r = await Picture.upload(Array.from(picturesUpload.value.files))
+    projectItem.pictures = projectItem.pictures.concat(r)
   }
 }
 
