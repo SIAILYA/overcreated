@@ -37,11 +37,14 @@
       <h5>Project topics</h5>
 
       <div class="d-flex flex-column">
-        <div v-for="t in topics" class="d-flex">
-          <input :id="t.id" :checked="projectItem.topics && projectItem.topics.includes(t.id)" class="my-auto"
-                 type="checkbox"
-                 @input="() => onClickToggleTopic(t.id)">
-          <label :for="t.id" class="my-auto ms-2">{{ t.title }}</label>
+        <div v-for="pt in projectTopics" class="d-flex">
+          <input
+              :id="pt.id" :checked="projectItem.topics.includes(pt)"
+              class="form-check-input my-auto"
+              type="checkbox"
+              @input="() => onClickToggleTopic(pt)"
+          >
+          <label :for="pt.id" class="form-check-label my-auto ms-2">{{ pt.title }}</label>
         </div>
       </div>
     </div>
@@ -51,27 +54,9 @@
           :project-item="projectItem"
       />
 
-      <h5 class="mt-4">Pictures</h5>
-      <div class="d-flex">
-        <input id="pictures_upload" ref="picturesUpload" accept="image/*" class="d-none" multiple="multiple" type="file"
-               @input="onPictureSelected"/>
+      <hr>
 
-        <label class="upload-btn btn btn-success d-flex w-100" for="pictures_upload">
-          <span class="mx-auto">Загрузить картинку</span>
-        </label>
-      </div>
-
-      <div class="row mt-3">
-        <div v-for="(pic, i) in projectItem.pictures" class="col-6 mt-2">
-          <a :href="BACKEND + '/' + pic" class="d-block position-relative picture" target="_blank">
-            <img :src="BACKEND + '/' + pic" alt="" class="w-100">
-
-            <button class="btn btn-danger remove-pic bg-danger" @click.prevent="removePicture(i)">
-              Удалить
-            </button>
-          </a>
-        </div>
-      </div>
+<!--      <project-pictures-bar/>-->
     </div>
   </div>
 
@@ -97,22 +82,29 @@
 <script lang="ts" setup>
 import {computed, onMounted, reactive, ref} from "vue";
 
-import {useRoute} from "vue-router";
-import {Project} from "../../data/models/Project";
-
-import {marked} from 'marked';
 import ProjectTechsBar from "../../components/ProjectTechsBar.vue";
+
+import {useRoute} from "vue-router";
+import {storeToRefs} from "pinia";
+import {marked} from 'marked';
+
+import {Project} from "../../data/models/Project";
 import {useTechStore} from "../../stores/techStore";
+import {useProjectTopicStore} from "../../stores/projectTopicStore";
+import {ProjectTopic} from "../../data/models/ProjectTopic";
+
 
 const route = useRoute()
+
+const {projectTopics} = storeToRefs(useProjectTopicStore())
 const {fetchTechs} = useTechStore()
+const {fetchProjectTopics} = useProjectTopicStore()
 
 const editMode = route.path.includes("edit")
 
 const projectItem = reactive<Project>(new Project())
 const picturesUpload = ref<HTMLInputElement>()
-const addTech = ref<string>("")
-const topics = ref<any[]>([])
+
 
 const isValid = computed(() => {
 })
@@ -149,8 +141,12 @@ const onClickSubmit = () => {
 const onClickDelete = () => {
 }
 
-const onClickToggleTopic = (topicId: string) => {
-
+const onClickToggleTopic = (pt: ProjectTopic) => {
+  if (projectItem.topics.includes(pt)) {
+    projectItem.topics = projectItem.topics.filter(t => t.id !== pt.id)
+  } else {
+    projectItem.topics.push(pt)
+  }
 }
 
 onMounted(() => {
@@ -159,6 +155,7 @@ onMounted(() => {
 })
 
 fetchTechs()
+fetchProjectTopics()
 </script>
 
 <style lang="scss" scoped>
