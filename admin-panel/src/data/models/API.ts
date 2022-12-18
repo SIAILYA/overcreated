@@ -18,7 +18,7 @@ export class API<T extends ApiModel> {
             return Promise.reject(new Error("Method getById are not available"))
         }
 
-        return (await axiosInstance.get(this.path + "/getById" + id)).data
+        return (await axiosInstance.get(this.path + "/getById/" + id)).data
     }
 
     async getAll() {

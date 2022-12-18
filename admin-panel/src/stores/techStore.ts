@@ -13,8 +13,7 @@ export const useTechStore = defineStore("techStore", {
             this.techs = _t.map((t: object) => new Tech().fromJSON(t))
         },
         async createTech(tech: any) {
-            const _t = new Tech().fromJSON(tech)
-            await _t.api.create(_t)
+            await new Tech().fromJSON(tech).create()
             await this.fetchTechs()
         }
     }

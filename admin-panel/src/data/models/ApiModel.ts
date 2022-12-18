@@ -3,8 +3,13 @@ import {Column} from "../decorators/Column";
 
 
 export abstract class ApiModel {
-    api: Partial<API<ApiModel>> = new API(this.constructor.name.toLowerCase())
+    api!: Partial<API<ApiModel>>
     public static $api: API<ApiModel>
+
+    get _api() {
+        // @ts-ignore
+        return this.constructor.$api
+    }
 
     @Column()
     id!: string
@@ -55,7 +60,31 @@ export abstract class ApiModel {
     }
 
     get json() {
-        return JSON.stringify(this)
+        const __metadata = Reflect.getMetadata("columns", this.constructor)
+        const json: any = {}
+
+        for (const thisProp in this) {
+            if (thisProp === "api") continue
+
+            const _propMetadata = __metadata[thisProp]
+            const _propType = _propMetadata?.type
+            const _propValue = this[thisProp]
+
+            if (_propType) {
+                if (Array.isArray(_propValue)) {
+                    json[thisProp] = _propValue.map((item: any) => item.json)
+                } else if (_propType() instanceof ApiModel) {
+                    // @ts-ignore
+                    json[thisProp] = _propValue.json
+                } else {
+                    json[thisProp] = _propValue
+                }
+            } else {
+                json[thisProp] = _propValue
+            }
+        }
+
+        return json
     }
 
     async load() {
@@ -63,7 +92,11 @@ export abstract class ApiModel {
             return Promise.reject(new Error("Model id is not defined"))
         }
 
-        this.fromJSON(await this.api.getById!(this.id))
+        this.fromJSON(await this._api.getById!(this.id))
         return this
+    }
+
+    async create() {
+        return this.fromJSON(await this._api.create!(this))
     }
 }
