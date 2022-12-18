@@ -47,27 +47,9 @@
     </div>
 
     <div class="col-12 col-md-6 mt-3">
-      <h5>Project techs</h5>
-
-      <div class="d-flex">
-        <input v-model="addTech" class="form-control w-100" placeholder="Название технологии" type="text">
-        <button :disabled="!addTech" class="btn btn-success d-flex ms-2" @click="onClickAddTech">
-          <span class="material-icons-round m-auto">playlist_add</span>
-        </button>
-      </div>
-
-      <div class="d-flex flex-column mt-2">
-        <div
-            v-for="(tech, index) in projectItem.techs"
-            :class="index !== (projectItem.techs.length - 1) && 'border-bottom border-1 border-dark'"
-            class="tech d-flex justify-content-end py-2"
-        >
-          <span class="my-auto">{{ tech }}</span>
-          <button class="ovc-btn bg-danger d-flex ms-2" @click="onClickRemoveTech(tech)">
-            <span class="material-icons-round m-auto">delete</span>
-          </button>
-        </div>
-      </div>
+      <project-techs-bar
+          :project-item="projectItem"
+      />
 
       <h5 class="mt-4">Pictures</h5>
       <div class="d-flex">
@@ -113,17 +95,21 @@
 </template>
 
 <script lang="ts" setup>
-import {computed, onMounted, ref} from "vue";
+import {computed, onMounted, reactive, ref} from "vue";
 
 import {useRoute} from "vue-router";
 import {Project} from "../../data/models/Project";
 
 import {marked} from 'marked';
+import ProjectTechsBar from "../../components/ProjectTechsBar.vue";
+import {useTechStore} from "../../stores/techStore";
 
 const route = useRoute()
+const {fetchTechs} = useTechStore()
+
 const editMode = route.path.includes("edit")
 
-const projectItem = ref<Project>(new Project())
+const projectItem = reactive<Project>(new Project())
 const picturesUpload = ref<HTMLInputElement>()
 const addTech = ref<string>("")
 const topics = ref<any[]>([])
@@ -132,8 +118,7 @@ const isValid = computed(() => {
 })
 
 const descriptionPreview = computed(() => {
-  console.log(123)
-  return marked(projectItem.value.fullDescription || "")
+  return marked(projectItem.fullDescription || "")
 })
 
 const onTitleInput = (ev: any) => {
@@ -170,10 +155,10 @@ const onClickToggleTopic = (topicId: string) => {
 
 onMounted(() => {
   if (editMode) {
-  } else {
-    projectItem.value = new Project()
   }
 })
+
+fetchTechs()
 </script>
 
 <style lang="scss" scoped>

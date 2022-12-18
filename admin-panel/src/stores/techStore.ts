@@ -16,5 +16,13 @@ export const useTechStore = defineStore("techStore", {
             await new Tech().fromJSON(tech).create()
             await this.fetchTechs()
         }
+    },
+    getters: {
+        searchTechs(state) {
+            return (search: string) => {
+                return state.techs.filter(t =>
+                    t.title.toLowerCase().includes(search.toLowerCase()))
+            }
+        }
     }
 })

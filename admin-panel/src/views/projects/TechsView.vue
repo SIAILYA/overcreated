@@ -11,7 +11,7 @@
   <hr>
 
   <div class="row">
-    <div v-for="techItem in techs" class="col-6 mt-3">
+    <div v-for="techItem in techs" class="col-6 col-md-4 mt-3">
       <div class="card p-2 text-center">
         <h4 class="mb-1">
           {{ techItem.title }}
