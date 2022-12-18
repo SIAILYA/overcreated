@@ -30,7 +30,7 @@ export class ProjectModel extends BaseModel {
     topics?: ProjectTopicModel[]
 
     @ManyToMany(type => TechModel, {eager: true})
-    @JoinTable({joinColumn: {name: 'project_id'}, inverseJoinColumn: {name: 'tech_id'}})
+    @JoinTable({joinColumn: {name: 'project_id'}, inverseJoinColumn: {name: 'tech_id'}, name: 'projects_to_techs'})
     techs: TechModel[]
 
     @Field()
