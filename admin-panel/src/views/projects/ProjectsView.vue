@@ -1,6 +1,6 @@
 <template>
   <router-view v-slot="{Component}">
-    <keep-alive :include="['projects-list-view', 'CreateEditProjectView']">
+    <keep-alive :include="['ProjectsListView']">
       <component :is="Component"/>
     </keep-alive>
   </router-view>

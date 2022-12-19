@@ -8,7 +8,7 @@
     <div
         v-for="project in filteredProjects"
         :key="project.id"
-        class="col-12 col-md-6 col-lg-4"
+        class="col-12 col-md-6 col-lg-4 mt-3"
         :class="!project.isVisible ? 'opacity-50' : ''"
     >
       <project-card
