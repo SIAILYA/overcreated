@@ -1,23 +1,24 @@
 import {ApiModel} from "./ApiModel";
 import {Entity} from "../decorators/Entity";
 import {Column} from "../decorators/Column";
-import {axiosInstance} from "../network";
+import {axiosInstance, BASE_HOST} from "../network";
 
 @Entity({disableApi: true})
 export class Picture extends ApiModel {
     api = {}
 
     @Column()
-    url!: string
+    path!: string
 
     @Column()
     caption?: string
 
-    get fullUrl(): string {
-        // FIXME: Изменить модель, поле url переименовать в path,
-        //  в геррере url (клиент) делать проверку на наличие http и если его нет,
-        //  то добавлять к нему адрес сервера из конфига
-        return `http://localhost:5000/${this.url}`
+    get url(): string {
+        if (!this.path.includes("http")) {
+            return `${BASE_HOST}/${this.path}`
+        }
+
+        return this.path
     }
 
     static async upload(files: File | File[]): Promise<Picture | Picture[]> {

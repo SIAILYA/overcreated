@@ -95,6 +95,7 @@
       <hr>
 
       <project-pictures-bar
+          v-if="projectItem.id"
           :project-item="projectItem"
           @update="onClickUpdateProject"
       />
@@ -144,7 +145,7 @@
 </template>
 
 <script lang="ts" setup>
-import {computed, onActivated, onMounted, reactive, ref, Ref, watch, watchEffect} from "vue";
+import {computed, onMounted, reactive, Ref} from "vue";
 
 import ProjectTechsBar from "../../components/ProjectTechsBar.vue";
 import ProjectPicturesBar from "../../components/ProjectPicturesBar.vue";
@@ -167,14 +168,13 @@ const route = useRoute()
 const router = useRouter()
 const message = useMessage()
 
-const {createProject} = useProjectsStore()
+const {createProject, fetchProjects} = useProjectsStore()
 const {projectTopics}: { projectTopics: Ref<ProjectTopic[]> } = storeToRefs(useProjectTopicStore())
 const {fetchTechs} = useTechStore()
 const {fetchProjectTopics} = useProjectTopicStore()
 
-const editMode = route.path.includes("edit")
+const editMode = computed<boolean>(() => route.path.includes("edit"))
 const projectItem = reactive<Project>(new Project())
-const unsavedChanges = ref(false)
 
 
 const isValid = computed(() => {
@@ -187,23 +187,27 @@ const descriptionPreview = computed(() => {
 })
 
 const onTitleInput = (ev: any) => {
-  projectItem.slug = transliterate(ev.target.value.toLowerCase().replace(/( |-|\/\\)/g, "_"))
+  if (!editMode.value) {
+    projectItem.slug = transliterate(ev.target.value.toLowerCase().replace(/( |-|\/\\)/g, "_"))
+  }
 }
 
 const onClickCreateProject = async () => {
   if (isValid.value) {
-    await createProject(projectItem)
+    const createdProject = await createProject(projectItem)
     message.success("Project created")
+    await router.replace("/projects/edit/" + createdProject.id)
   }
 }
 
 const onClickUpdateProject = async () => {
   if (isValid.value) {
     projectItem.update().then(() => {
-      unsavedChanges.value = false
       message.success("Project updated")
     }).catch(() => {
       message.danger("Project update error")
+    }).finally(() => {
+      fetchProjects()
     })
   }
 }
@@ -214,8 +218,6 @@ const onClickDelete = async () => {
         await projectItem.delete()
         message.danger("Project deleted")
         await router.push("/projects")
-      })
-      .catch(() => {
       })
 }
 
@@ -228,33 +230,17 @@ const onClickToggleTopic = (pt: ProjectTopic) => {
 }
 
 const fetchCurrentProject = async () => {
-  if (editMode) {
+  if (editMode.value) {
     projectItem.id = route.params.id as string
     projectItem.load().catch(() => {
       message.danger("Project not found")
       router.push("/projects")
     })
-    unsavedChanges.value = false
   }
 }
 
-// Хэндлер для несохраненных изменений
-//
-// watch(projectItem, () => {
-//   unsavedChanges.value = true
-// }, {deep: true})
-//
-// onActivated(() => {
-//   if (editMode && unsavedChanges.value) {
-//     useConfirm("There is unsaved. Do you want to reload project?")
-//         .then(() => {
-//           fetchCurrentProject()
-//         })
-//   }
-// })
-
 onMounted(() => {
-  if (editMode) {
+  if (editMode.value) {
     fetchCurrentProject()
   }
 })

@@ -16,8 +16,10 @@ export const useProjectsStore = defineStore("projects", {
             this.projects = _p.map((project: object) => new Project().fromJSON(project))
         },
         async createProject(project: Project) {
-            await project.create()
+            const _r = await project.create()
             await this.fetchProjects()
+
+            return _r
         }
     }
 })

@@ -18,8 +18,8 @@
 
   <div class="row mt-3">
     <div v-for="pic in projectItem.pictures" class="col-6 mt-2">
-      <a :href="pic.fullUrl" class="d-block position-relative picture" target="_blank">
-        <img :src="pic.fullUrl" alt="" class="w-100">
+      <a :href="pic.url" class="d-block position-relative picture" target="_blank">
+        <img :src="pic.url" alt="" class="w-100">
 
         <button class="btn btn-danger remove-pic bg-danger" @click.prevent="removePicture(pic)">
           Delete

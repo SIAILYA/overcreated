@@ -1,7 +1,9 @@
 import axios from "axios";
 
+export const BASE_HOST = "http://localhost:5000";
+
 export const axiosInstance = axios.create({
-    baseURL: "http://localhost:5000/api/v3/admin",
+    baseURL: `${BASE_HOST}/api/v3/admin`,
     headers: {
         "Content-Type": "application/json",
     }
