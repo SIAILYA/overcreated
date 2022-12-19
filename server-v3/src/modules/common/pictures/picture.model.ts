@@ -9,8 +9,8 @@ export class PictureModel extends BaseModel {
     //  в геррере url (клиент) делать проверку на наличие http и если его нет,
     //  то добавлять к нему адрес сервера из конфига
     @Field()
-    @Column({type: 'varchar', length: 255, nullable: false})
-    url!: string
+    @Column({type: 'varchar', length: 1024, nullable: false})
+    path!: string
 
     @Field({nullable: true})
     @Column({type: 'text', nullable: true})

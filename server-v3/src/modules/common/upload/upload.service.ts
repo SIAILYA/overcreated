@@ -8,6 +8,6 @@ export class UploadService {
     }
 
     async savePicture(file: Express.Multer.File) {
-        return await this.picturesService.create({url: file.path} as PictureModel)
+        return await this.picturesService.create({path: file.path} as PictureModel)
     }
 }
