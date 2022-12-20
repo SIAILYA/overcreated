@@ -8,10 +8,8 @@ import {ProjectsController} from "../controllers/projects.controller";
 import {ProjectsAdminController} from "../controllers/projects.admin.controller";
 import {ProjectTopicModel} from "../entities/projectTopic.model";
 import {ProjectTopicsController} from "../controllers/projectTopics.controller";
-import {ProjectsAdminService} from "../services/projects.admin.service";
 import {ProjectTopicsAdminController} from "../controllers/projectTopics.admin.controller";
 import {ProjectTopicsService} from "../services/projectTopics.service";
-import {ProjectTopicsAdminService} from "../services/projectTopics.admin.service";
 import {TechModel} from "../entities/tech.model";
 import {TechsController} from "../controllers/techs.controller";
 import {TechsService} from "../services/techs.service";
@@ -25,9 +23,7 @@ import {TechsAdminController} from "../controllers/techs.admin.controller";
     providers: [
         ProjectsResolver,
         ProjectsService,
-        ProjectsAdminService,
         ProjectTopicsService,
-        ProjectTopicsAdminService,
         TechsService
     ],
     controllers: [
