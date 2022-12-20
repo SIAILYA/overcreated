@@ -1,19 +1,19 @@
 import {BaseService} from "./base.service";
 import {OrderableModel} from "../orderable.model";
-import {IOrderService} from "./IOrder.service";
-import {ReorderDto} from "../ReorderDto";
-import {LessThanOrEqual, MoreThan, Repository} from "typeorm";
+import {IOrderableService} from "../interface/IOrderable.service";
+import {ReorderBodyDto} from "../controller/dto/reorder.body.dto";
+import {FindOptionsWhere, LessThanOrEqual, MoreThan, Repository} from "typeorm";
 
-export class OrderableService<M extends OrderableModel> extends BaseService<M> implements IOrderService<M> {
+export class OrderableService<M extends OrderableModel> extends BaseService<M> implements IOrderableService<M> {
     constructor(protected readonly repository: Repository<M>) {
         super(repository);
     }
 
-    async reorder(reorderDto: ReorderDto): Promise<void> {
+    async reorder(reorderDto: ReorderBodyDto): Promise<void> {
         const {from, to} = reorderDto;
 
         // @ts-ignore https://github.com/typeorm/typeorm/issues/8939
-        const entity = await this.repository.findOne({where: {order: from}});
+        const entity = await this.repository.findOne({where: {order: from}} as FindOptionsWhere<M>);
 
         if (from > to) {
             // @ts-ignore

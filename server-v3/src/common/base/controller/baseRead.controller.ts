@@ -1,11 +1,13 @@
 import {BaseModel} from "../base.model";
-import {IReadController} from "./IRead.controller";
-import {ClassSerializerInterceptor, Get, Param, SerializeOptions, UseInterceptors} from "@nestjs/common";
-import {IBaseService} from "../service/IBase.service";
+import {IReadController} from "../interface/IRead.controller";
+import {Body, ClassSerializerInterceptor, Get, Param, Query, SerializeOptions, UseInterceptors} from "@nestjs/common";
+import {IBaseService} from "../interface/IBase.service";
+import {GetAllParamsDto} from "./dto/getAll.params.dto";
 
 
 export class BaseReadController<M extends BaseModel> implements IReadController<M> {
-    constructor(private readonly IBaseService: IBaseService<M>) {}
+    constructor(private readonly IBaseService: IBaseService<M>) {
+    }
 
     @UseInterceptors(ClassSerializerInterceptor)
     @SerializeOptions({
@@ -13,8 +15,8 @@ export class BaseReadController<M extends BaseModel> implements IReadController<
         excludePrefixes: ['_'],
     })
     @Get('/getAll')
-    async getAll(): Promise<M[]> {
-        return this.IBaseService.getAll()
+    async getAll(@Query() getAllParams?: GetAllParamsDto): Promise<M[]> {
+        return this.IBaseService.getAllVisible(getAllParams)
     }
 
     @UseInterceptors(ClassSerializerInterceptor)
@@ -24,6 +26,6 @@ export class BaseReadController<M extends BaseModel> implements IReadController<
     })
     @Get('/getById/:id')
     async get(@Param('id') id: string): Promise<M> {
-        return await this.IBaseService.get(id)
+        return await this.IBaseService.getVisible(id)
     }
 }

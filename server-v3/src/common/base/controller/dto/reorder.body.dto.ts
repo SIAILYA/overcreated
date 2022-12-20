@@ -1,4 +1,4 @@
-export class ReorderDto {
+export class ReorderBodyDto {
     from: number;
     to: number;
 }

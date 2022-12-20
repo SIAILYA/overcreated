@@ -1,17 +1,19 @@
-import {Body, Delete, Get, Param, Post, Put, UseGuards} from "@nestjs/common";
+import {Body, Delete, Get, Param, Post, Put, Query, UseGuards} from "@nestjs/common";
 import {BaseModel} from "../base.model";
-import {IBaseService} from "../service/IBase.service";
-import {IReadController} from "./IRead.controller";
-import {IWriteController} from "./IWrite.controller";
+import {IBaseService} from "../interface/IBase.service";
+import {IReadController} from "../interface/IRead.controller";
+import {IWriteController} from "../interface/IWrite.controller";
 import {AuthGuard} from "../../../modules/auth/auth.guard";
+import {GetAllParamsDto} from "./dto/getAll.params.dto";
 
 export class BaseCRUDController<M extends BaseModel> implements IReadController<M>, IWriteController<M> {
-    constructor(private readonly IBaseService: IBaseService<M>) {}
+    constructor(private readonly IBaseService: IBaseService<M>) {
+    }
 
     @UseGuards(AuthGuard)
     @Get('/getAll')
-    async getAll(): Promise<M[]> {
-        return this.IBaseService.getAll()
+    async getAll(@Query() getAllParams?: GetAllParamsDto): Promise<M[]> {
+        return this.IBaseService.getAll(getAllParams)
     }
 
     @UseGuards(AuthGuard)
