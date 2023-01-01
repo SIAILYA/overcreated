@@ -1,9 +1,26 @@
 <template>
   <router-link
+      :style="{color: projectItem.color}"
       :to="'/projects/edit/' + projectItem.id"
       class="project-card d-block h-100"
-      :style="{color: projectItem.color}"
   >
+    <div class="d-flex w-100 mb-3">
+      <button
+          v-if="shiftLeft"
+          class="btn btn-sm btn-outline-primary me-auto"
+          @click.prevent="onClickShift(-1)"
+      >
+        &lt;
+      </button>
+      <button
+          v-if="shiftRight"
+          class="btn btn-sm btn-outline-primary ms-auto"
+          @click.prevent="onClickShift(1)"
+      >
+        &gt;
+      </button>
+    </div>
+
     <h2 class="title text-center">
       {{ projectItem.title }}
     </h2>
@@ -16,11 +33,21 @@
 <script lang="ts" setup>
 import {Project} from "../data/models/Project";
 
+const emit = defineEmits(['shift'])
+
 interface Props {
-  projectItem: Project
+  projectItem: Project,
+  shiftLeft: boolean,
+  shiftRight: boolean
 }
 
-const {projectItem} = defineProps<Props>()
+const {projectItem, shiftLeft, shiftRight} = defineProps<Props>()
+
+const onClickShift = (direction: number) => {
+  projectItem.reorder(projectItem.order + direction).then(() => {
+    emit('shift')
+  })
+}
 </script>
 
 <style lang="scss" scoped>

@@ -1,4 +1,4 @@
-import {Body, Delete, Get, Param, Post, Put, Query, UseGuards} from "@nestjs/common";
+import {Body, Delete, Get, Param, Post, Put, UseGuards} from "@nestjs/common";
 import {BaseModel} from "../base.model";
 import {IBaseService} from "../interface/IBase.service";
 import {IReadController} from "../interface/IRead.controller";
@@ -11,8 +11,8 @@ export class BaseCRUDController<M extends BaseModel> implements IReadController<
     }
 
     @UseGuards(AuthGuard)
-    @Get('/getAll')
-    async getAll(@Query() getAllParams?: GetAllParamsDto): Promise<M[]> {
+    @Post('/getAll')
+    async getAll(@Body() getAllParams?: GetAllParamsDto): Promise<M[]> {
         return this.IBaseService.getAll(getAllParams)
     }
 

@@ -1,13 +1,13 @@
 import {Picture} from "./Picture";
-import {ApiModel} from "./ApiModel";
 import {Column} from "../decorators/Column";
 import {Tech} from "./Tech";
 import {ProjectTopic} from "./ProjectTopic";
 import {Entity} from "../decorators/Entity";
+import {OrderableModel} from "./OrderableModel";
 
 
 @Entity()
-export class Project extends ApiModel {
+export class Project extends OrderableModel {
     api = {path: "/portfolio/projects"}
 
     @Column()

@@ -6,7 +6,7 @@
 
   <div class="row">
     <div
-        v-for="project in filteredProjects"
+        v-for="(project, index) in filteredProjects"
         :key="project.id"
         class="col-12 col-md-6 col-lg-4 mt-3"
         :class="!project.isVisible ? 'opacity-50' : ''"
@@ -14,6 +14,9 @@
       <project-card
           :key="project.id"
           :project-item="project"
+          :shift-left="index !== 0"
+          :shift-right="index !== filteredProjects.length - 1"
+          @shift="fetchProjects"
       />
     </div>
   </div>

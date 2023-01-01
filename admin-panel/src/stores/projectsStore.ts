@@ -1,7 +1,6 @@
 import {defineStore} from "pinia";
 import {Project} from "../data/models/Project";
 import {API} from "../data/models/API";
-import {ProjectTopic} from "../data/models/ProjectTopic";
 
 export const useProjectsStore = defineStore("projects", {
     state: () => {
@@ -11,8 +10,8 @@ export const useProjectsStore = defineStore("projects", {
         }
     },
     actions: {
-        async fetchProjects() {
-            const _p = await this.$api.getAll()
+        async fetchProjects(options: any = {order: {order: 'asc'}}) {
+            const _p = await this.$api.getAll(options)
             this.projects = _p.map((project: object) => new Project().fromJSON(project))
         },
         async createProject(project: Project) {

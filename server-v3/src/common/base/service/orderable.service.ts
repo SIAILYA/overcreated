@@ -15,15 +15,20 @@ export class OrderableService<M extends OrderableModel> extends BaseService<M> i
         // @ts-ignore https://github.com/typeorm/typeorm/issues/8939
         const entity = await this.repository.findOne({where: {order: from}} as FindOptionsWhere<M>);
 
-        if (from > to) {
-            // @ts-ignore
-            await this.repository.increment({order: MoreThan(to), order: LessThanOrEqual(from)}, 'order', 1);
-        } else {
-            // @ts-ignore
-            await this.repository.increment({order: MoreThan(from), order: LessThanOrEqual(to)}, 'order', -1);
+        if (!entity?.id) {
+            throw new Error(`Entity with order ${from} not found`);
         }
 
-        // @ts-ignore
-        await this.repository.update({id: entity.id}, {order: to});
+        // move element with order: from to order: to
+        if (from < to) {
+            // @ts-ignore
+            await this.repository.increment({order: MoreThan(from), order: LessThanOrEqual(to)}, 'order', -1);
+        } else {
+            // @ts-ignore
+            await this.repository.increment({order: MoreThan(to), order: LessThanOrEqual(from)}, 'order', 1);
+        }
+
+        // entity.order = to;
+        // await this.repository.save(entity);
     }
 }
