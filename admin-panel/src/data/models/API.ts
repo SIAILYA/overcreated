@@ -22,12 +22,12 @@ export class API<T extends ApiModel> {
         return (await axiosInstance.get(this.path + "/getById/" + id)).data
     }
 
-    async getAll() {
+    async getAll(options: any) {
         if (!this.methods.includes("getAll")) {
             return Promise.reject(new Error("Method getAll are not available"))
         }
 
-        return (await axiosInstance.get(this.path + "/getAll")).data
+        return (await axiosInstance.post(this.path + "/getAll", options)).data
     }
 
     async create(data: T) {
@@ -55,5 +55,9 @@ export class API<T extends ApiModel> {
         }
 
         return (await axiosInstance.delete(this.path + "/delete/" + id)).data
+    }
+
+    async reorder(id: string, newOrder: number) {
+        return (await axiosInstance.post(this.path + "/reorder", {id, new_order: newOrder})).data
     }
 }
