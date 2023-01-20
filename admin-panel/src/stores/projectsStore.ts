@@ -10,6 +10,7 @@ export const useProjectsStore = defineStore("projects", {
         }
     },
     actions: {
+        //FIXME: add typing to options
         async fetchProjects(options: any = {order: {order: 'asc'}}) {
             const _p = await this.$api.getAll(options)
             this.projects = _p.map((project: object) => new Project().fromJSON(project))
