@@ -1,4 +1,4 @@
 export class ReorderBodyDto {
-    from: number;
-    to: number;
+    id: string;
+    new_order: number;
 }
