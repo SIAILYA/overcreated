@@ -147,21 +147,22 @@
 <script lang="ts" setup>
 import {computed, onMounted, reactive, Ref} from "vue";
 
-import ProjectTechsBar from "../../components/ProjectTechsBar.vue";
-import ProjectPicturesBar from "../../components/ProjectPicturesBar.vue";
+import ProjectTechsBar from "@components/ProjectTechsBar.vue";
+import ProjectPicturesBar from "@components/ProjectPicturesBar.vue";
 
 import {useRoute, useRouter} from "vue-router";
 import {storeToRefs} from "pinia";
 import {marked} from 'marked';
 
-import {Project} from "../../data/models/Project";
-import {useTechStore} from "../../stores/techStore";
-import {useProjectTopicStore} from "../../stores/projectTopicStore";
-import {ProjectTopic} from "../../data/models/ProjectTopic";
-import {useProjectsStore} from "../../stores/projectsStore";
-import {useMessage} from "../../utils/useMessage";
-import {transliterate} from "../../utils/utils";
-import {useConfirm} from "../../utils/useConfirm";
+import {Project} from "@data/models/Project";
+import {useTechStore} from "@stores/techStore";
+import {useProjectTopicStore} from "@stores/projectTopicStore";
+import {ProjectTopic} from "@data/models/ProjectTopic";
+import {useProjectsStore} from "@stores/projectsStore";
+
+import {transliterate} from "@/utils/utils";
+import {useMessage} from "@/utils/useMessage";
+import {useConfirm} from "@/utils/useConfirm";
 
 
 const route = useRoute()

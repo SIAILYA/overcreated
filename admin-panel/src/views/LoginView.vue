@@ -15,9 +15,10 @@
 
 <script lang="ts" setup>
 import {ref} from "vue";
-import {axiosInstance} from "../data/network";
 import {useRouter} from "vue-router";
-import {useTokenStore} from "../stores/tokenStore";
+
+import {axiosInstance} from "@data/network";
+import {useTokenStore} from "@stores/tokenStore";
 
 const loginData = ref({
   login: "",

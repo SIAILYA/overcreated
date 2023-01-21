@@ -37,8 +37,8 @@
 </template>
 
 <script lang="ts" setup>
-import {Tech} from "../data/models/Tech";
-import {transliterate} from "../utils/utils";
+import {Tech} from "@data/models/Tech";
+import {transliterate} from "@/utils/utils";
 
 const emit = defineEmits(["delete", "create"])
 

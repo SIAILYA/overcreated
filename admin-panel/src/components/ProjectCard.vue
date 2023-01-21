@@ -45,7 +45,7 @@
 </template>
 
 <script lang="ts" setup>
-import {Project} from "../data/models/Project";
+import {Project} from "@data/models/Project";
 import {defineProps, toRefs} from "vue";
 
 const emit = defineEmits(['shift', 'reorder'])

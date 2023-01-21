@@ -30,10 +30,11 @@
 </template>
 
 <script lang="ts" setup>
-import {Project} from "../data/models/Project";
 import {ref} from "vue";
-import {Picture} from "../data/models/Picture";
-import {useConfirm} from "../utils/useConfirm";
+
+import {Project} from "@data/models/Project";
+import {Picture} from "@data/models/Picture";
+import {useConfirm} from "@/utils/useConfirm";
 
 interface Props {
   projectItem: Project

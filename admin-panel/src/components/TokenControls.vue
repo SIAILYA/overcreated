@@ -5,11 +5,12 @@
 </template>
 
 <script lang="ts" setup>
-import {storeToRefs} from "pinia";
-import {useTokenStore} from "../stores/tokenStore";
 import {ref} from "vue";
+import {storeToRefs} from "pinia";
 import {useRouter} from "vue-router";
-import {formatMinutesSeconds} from "../utils/utils"
+
+import {useTokenStore} from "@stores/tokenStore";
+import {formatMinutesSeconds} from "@/utils/utils"
 
 const {expireAt} = storeToRefs(useTokenStore())
 const untilExpire = ref(0)

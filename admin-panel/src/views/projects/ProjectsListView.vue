@@ -60,10 +60,11 @@ import {computed, ComputedRef, ref} from "vue";
 
 import {storeToRefs} from "pinia";
 
-import ProjectCard from "../../components/ProjectCard.vue";
-import {useProjectsStore} from "../../stores/projectsStore";
-import {Project} from "../../data/models/Project";
-import ModalWindow from "../../components/ModalWindow.vue";
+import ProjectCard from "@components/ProjectCard.vue";
+import ModalWindow from "@components/ModalWindow.vue";
+
+import {useProjectsStore} from "@stores/projectsStore";
+import {Project} from "@data/models/Project";
 
 const {fetchProjects} = useProjectsStore()
 const {projects} = storeToRefs(useProjectsStore())

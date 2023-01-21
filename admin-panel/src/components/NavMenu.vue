@@ -15,7 +15,7 @@
 </template>
 
 <script lang="ts" setup>
-import TokenControls from "./TokenControls.vue";
+import TokenControls from "@components/TokenControls.vue";
 
 type menuItem = { href: string, title: string }
 

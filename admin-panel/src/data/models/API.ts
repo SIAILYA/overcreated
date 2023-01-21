@@ -22,7 +22,7 @@ export class API<T extends ApiModel> {
         return (await axiosInstance.get(this.path + "/getById/" + id)).data
     }
 
-    async getAll(options: any) {
+    async getAll(options: any = {}) {
         if (!this.methods.includes("getAll")) {
             return Promise.reject(new Error("Method getAll are not available"))
         }

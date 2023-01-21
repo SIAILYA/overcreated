@@ -56,12 +56,14 @@
 
 <script lang="ts" setup>
 import {reactive, ref} from "vue";
-import {ProjectTopic} from "../../data/models/ProjectTopic";
-import ProjectTopicForm from "../../components/ProjectTopicForm.vue";
-import {useProjectTopicStore} from "../../stores/projectTopicStore";
 import {storeToRefs} from "pinia";
-import ModalWindow from "../../components/ModalWindow.vue";
-import {useConfirm} from "../../utils/useConfirm";
+
+import ProjectTopicForm from "@components/ProjectTopicForm.vue";
+import ModalWindow from "@components/ModalWindow.vue";
+
+import {useProjectTopicStore} from "@stores/projectTopicStore";
+import {ProjectTopic} from "@data/models/ProjectTopic";
+import {useConfirm} from "@/utils/useConfirm";
 
 const {fetchProjectTopics, createProjectTopic} = useProjectTopicStore();
 const {projectTopics} = storeToRefs(useProjectTopicStore());

@@ -42,11 +42,13 @@
 </template>
 
 <script lang="ts" setup>
-import {Project} from "../data/models/Project";
-import {useTechStore} from "../stores/techStore";
 import {computed, ComputedRef, ref} from "vue";
-import TechItem from "./TechItem.vue";
-import {Tech} from "../data/models/Tech";
+
+import TechItem from "@components/TechItem.vue";
+
+import {Project} from "@data/models/Project";
+import {Tech} from "@data/models/Tech";
+import {useTechStore} from "@stores/techStore";
 
 interface Props {
   projectItem: Project

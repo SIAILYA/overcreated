@@ -41,13 +41,15 @@
 </template>
 
 <script lang="ts" setup>
-import {storeToRefs} from "pinia";
-import {useTechStore} from "../../stores/techStore";
 import {reactive, ref} from "vue";
-import ModalWindow from "../../components/ModalWindow.vue";
-import TechForm from "../../components/TechForm.vue";
-import {Tech} from "../../data/models/Tech";
-import {useConfirm} from "../../utils/useConfirm";
+import {storeToRefs} from "pinia";
+
+import ModalWindow from "@components/ModalWindow.vue";
+import TechForm from "@components/TechForm.vue";
+
+import {useTechStore} from "@stores/techStore";
+import {Tech} from "@data/models/Tech";
+import {useConfirm} from "@/utils/useConfirm";
 
 const {techs} = storeToRefs(useTechStore());
 const {fetchTechs, createTech} = useTechStore();

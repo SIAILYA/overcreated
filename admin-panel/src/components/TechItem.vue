@@ -11,7 +11,7 @@
 </template>
 
 <script lang="ts" setup>
-import {Tech} from "../data/models/Tech";
+import {Tech} from "@data/models/Tech";
 
 const emit = defineEmits(["update:selected"])
 

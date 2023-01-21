@@ -35,14 +35,14 @@
 <script lang="ts" setup>
 import {computed} from "vue";
 
-import EmptyLayout from "./layout/EmptyLayout.vue"
-import MainLayout from "./layout/MainLayout.vue"
-import ModalWindow from "./components/ModalWindow.vue";
+import EmptyLayout from "@/layout/EmptyLayout.vue"
+import MainLayout from "@/layout/MainLayout.vue"
+import ModalWindow from "@components/ModalWindow.vue";
 
 import {useRouter} from "vue-router";
-import {useTokenStore} from "./stores/tokenStore";
-import {useRootStore} from "./stores/rootStore";
-import {useMessage} from "./utils/useMessage";
+import {useTokenStore} from "@stores/tokenStore";
+import {useRootStore} from "@stores/rootStore";
+import {useMessage} from "@/utils/useMessage";
 
 const router = useRouter()
 
