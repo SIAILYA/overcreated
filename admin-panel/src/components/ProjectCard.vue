@@ -22,7 +22,7 @@
     </div>
 
     <h2 class="title text-center">
-      {{ projectItem.title }}
+      {{ projectItem.title }} ({{ projectItem.order }})
     </h2>
     <div class="mt-2">
       {{ projectItem.description }}
@@ -32,6 +32,7 @@
 
 <script lang="ts" setup>
 import {Project} from "../data/models/Project";
+import {defineProps, toRefs} from "vue";
 
 const emit = defineEmits(['shift'])
 
@@ -41,10 +42,12 @@ interface Props {
   shiftRight: boolean
 }
 
-const {projectItem, shiftLeft, shiftRight} = defineProps<Props>()
+const props = defineProps<Props>()
+const {projectItem, shiftLeft, shiftRight} = toRefs(props)
 
 const onClickShift = (direction: number) => {
-  projectItem.reorder(projectItem.order + direction).then(() => {
+  console.log(projectItem.value.order)
+  projectItem.value.reorder(projectItem.value.order + direction).then(() => {
     emit('shift')
   })
 }

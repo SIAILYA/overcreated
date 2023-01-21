@@ -58,6 +58,6 @@ export class API<T extends ApiModel> {
     }
 
     async reorder(id: string, newOrder: number) {
-        return (await axiosInstance.post(this.path + "/reorder", {id, new_order: newOrder})).data
+        return (await axiosInstance.post(this.path + "/reorder", {id, newOrder})).data
     }
 }
