@@ -8,6 +8,7 @@
     "client:postinstall": "nuxt prepare"
   },
   "devDependencies": {
+    "@nuxtjs/color-mode": "^3.2.0",
     "nuxt": "3.0.0",
     "sass": "^1.56.1",
     "sass-loader": "10"

@@ -67,7 +67,7 @@ const onHeadlineClick = () => {
     position: absolute;
     width: 25%;
     height: 7px;
-    bottom: 0;
+    bottom: -10px;
     transition: all 1.2s ease, background-color .3s ease;
     border-radius: 100px;
     background: var(--accent);

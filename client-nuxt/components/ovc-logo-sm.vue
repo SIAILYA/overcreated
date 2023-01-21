@@ -1,7 +1,7 @@
 <template>
   <div class="logo-sm relative my-auto" :class="{extended}">
     <h3 ref="text" class="m-0">
-      <span v-for="l in logoLetters"
+      <span v-for="l in expandedLogoLetters"
             :class="{'colored': l.marked}"
             :style="{width: (l.minified || extended) ? l.width : 0}"
       >
@@ -14,10 +14,15 @@
 
 <script lang="ts" setup>
 import {logoLetters} from "~/data/static/logo";
+import {computed} from "@vue/reactivity";
 
 interface Props {
   extended: boolean
 }
+
+const expandedLogoLetters = computed(() => {
+  return logoLetters.filter(l => l.expanded)
+})
 
 defineProps<Props>()
 
