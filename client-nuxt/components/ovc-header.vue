@@ -58,7 +58,7 @@
     </div>
 
 
-    <ovc-logo class="pt-20 container flex"/>
+    <ovc-logo class="pt-[130px] container flex"/>
   </header>
 </template>
 
