@@ -5,6 +5,11 @@ export default defineNuxtConfig({
         '@nuxtjs/color-mode',
         '@pinia/nuxt',
     ],
+    runtimeConfig: {
+      public: {
+        apiUrl: process.env.NUXT_API_URL
+      }
+    },
     app: {
         pageTransition: { name: 'page', mode: 'out-in', appear: true },
         layoutTransition: { name: 'fade', mode: 'out-in', appear: true },
