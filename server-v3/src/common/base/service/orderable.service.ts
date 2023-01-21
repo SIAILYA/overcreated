@@ -10,29 +10,33 @@ export class OrderableService<M extends OrderableModel> extends BaseService<M> i
     }
 
     async reorder(reorderDto: ReorderBodyDto): Promise<void> {
-        const {id, new_order} = reorderDto;
+        const {id, newOrder} = reorderDto;
         const orderable = await this.repository.findOneBy({id} as FindOptionsWhere<M>);
         const currentOrder = orderable.order;
 
-        if (new_order > currentOrder) {
-            await this.shiftEntities(currentOrder, new_order, -1);
-        } else if (new_order < currentOrder) {
-            await this.shiftEntities(new_order, currentOrder, 1);
+        if (newOrder > currentOrder) {
+            await this.shiftEntities(currentOrder, newOrder, -1);
+        } else if (newOrder < currentOrder) {
+            await this.shiftEntities(newOrder, currentOrder, 1);
         }
 
-        orderable.order = new_order;
+        orderable.order = newOrder;
         await this.repository.save(orderable);
     }
 
-    async shiftEntities(start: number, end: number, shift: number) {
-        await this.repository
+    async shiftEntities(currentOrder: number, newOrder: number, direction: number) {
+        console.log(currentOrder, newOrder, direction);
+        let query = this.repository
             .createQueryBuilder()
             .update(this.repository.metadata.target)
-            .set({ order: () => `CASE
-                            WHEN "order" >= ${start} AND "order" < ${end} THEN "order" + ${shift}
-                            ELSE "order"
-                            END`
-            })
-            .execute();
+            .set({ order: () => `"order" + ${direction}` });
+
+        if (direction === 1) {
+            query = query.where(`"order" >= ${currentOrder} AND "order" < ${newOrder}`);
+        } else {
+            query = query.where(`"order" > ${currentOrder} AND "order" <= ${newOrder}`);
+        }
+
+        await query.execute();
     }
 }
