@@ -4,21 +4,35 @@
       :to="'/projects/edit/' + projectItem.id"
       class="project-card d-block h-100"
   >
-    <div class="d-flex w-100 mb-3">
-      <button
-          v-if="shiftLeft"
-          class="btn btn-sm btn-outline-primary me-auto"
-          @click.prevent="onClickShift(-1)"
-      >
-        &lt;
-      </button>
-      <button
-          v-if="shiftRight"
-          class="btn btn-sm btn-outline-primary ms-auto"
-          @click.prevent="onClickShift(1)"
-      >
-        &gt;
-      </button>
+    <div class="d-flex justify-content-between w-100 mb-3">
+      <div class="w-100">
+        <button
+            v-if="shiftLeft"
+            class="btn btn-sm btn-outline-primary me-auto"
+            @click.prevent="onClickShift(-1)"
+        >
+          &lt;
+        </button>
+      </div>
+
+      <div class="d-flex">
+        <button
+            class="btn btn-sm btn-outline-primary ms-2"
+            @click.prevent="onClickReorder()"
+        >
+          Reorder
+        </button>
+      </div>
+
+      <div class="w-100 text-end">
+        <button
+            v-if="shiftRight"
+            class="btn btn-sm btn-outline-primary ms-auto"
+            @click.prevent="onClickShift(1)"
+        >
+          &gt;
+        </button>
+      </div>
     </div>
 
     <h2 class="title text-center">
@@ -34,7 +48,7 @@
 import {Project} from "../data/models/Project";
 import {defineProps, toRefs} from "vue";
 
-const emit = defineEmits(['shift'])
+const emit = defineEmits(['shift', 'reorder'])
 
 interface Props {
   projectItem: Project,
@@ -50,6 +64,10 @@ const onClickShift = (direction: number) => {
   projectItem.value.reorder(projectItem.value.order + direction).then(() => {
     emit('shift')
   })
+}
+
+const onClickReorder = () => {
+  emit('reorder', projectItem.value)
 }
 </script>
 
