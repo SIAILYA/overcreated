@@ -25,7 +25,6 @@ export class OrderableService<M extends OrderableModel> extends BaseService<M> i
     }
 
     async shiftEntities(currentOrder: number, newOrder: number, direction: number) {
-        console.log(currentOrder, newOrder, direction);
         let query = this.repository
             .createQueryBuilder()
             .update(this.repository.metadata.target)
