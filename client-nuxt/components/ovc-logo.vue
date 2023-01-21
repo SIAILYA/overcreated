@@ -42,7 +42,7 @@ const onHeadlineClick = () => {
 
 .headline__inner h1 {
   user-select: none;
-  font-size: 98px;
+  font-size: 86px;
   font-weight: 450;
   line-height: 1.1;
 

@@ -1,9 +1,11 @@
 <template>
   <div>
     <ovc-header/>
-    <div class="view">
-      <slot></slot>
-    </div>
+    <transition name="fade" appear>
+      <div class="view mt-12">
+        <slot></slot>
+      </div>
+    </transition>
     <ovc-footer/>
   </div>
 </template>
