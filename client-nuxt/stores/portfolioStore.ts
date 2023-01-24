@@ -8,6 +8,9 @@ export const usePortfolioStore = defineStore("portfolio", {
     actions: {
         async fetchProjectTopics() {
             this.projectTopics = await ProjectTopic.all();
+        },
+        deselectAllTopics() {
+            this.projectTopics.forEach(i => i.selected = false)
         }
     }
 })

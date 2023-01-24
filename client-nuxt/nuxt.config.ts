@@ -14,6 +14,9 @@ export default defineNuxtConfig({
         pageTransition: { name: 'page', mode: 'out-in', appear: true },
         layoutTransition: { name: 'fade', mode: 'out-in', appear: true },
         head: {
+            meta: [
+                { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+            ],
             link: [
                 { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Round'}
             ]

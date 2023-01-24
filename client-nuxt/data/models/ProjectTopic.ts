@@ -1,24 +1,24 @@
-import {BaseModel} from "~/data/models/BaseModel";
-import {useOvcApi} from "~/hooks/useOvcApi";
+import "reflect-metadata";
+import {FetchModel} from "~/data/models/api/FetchModel";
+import {ClientAPI} from "~/data/models/api/ClientAPI";
+import {Column} from "~/data/decorators/Column";
+import {Entity} from "~/data/decorators/Entity";
 
-export class ProjectTopic extends BaseModel {
+@Entity()
+export class ProjectTopic extends FetchModel {
+    api = new ClientAPI('/portfolio/projectTopics')
+
+    @Column()
     title!: string
+
+    @Column()
     color!: string
 
-    constructor(data: any) {
-        super()
+    @Column()
+    selected: boolean = false
 
-        for (const key in data) {
-            if (Object.prototype.hasOwnProperty.call(this, key)) {
-                // @ts-ignore
-                this[key] = data[key]
-            }
-        }
-    }
-
-    static path = "/portfolio/projectTopics"
-    static async all(): Promise<ProjectTopic[]> {
-        const _r = await useOvcApi(ProjectTopic.path + '/getAll', {method: "POST"})
-        return _r.map((i: any) => new ProjectTopic(i))
+    static async all() {
+        return (await ProjectTopic.$api.all())
+            .map((t: ProjectTopic) => new ProjectTopic().fromJSON(t))
     }
 }

@@ -10,6 +10,7 @@ html {
 body {
   $backgroundPrimary: #151515;
   $backgroundSecondary: #2c2c2c;
+  $backgroundTertiary: #2c2c2c;
   $textColor: #FFF;
   $shadowColor: rgba(255, 255, 255, .3);
 
@@ -19,6 +20,7 @@ body {
   $accentPurple: #df006a;
 
   --background-primary: #{$backgroundPrimary};
+  --background-tetriary: #{$backgroundTertiary};
   --background-secondary: #{$backgroundSecondary};
   --text-color: #{$textColor};
   --shadow-color: #{$shadowColor};
@@ -36,6 +38,7 @@ body {
 .light-mode body {
   $backgroundPrimary: #f0f0f0;
   $backgroundSecondary: #ffffff;
+  $backgroundTertiary: #f0f0f0;
   $textColor: #1a1a1a;
   $shadowColor: rgba(0, 0, 0, .15);
 
@@ -46,6 +49,7 @@ body {
 
   --background-primary: #{$backgroundPrimary};
   --background-secondary: #{$backgroundSecondary};
+  --background-tetriary: #{$backgroundTertiary};
   --text-color: #{$textColor};
   --shadow-color: #{$shadowColor};
 

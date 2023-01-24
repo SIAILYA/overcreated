@@ -1,19 +1,19 @@
 <template>
-  <div
+  <button
       :class="selected && 'selected'"
-      :style="'border-color: ' + color + '; background: ' + color"
+      :style="'border-color: ' + color + '; background: ' + color + '; color: ' + color"
       class="pill__wrapper"
-      @click="emit('click')"
+      @click="emit('update:selected', !selected)"
   >
-    <div :style="'color:' + getContrastColor(color)" class="pill__inner">
+    <span :style="'color:' + getContrastColor(color)" class="pill__inner">
       <slot></slot>
-    </div>
-    <div class="pill__back"></div>
-  </div>
+    </span>
+    <span class="pill__back"></span>
+  </button>
 </template>
 
 <script lang="ts" setup>
-const emit = defineEmits(['click'])
+const emit = defineEmits(['click', 'update:selected'])
 
 interface Props {
   color: string;
@@ -30,7 +30,7 @@ const {color, selected} = toRefs(props)
 .pill__wrapper {
   position: relative;
   border-radius: 10px;
-  border-width: 2px;
+  border-width: 1px;
   width: fit-content;
   padding: 6px 12px;
   border-style: solid;
@@ -74,7 +74,7 @@ const {color, selected} = toRefs(props)
   }
 
   &:hover {
-    box-shadow: 0 0 10px var(--shadow-color);
+    box-shadow: 0 0 10px currentColor;
   }
 
   .pill__back {

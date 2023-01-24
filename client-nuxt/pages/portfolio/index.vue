@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <main class="container">
     <div class="text-center">
       <h2 class="page-header">Портфолио</h2>
       <article>
@@ -7,12 +7,46 @@
       </article>
     </div>
 
-    <section class="container mt-8 md:mt-12 lg:mt-14 flex justify-center gap-2">
-      <ovc-pill color="#FFFFFF" :selected="false" v-for="pt in projectTopics">
-        {{ pt.title }}
-      </ovc-pill>
+    <section class="container text-center">
+      <div class="mt-8 md:mt-12 lg:mt-14 flex flex-wrap justify-center gap-2">
+        <ovc-pill
+            v-for="pt in projectTopics"
+            v-model:selected="pt.selected"
+            :color="pt.color"
+        >
+          {{ pt.title }}
+        </ovc-pill>
+        <button
+            class="clear-topics flex items-center justify-center"
+            @click="deselectAllTopics"
+        >
+          <svg viewBox="0 0 32 32" width="24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M24 9.4L22.6 8L16 14.6L9.4 8L8 9.4l6.6 6.6L8 22.6L9.4 24l6.6-6.6l6.6 6.6l1.4-1.4l-6.6-6.6L24 9.4z"
+                  fill="currentColor"></path>
+          </svg>
+        </button>
+      </div>
+
+      <button class="filters-button mt-3 px-2 py-1 flex items-center mx-auto">
+        <svg class="mr-2" viewBox="0 0 16 16" width="16" xmlns="http://www.w3.org/2000/svg">
+          <g fill="none">
+            <path
+                d="M2 3.5a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5zm2 4a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm2 4a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5z"
+                fill="currentColor"></path>
+          </g>
+        </svg>
+        <span>Ещё фильтры</span>
+      </button>
+
+      <div>
+        <!--        <ovc-select-->
+        <!--            :options="[]"-->
+        <!--        >-->
+
+        <!--        </ovc-select>-->
+      </div>
     </section>
-  </div>
+  </main>
 </template>
 
 <script lang="ts" setup>
@@ -28,11 +62,29 @@ useHead({
   title: "Портфолио | samolyev"
 })
 
-const {fetchProjectTopics} = usePortfolioStore()
+const {fetchProjectTopics, deselectAllTopics} = usePortfolioStore()
 const {projectTopics} = storeToRefs(usePortfolioStore())
-fetchProjectTopics()
+
+useAsyncData(async () => {
+  await fetchProjectTopics()
+})
+
 </script>
 
 <style scoped>
+.clear-topics {
+  width: 36px;
+  height: 36px;
+  aspect-ratio: 1;
+  border: 1px solid var(--text-color);
+  border-radius: 10px;
+  color: var(--text-color);
+  background: var(--background-tetriary);
+  transition: all .3s ease;
+}
 
+.filters-button {
+  color: var(--text-color);
+  opacity: 0.7;
+}
 </style>
