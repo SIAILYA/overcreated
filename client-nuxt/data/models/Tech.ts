@@ -5,20 +5,17 @@ import {Column} from "~/data/decorators/Column";
 import {Entity} from "~/data/decorators/Entity";
 
 @Entity()
-export class ProjectTopic extends FetchModel {
-    api = new ClientAPI('/portfolio/projectTopics')
+export class Tech extends FetchModel {
+    api = new ClientAPI('/portfolio/techs')
 
     @Column()
     title!: string
 
     @Column()
-    color!: string
-
-    @Column({excludeFromJSON: true, defaultValue: true})
-    selected: boolean = true
+    slug!: string
 
     static async all() {
-        return (await ProjectTopic.$api.all())
-            .map((t: ProjectTopic) => new ProjectTopic().fromJSON(t))
+        return (await Tech.$api.all())
+            .map((t: Tech) => new Tech().fromJSON(t))
     }
 }

@@ -21,7 +21,7 @@ export abstract class BaseModel {
 
             const _propMetadata = __metadata[thisProp]
             const _propType = _propMetadata?.type
-            const _propValue = (unknownJson as any)[thisProp]
+            const _propValue = (unknownJson as any)[thisProp] ?? _propMetadata?.defaultValue
 
             if (_propType) {
                 if (Array.isArray(_propValue)) {

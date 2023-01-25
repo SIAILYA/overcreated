@@ -10,11 +10,11 @@
     <section class="container text-center">
       <div class="mt-8 md:mt-12 lg:mt-14 flex flex-wrap justify-center gap-2">
         <ovc-pill
-            v-for="pt in projectTopics"
-            v-model:selected="pt.selected"
-            :color="pt.color"
+            v-for="projectTopic in projectTopics"
+            v-model:selected="projectTopic.selected"
+            :color="projectTopic.color"
         >
-          {{ pt.title }}
+          {{ projectTopic.title }}
         </ovc-pill>
         <button
             class="clear-topics flex items-center justify-center"
@@ -25,26 +25,25 @@
                   fill="currentColor"></path>
           </svg>
         </button>
+        <ovc-help
+            class="my-auto"
+            align="end"
+            width="200px"
+            text="Выбирайте топики, чтобы отфильтровать проекты. Нажмите на крестик, чтобы снять выбор со всех топиков"
+        />
       </div>
 
-      <button class="filters-button mt-3 px-2 py-1 flex items-center mx-auto">
-        <svg class="mr-2" viewBox="0 0 16 16" width="16" xmlns="http://www.w3.org/2000/svg">
-          <g fill="none">
-            <path
-                d="M2 3.5a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5zm2 4a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm2 4a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5z"
-                fill="currentColor"></path>
-          </g>
-        </svg>
-        <span>Ещё фильтры</span>
-      </button>
-
-      <div>
-        <!--        <ovc-select-->
-        <!--            :options="[]"-->
-        <!--        >-->
-
-        <!--        </ovc-select>-->
-      </div>
+<!--      TODO: Дополнительные фильтры-->
+<!--      <button class="filters-button mt-3 px-2 py-1 flex items-center mx-auto" >-->
+<!--        <svg class="mr-2" viewBox="0 0 16 16" width="16" xmlns="http://www.w3.org/2000/svg">-->
+<!--          <g fill="none">-->
+<!--            <path-->
+<!--                d="M2 3.5a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5zm2 4a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm2 4a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5z"-->
+<!--                fill="currentColor"></path>-->
+<!--          </g>-->
+<!--        </svg>-->
+<!--        <span>Ещё фильтры</span>-->
+<!--      </button>-->
     </section>
   </main>
 </template>
@@ -62,13 +61,15 @@ useHead({
   title: "Портфолио | samolyev"
 })
 
-const {fetchProjectTopics, deselectAllTopics} = usePortfolioStore()
-const {projectTopics} = storeToRefs(usePortfolioStore())
+const {fetchProjectTopics, deselectAllTopics, fetchTechs} = usePortfolioStore()
+const {projectTopics, techs} = storeToRefs(usePortfolioStore())
 
 useAsyncData(async () => {
-  await fetchProjectTopics()
+  await Promise.all([
+    fetchProjectTopics(),
+    fetchTechs()
+  ])
 })
-
 </script>
 
 <style scoped>

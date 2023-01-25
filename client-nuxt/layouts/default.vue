@@ -2,7 +2,7 @@
   <div>
     <ovc-header/>
     <transition name="fade" appear>
-      <div class="view mt-12">
+      <div class="view mt-8 md:mt-12">
         <slot></slot>
       </div>
     </transition>
