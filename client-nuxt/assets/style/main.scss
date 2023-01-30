@@ -11,19 +11,21 @@ body {
   $backgroundPrimary: #151515;
   $backgroundSecondary: #2c2c2c;
   $backgroundTertiary: #2c2c2c;
-  $textColor: #FFF;
+  $textColor: rgb(255, 255, 255);
   $shadowColor: rgba(255, 255, 255, .3);
 
   $accentOrange: #ff8800;
   $accentGreen: #00FF57;
   $accentBlue: #00BDC9;
   $accentPurple: #df006a;
+  $borderColor: rgba($textColor, .25);
 
   --background-primary: #{$backgroundPrimary};
   --background-tetriary: #{$backgroundTertiary};
   --background-secondary: #{$backgroundSecondary};
   --text-color: #{$textColor};
   --shadow-color: #{$shadowColor};
+  --border-color: #{$borderColor};
 
   --accent-orange: #{$accentOrange};
   --accent-green: #{$accentGreen};
@@ -39,19 +41,21 @@ body {
   $backgroundPrimary: #f0f0f0;
   $backgroundSecondary: #ffffff;
   $backgroundTertiary: #f0f0f0;
-  $textColor: #1a1a1a;
+  $textColor: rgb(26, 26, 26);
   $shadowColor: rgba(0, 0, 0, .15);
 
   $accentOrange: #c92500;
   $accentGreen: #08b200;
   $accentBlue: #00BDC9;
   $accentPurple: #C7005F;
+  $borderColor: rgba($textColor, .25);
 
   --background-primary: #{$backgroundPrimary};
   --background-secondary: #{$backgroundSecondary};
   --background-tetriary: #{$backgroundTertiary};
   --text-color: #{$textColor};
   --shadow-color: #{$shadowColor};
+  --border-color: #{$borderColor};
 
   --accent-orange: #{$accentOrange};
   --accent-green: #{$accentGreen};

@@ -7,7 +7,7 @@
       </article>
     </div>
 
-    <section class="container text-center">
+    <section class="container text-center" role="search">
       <div class="mt-8 md:mt-12 lg:mt-14 flex flex-wrap justify-center gap-2">
         <ovc-pill
             v-for="projectTopic in projectTopics"
@@ -45,12 +45,23 @@
 <!--        <span>Ещё фильтры</span>-->
 <!--      </button>-->
     </section>
+
+    <section class="container mt-5 grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-3">
+      <transition-group>
+        <ovc-project-card
+            v-for="project in projects"
+            :project-item="project"
+            :key="project.id"
+        />
+      </transition-group>
+    </section>
   </main>
 </template>
 
 <script lang="ts" setup>
 import {usePortfolioStore} from "~/stores/portfolioStore";
 import {storeToRefs} from "pinia";
+import OvcProjectCard from "~/components/ovc-project-card.vue";
 
 definePageMeta({
   middleware: "accent-color-client",

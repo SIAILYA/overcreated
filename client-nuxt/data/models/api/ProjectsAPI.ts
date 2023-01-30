@@ -3,6 +3,6 @@ import {useOvcApi} from "~/hooks/useOvcApi";
 
 export class ProjectsAPI extends ClientAPI {
     async getPreviews() {
-        return await useOvcApi(this.path + '/getPreviews', {method: 'POST'})
+        return await useOvcApi(this.path + '/getPreviews', {method: 'POST', body: {order: {order: 'ASC'}}})
     }
 }
