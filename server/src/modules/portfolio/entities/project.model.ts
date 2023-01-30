@@ -1,31 +1,30 @@
 import {Column, Entity, JoinTable, ManyToMany} from "typeorm";
 import {PictureModel} from "../../common/pictures/picture.model";
-import {Field, ObjectType} from "@nestjs/graphql";
+import {ObjectType} from "@nestjs/graphql";
 import {ProjectTopicModel} from "./projectTopic.model";
 import {TechModel} from "./tech.model";
 import {OrderableModel} from "../../../common/base/orderable.model";
+import {Expose} from "class-transformer";
 
 @ObjectType({description: 'Project'})
 @Entity({name: 'projects'})
 export class ProjectModel extends OrderableModel {
-    @Field(type => String)
+    @Expose({groups: ['preview']})
     @Column({type: 'varchar', length: 255, nullable: false})
     title!: string
 
-    @Field()
+    @Expose({groups: ['preview']})
     @Column({type: 'varchar', length: 255, nullable: false})
     slug!: string
 
-    @Field()
+    @Expose({groups: ['preview']})
     @Column({type: 'varchar', length: 7, nullable: false})
     color!: string
 
-    @Field()
     @Column({type: 'boolean', default: false})
     isVisible: boolean
 
-    // @Field(type => [ProjectTopicModel])
-    @ManyToMany(type => ProjectTopicModel, {eager: true})
+    @Expose({groups: ['preview']})
     @JoinTable({
         joinColumn: {name: 'project_id'},
         inverseJoinColumn: {name: 'project_topic_id'},
@@ -37,15 +36,13 @@ export class ProjectModel extends OrderableModel {
     @JoinTable({joinColumn: {name: 'project_id'}, inverseJoinColumn: {name: 'tech_id'}, name: 'projects_to_techs'})
     techs: TechModel[]
 
-    @Field()
+    @Expose({groups: ['preview']})
     @Column({type: 'varchar', length: 1024, nullable: false})
     description!: string
 
-    @Field({nullable: true})
     @Column({type: 'text', nullable: true})
     fullDescription?: string
 
-    @Field(type => [PictureModel], {nullable: true})
     @ManyToMany(() => PictureModel, {onDelete: "NO ACTION", eager: true})
     @JoinTable({
         joinColumn: {name: 'project_id'},
@@ -54,19 +51,15 @@ export class ProjectModel extends OrderableModel {
     })
     pictures?: PictureModel[]
 
-    @Field({nullable: true})
     @Column({type: 'varchar', length: 4096, nullable: true})
     link?: string
 
-    @Field({nullable: true})
     @Column({type: 'varchar', length: 4096, nullable: true})
     github?: string
 
-    @Field({nullable: true})
     @Column({type: 'varchar', length: 4096, nullable: true})
     behance?: string
 
-    @Field({nullable: true})
     @Column({type: 'integer', nullable: true})
     developTime?: number
 }

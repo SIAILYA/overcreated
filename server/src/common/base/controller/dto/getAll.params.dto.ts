@@ -1,4 +1,4 @@
-export class GetAllParamsDto {
+export class  GetAllParamsDto {
     limit?: number;
     offset?: number;
     order?: { [key: string]: "ASC" | "DESC" };
@@ -8,7 +8,7 @@ export class GetAllParamsDto {
 export class GetAllParamsOrderable extends GetAllParamsDto {
     order?: { [key: string]: "ASC" | "DESC" } = {order: "ASC"};
 
-    constructor() {
+    constructor() { 
         super();
         this.order = {order: "ASC"};
     }

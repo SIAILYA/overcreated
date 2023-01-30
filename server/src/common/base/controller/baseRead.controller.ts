@@ -13,6 +13,7 @@ export class BaseReadController<M extends BaseModel> implements IReadController<
     @SerializeOptions({
         strategy: 'exposeAll',
         excludePrefixes: ['_'],
+        groups: ['client']
     })
     @Post('/getAll')
     async getAll(@Body() getAllParams?: GetAllParamsDto): Promise<M[]> {
@@ -23,6 +24,7 @@ export class BaseReadController<M extends BaseModel> implements IReadController<
     @SerializeOptions({
         strategy: 'exposeAll',
         excludePrefixes: ['_'],
+        groups: ['client']
     })
     @Get('/getById/:id')
     async get(@Param('id') id: string): Promise<M> {
