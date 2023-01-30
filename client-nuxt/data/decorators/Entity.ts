@@ -8,7 +8,7 @@ type EntityOptions = {
 export const Entity = (options: EntityOptions = {disableApi: false}) => {
     return (target: any) => {
         if (!options.disableApi) {
-            target.$api = new ClientAPI(new target().api?.path || `/${target.name.toLowerCase()}`)
+            target.$api = new target().api
         } else {
             target.$api = null
         }

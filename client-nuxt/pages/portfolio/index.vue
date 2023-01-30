@@ -61,14 +61,17 @@ useHead({
   title: "Портфолио | samolyev"
 })
 
-const {fetchProjectTopics, deselectAllTopics, fetchTechs} = usePortfolioStore()
-const {projectTopics, techs} = storeToRefs(usePortfolioStore())
+const {fetchProjectTopics, deselectAllTopics, fetchTechs, fetchProjects} = usePortfolioStore()
+const {projectTopics, techs, projects} = storeToRefs(usePortfolioStore())
 
 useAsyncData(async () => {
   await Promise.all([
+    fetchProjects(),
     fetchProjectTopics(),
-    fetchTechs()
+    fetchTechs(),
   ])
+
+  console.log(projects.value)
 })
 </script>
 

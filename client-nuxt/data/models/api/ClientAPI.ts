@@ -4,7 +4,6 @@ export class ClientAPI {
     path!: string
     methods: string[] = ['all']
 
-
     constructor (path: string) {
         this.path = path
     }
