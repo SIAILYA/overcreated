@@ -1,6 +1,6 @@
 import {Column, Entity, JoinTable, ManyToMany} from "typeorm";
 import {PictureModel} from "../../common/pictures/picture.model";
-import {ObjectType} from "@nestjs/graphql";
+import {Field, ObjectType} from "@nestjs/graphql";
 import {ProjectTopicModel} from "./projectTopic.model";
 import {TechModel} from "./tech.model";
 import {OrderableModel} from "../../../common/base/orderable.model";
@@ -25,6 +25,7 @@ export class ProjectModel extends OrderableModel {
     isVisible: boolean
 
     @Expose({groups: ['preview']})
+    @ManyToMany(type => ProjectTopicModel, {eager: true})
     @JoinTable({
         joinColumn: {name: 'project_id'},
         inverseJoinColumn: {name: 'project_topic_id'},
