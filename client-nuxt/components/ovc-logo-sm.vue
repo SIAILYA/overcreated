@@ -38,7 +38,7 @@ const text = ref<HTMLElement>()
   h3 {
     user-select: none;
     font-size: 24px;
-    line-height: 1;
+    line-height: 1.1;
     font-weight: 450;
 
     span {

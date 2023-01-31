@@ -1,6 +1,6 @@
 <template>
-  <header :class="{'scrolled': isScrolled}" class="ovc-header mx-auto">
-    <div class="ovc-header__menu z-10 fixed w-full py-3.5">
+  <header :class="{'scrolled': isScrolled}" class="z-20 ovc-header mx-auto">
+    <div class="ovc-header__menu z-20 fixed w-full py-3.5">
       <client-only>
         <transition appear name="slide-down">
           <div class="container flex justify-between relative">

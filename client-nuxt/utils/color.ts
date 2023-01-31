@@ -17,3 +17,27 @@ export const getContrastColor = (color: string) => {
     }
     return 'black'
 }
+
+export const makeMoreContrast = (theme: string, color: string) => {
+    const rgb = HexToRgb(color)
+
+    if (rgb) {
+        const centerDelta = (Math.abs(128 - rgb.r) + Math.abs(128 - rgb.g) + Math.abs(128 - rgb.b)) / 3
+
+        if (rgb?.r + rgb?.g + rgb?.b > 382 && theme === 'light') {
+            rgb.r -= centerDelta
+            rgb.g -= centerDelta
+            rgb.b -= centerDelta
+        }
+
+        if (rgb?.r + rgb?.g + rgb?.b < 382 && theme === 'dark') {
+            rgb.r += centerDelta
+            rgb.g += centerDelta
+            rgb.b += centerDelta
+        }
+
+        return `rgb(${rgb.r}, ${rgb.g}, ${rgb.b})`
+    }
+
+    return color
+}

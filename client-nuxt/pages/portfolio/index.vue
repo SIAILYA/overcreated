@@ -1,5 +1,5 @@
 <template>
-  <main class="container">
+  <main class="container md:px-6 lg:px-12">
     <div class="text-center">
       <h2 class="page-header">Портфолио</h2>
       <article>
@@ -7,7 +7,7 @@
       </article>
     </div>
 
-    <section class="container text-center" role="search">
+    <section class="text-center" role="search">
       <div class="mt-8 md:mt-12 lg:mt-14 flex flex-wrap justify-center gap-2">
         <ovc-pill
             v-for="projectTopic in projectTopics"
@@ -46,7 +46,7 @@
 <!--      </button>-->
     </section>
 
-    <section class="container mt-5 grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-3">
+    <section class="mt-8 grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-5 auto-rows-fr">
       <transition-group>
         <ovc-project-card
             v-for="project in projects"
