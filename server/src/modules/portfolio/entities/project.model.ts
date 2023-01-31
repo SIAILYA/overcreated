@@ -44,7 +44,7 @@ export class ProjectModel extends OrderableModel {
     @Column({type: 'text', nullable: true})
     fullDescription?: string
 
-    @ManyToMany(() => PictureModel, {onDelete: "NO ACTION", eager: true})
+    @ManyToMany(() => PictureModel, {onDelete: "CASCADE", eager: true})
     @JoinTable({
         joinColumn: {name: 'project_id'},
         inverseJoinColumn: {name: 'picture_id'},
