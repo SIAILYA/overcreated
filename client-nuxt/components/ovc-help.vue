@@ -37,7 +37,7 @@ const {text} = toRefs(props)
   background: var(--background-secondary);
   position: relative;
   transition: all .3s ease;
-  z-index: 100;
+  z-index: 29;
 
   &::after {
     content: attr(data-popup);

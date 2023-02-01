@@ -31,14 +31,14 @@
     <transition name="fade">
       <div
           v-if="isMobileMenuOpen"
-          class="menu-backdrop bg-black bg-opacity-40 fixed z-10 w-full h-full transition"
+          class="menu-backdrop bg-black bg-opacity-40 fixed z-30 w-full h-full transition"
           @click="onMobileMenuClose"
       />
     </transition>
 
     <div
         :class="{'open': isMobileMenuOpen}"
-        class="mobile-menu flex flex-col md:hidden fixed h-full z-20 px-6 pt-4"
+        class="mobile-menu flex flex-col md:hidden fixed h-full z-40 px-6 pt-4"
     >
       <div class="flex justify-between">
         <theme-switcher btn/>
