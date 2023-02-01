@@ -23,6 +23,9 @@ export class Project extends FetchModel {
     @Column()
     description!: string
 
+    @Column()
+    developTime?: number
+
     @Column({type: [ProjectTopic]})
     topics?: ProjectTopic[]
 
@@ -41,5 +44,20 @@ export class Project extends FetchModel {
     static async previews() {
         return (await Project.$api.getPreviews())
             .map((t: Project) => new Project().fromJSON(t))
+    }
+
+    get plain_techs() {
+        return this.techs?.map(t => t.title).join(', ') || ''
+    }
+
+    get beautiful_link() {
+        if (!this.link) {
+            return ''
+        }
+
+        const _t = this.link.replaceAll(new RegExp('^https?://', 'g'), '').trim()
+        if (_t[_t.length - 1] === '/') {
+            return _t.slice(0, _t.length - 1)
+        }
     }
 }

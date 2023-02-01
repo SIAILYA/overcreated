@@ -33,6 +33,7 @@ export class ProjectModel extends OrderableModel {
     })
     topics?: ProjectTopicModel[]
 
+    @Expose({groups: ['preview']})
     @ManyToMany(type => TechModel, {eager: true})
     @JoinTable({joinColumn: {name: 'project_id'}, inverseJoinColumn: {name: 'tech_id'}, name: 'projects_to_techs'})
     techs: TechModel[]
@@ -52,6 +53,7 @@ export class ProjectModel extends OrderableModel {
     })
     pictures?: PictureModel[]
 
+    @Expose({groups: ['preview']})
     @Column({type: 'varchar', length: 4096, nullable: true})
     link?: string
 
@@ -61,6 +63,7 @@ export class ProjectModel extends OrderableModel {
     @Column({type: 'varchar', length: 4096, nullable: true})
     behance?: string
 
+    @Expose({groups: ['preview']})
     @Column({type: 'integer', nullable: true})
     developTime?: number
 }
