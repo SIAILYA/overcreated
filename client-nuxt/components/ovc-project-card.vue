@@ -32,11 +32,18 @@
       </div>
     </section>
 
-    <div class="flex justify-center gap-1">
-      <span
-          v-for="topic in projectItem.topics"
-          :style="{color: topic.color}" class="w-2 aspect-square bg-current rounded-full"
-      ></span>
+    <div class="flex">
+      <div class="flex gap-1 mt-auto">
+        <span
+            v-for="topic in projectItem.topics"
+            :style="{color: topic.color}" class="w-2 aspect-square bg-current rounded-full"
+        ></span>
+      </div>
+
+      <div class="flex ml-auto gap-1 opacity-40" :style="{color: makeMoreContrast(theme.value, projectItem.color)}">
+        <icon-github/>
+        <icon-behance/>
+      </div>
     </div>
   </nuxt-link>
 </template>
@@ -46,6 +53,8 @@ import {Project} from "~/data/models/Project";
 import {useThemeStore} from "~/stores/themeStore";
 import {makeMoreContrast} from "~/utils/color";
 import IconTime from "~/components/icons/time.vue";
+import IconGithub from "~/components/icons/github.vue";
+import IconBehance from "~/components/icons/behance.vue";
 
 interface Props {
   projectItem: Project

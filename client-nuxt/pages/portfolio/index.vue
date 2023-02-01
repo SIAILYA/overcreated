@@ -26,32 +26,32 @@
           </svg>
         </button>
         <ovc-help
-            class="my-auto"
             align="end"
-            width="200px"
+            class="my-auto"
             text="Выбирайте топики, чтобы отфильтровать проекты. Нажмите на крестик, чтобы снять выбор со всех топиков"
+            width="200px"
         />
       </div>
 
-<!--      TODO: Дополнительные фильтры-->
-<!--      <button class="filters-button mt-3 px-2 py-1 flex items-center mx-auto" >-->
-<!--        <svg class="mr-2" viewBox="0 0 16 16" width="16" xmlns="http://www.w3.org/2000/svg">-->
-<!--          <g fill="none">-->
-<!--            <path-->
-<!--                d="M2 3.5a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5zm2 4a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm2 4a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5z"-->
-<!--                fill="currentColor"></path>-->
-<!--          </g>-->
-<!--        </svg>-->
-<!--        <span>Ещё фильтры</span>-->
-<!--      </button>-->
+      <!--      TODO: Дополнительные фильтры-->
+      <!--      <button class="filters-button mt-3 px-2 py-1 flex items-center mx-auto" >-->
+      <!--        <svg class="mr-2" viewBox="0 0 16 16" width="16" xmlns="http://www.w3.org/2000/svg">-->
+      <!--          <g fill="none">-->
+      <!--            <path-->
+      <!--                d="M2 3.5a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5zm2 4a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm2 4a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5z"-->
+      <!--                fill="currentColor"></path>-->
+      <!--          </g>-->
+      <!--        </svg>-->
+      <!--        <span>Ещё фильтры</span>-->
+      <!--      </button>-->
     </section>
 
     <section class="mt-8 grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-5 auto-rows-fr">
       <transition-group>
         <ovc-project-card
             v-for="project in projects"
-            :project-item="project"
             :key="project.id"
+            :project-item="project"
         />
       </transition-group>
     </section>
@@ -81,8 +81,6 @@ useAsyncData(async () => {
     fetchProjectTopics(),
     fetchTechs(),
   ])
-
-  console.log(projects.value)
 })
 </script>
 
