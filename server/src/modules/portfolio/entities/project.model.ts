@@ -57,9 +57,11 @@ export class ProjectModel extends OrderableModel {
     @Column({type: 'varchar', length: 4096, nullable: true})
     link?: string
 
+    @Expose({groups: ['preview']})
     @Column({type: 'varchar', length: 4096, nullable: true})
     github?: string
 
+    @Expose({groups: ['preview']})
     @Column({type: 'varchar', length: 4096, nullable: true})
     behance?: string
 

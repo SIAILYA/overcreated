@@ -41,8 +41,8 @@
       </div>
 
       <div class="flex ml-auto gap-1 opacity-40" :style="{color: makeMoreContrast(theme.value, projectItem.color)}">
-        <icon-github/>
-        <icon-behance/>
+        <icon-github v-if="projectItem.github"/>
+        <icon-behance v-if="projectItem.behance"/>
       </div>
     </div>
   </nuxt-link>
