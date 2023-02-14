@@ -12,6 +12,7 @@
         <ovc-pill
             v-for="projectTopic in projectTopics"
             v-model:selected="projectTopic.selected"
+            @update:selected="onUpdateProjectTopics"
             :color="projectTopic.color"
         >
           {{ projectTopic.title }}
@@ -74,6 +75,10 @@ useHead({
 
 const {fetchProjectTopics, deselectAllTopics, fetchTechs, fetchProjects} = usePortfolioStore()
 const {projectTopics, techs, projects} = storeToRefs(usePortfolioStore())
+
+const onUpdateProjectTopics = () => {
+  console.log(usePortfolioStore().selectedTopics)
+}
 
 useAsyncData(async () => {
   await Promise.all([

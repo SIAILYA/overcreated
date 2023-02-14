@@ -8,7 +8,6 @@ export const usePortfolioStore = defineStore("portfolio", {
         projectTopics: [] as ProjectTopic[],
         techs: [] as Tech[],
         projects: [] as Project[],
-        selectedTechs: [] as Tech[],
     }),
     actions: {
         async fetchProjectTopics() {
@@ -25,11 +24,8 @@ export const usePortfolioStore = defineStore("portfolio", {
         }
     },
     getters: {
-        selectTechs(state) {
-            return this.techs.map(t => ({
-                label: t.title,
-                value: t.slug
-            }))
+        selectedTopics(state) {
+            return this.projectTopics.filter(p => p.selected)
         }
     }
 })
