@@ -1,4 +1,4 @@
-import {Controller, Post, Req, UploadedFiles, UseGuards, UseInterceptors} from "@nestjs/common";
+import {Controller, Post, UploadedFiles, UseGuards, UseInterceptors} from "@nestjs/common";
 import {FilesInterceptor} from "@nestjs/platform-express";
 import {diskStorage} from "multer";
 import {v4} from "uuid";
@@ -31,7 +31,7 @@ export class UploadController {
             }
         })
     }))
-    async upload(@UploadedFiles() files: Array<Express.Multer.File>, @Req() req: Request) {
+    async upload(@UploadedFiles() files: Array<Express.Multer.File>) {
         return await Promise.all(files.map(async file => await this.uploadService.savePicture(file)))
     }
 }
