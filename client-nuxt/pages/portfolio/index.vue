@@ -12,43 +12,32 @@
         <ovc-pill
             v-for="projectTopic in projectTopics"
             v-model:selected="projectTopic.selected"
-            @update:selected="onUpdateProjectTopics"
+            @update:selected="fetchProjectsBySelectedTopics"
             :color="projectTopic.color"
         >
           {{ projectTopic.title }}
         </ovc-pill>
         <button
             class="clear-topics flex items-center justify-center"
-            @click="deselectAllTopics"
+            @click="toggleAllTopics"
         >
-          <svg viewBox="0 0 32 32" width="24" xmlns="http://www.w3.org/2000/svg">
-            <path d="M24 9.4L22.6 8L16 14.6L9.4 8L8 9.4l6.6 6.6L8 22.6L9.4 24l6.6-6.6l6.6 6.6l1.4-1.4l-6.6-6.6L24 9.4z"
-                  fill="currentColor"></path>
-          </svg>
+          <close-add
+              :rotate="!portfolioStore.isAnyTopicSelected"
+          />
         </button>
         <ovc-help
             align="end"
             class="my-auto"
-            text="Выбирайте топики, чтобы отфильтровать проекты. Нажмите на крестик, чтобы снять выбор со всех топиков"
+            text="Выбирайте топики, чтобы отфильтровать проекты. Крестик сбрасывает все фильтры. Плюсик включает все топики"
             width="200px"
         />
       </div>
 
       <!--      TODO: Дополнительные фильтры-->
-      <!--      <button class="filters-button mt-3 px-2 py-1 flex items-center mx-auto" >-->
-      <!--        <svg class="mr-2" viewBox="0 0 16 16" width="16" xmlns="http://www.w3.org/2000/svg">-->
-      <!--          <g fill="none">-->
-      <!--            <path-->
-      <!--                d="M2 3.5a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5zm2 4a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm2 4a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5z"-->
-      <!--                fill="currentColor"></path>-->
-      <!--          </g>-->
-      <!--        </svg>-->
-      <!--        <span>Ещё фильтры</span>-->
-      <!--      </button>-->
     </section>
 
     <section class="mt-8 grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-5 auto-rows-fr">
-      <transition-group>
+      <transition-group name="projects-list">
         <ovc-project-card
             v-for="project in projects"
             :key="project.id"
@@ -63,6 +52,7 @@
 import {usePortfolioStore} from "~/stores/portfolioStore";
 import {storeToRefs} from "pinia";
 import OvcProjectCard from "~/components/ovc-project-card.vue";
+import CloseAdd from "~/components/icons/close-add.vue";
 
 definePageMeta({
   middleware: "accent-color-client",
@@ -73,20 +63,38 @@ useHead({
   title: "Портфолио | samolyev"
 })
 
-const {fetchProjectTopics, deselectAllTopics, fetchTechs, fetchProjects} = usePortfolioStore()
+const {fetchProjectTopics, selectAllTopics, deselectAllTopics,
+  fetchTechs, fetchProjectsByTopics} = usePortfolioStore()
 const {projectTopics, techs, projects} = storeToRefs(usePortfolioStore())
+const portfolioStore = usePortfolioStore()
 
-const onUpdateProjectTopics = () => {
-  console.log(usePortfolioStore().selectedTopics)
+const toggleAllTopics = () => {
+  if (portfolioStore.isAnyTopicSelected) {
+    deselectAllTopics()
+  } else {
+    selectAllTopics()
+  }
 }
 
-useAsyncData(async () => {
-  await Promise.all([
-    fetchProjects(),
-    fetchProjectTopics(),
-    fetchTechs(),
-  ])
+const selectedTopics = computed(() => {
+  return projectTopics.value.filter(topic => topic.selected)
 })
+
+const fetchProjectsBySelectedTopics = async () => {
+  const _ = await fetchProjectsByTopics(selectedTopics.value)
+}
+
+watch(selectedTopics, async () => {
+  console.log("selectedTopics changed")
+  await fetchProjectsBySelectedTopics()
+})
+
+await fetchProjectTopics()
+
+await Promise.all([
+  fetchProjectsBySelectedTopics(),
+  fetchTechs(),
+])
 </script>
 
 <style scoped>

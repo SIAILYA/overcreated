@@ -5,4 +5,8 @@ export class ProjectsAPI extends ClientAPI {
     async getPreviews() {
         return await useOvcApi(this.path + '/getPreviews', {method: 'POST', body: {order: {order: 'ASC'}}})
     }
+
+    async getPreviewsByTopics(projectTopics: any[]) {
+        return await useOvcApi(this.path + '/getPreviewsByTopics', {method: 'POST', body: {topics: projectTopics, order: {order: 'ASC'}}})
+    }
 }

@@ -138,3 +138,37 @@
 .line-grow-leave-from {
   transform: scaleX(100%);
 }
+
+.projects-list-enter, .projects-list-leave-to {
+  opacity: 0;
+  transform: translateY(10vh);
+  transition: all .5s ease;
+  filter: blur(12px);
+}
+
+.projects-list-leave-active {
+  position: absolute;
+  transform: translateY(10vh);
+  opacity: 0;
+  transition: all .5s ease;
+  filter: blur(12px);
+  max-width: 23%;
+}
+
+@media screen and (max-width: 768px) {
+  .projects-list-leave-active {
+    max-width: 90%;
+  }
+}
+
+
+.projects-list-enter-active {
+  transform: translateY(10vh);
+  opacity: 0;
+  transition: all .5s ease;
+  filter: blur(12px);
+}
+
+.projects-list-move {
+  transition: all .5s ease;
+}

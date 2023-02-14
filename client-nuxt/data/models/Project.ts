@@ -46,6 +46,11 @@ export class Project extends FetchModel {
             .map((t: Project) => new Project().fromJSON(t))
     }
 
+    static async previewsByTopics(topics: ProjectTopic[]) {
+        return (await Project.$api.getPreviewsByTopics(topics))
+            .map((t: Project) => new Project().fromJSON(t))
+    }
+
     get plain_techs() {
         return this.techs?.map(t => t.title).join(', ') || ''
     }
