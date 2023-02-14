@@ -19,4 +19,14 @@ export class ProjectsController extends BaseReadController<ProjectModel> {
     async getPreviews(@Body() getProjectPreviewsDto: GetProjectPreviewsBodyDto) {
         return this.projectsService.getAllVisible(getProjectPreviewsDto)
     }
+
+    @UseInterceptors(ClassSerializerInterceptor)
+    @SerializeOptions({
+        strategy: 'excludeAll',
+        groups: ['preview']
+    })
+    @Post('/getPreviewsByTopics')
+    async getPreviewsByTopics(@Body() getProjectPreviewsDto: GetProjectPreviewsBodyDto) {
+        return this.projectsService.getAllVisibleByTopics(getProjectPreviewsDto.topics)
+    }
 }
