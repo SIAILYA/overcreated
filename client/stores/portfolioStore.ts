@@ -22,8 +22,9 @@ export const usePortfolioStore = defineStore("portfolio", {
         async fetchTechs() {
             this.techs = await Tech.all();
         },
-        // DEPRECATED
-        // Теперь везде используется fetchProjectsByTopics
+        /**
+         * @deprecated
+         **/
         async fetchProjects() {
             this.projects = await Project.previews()
         },

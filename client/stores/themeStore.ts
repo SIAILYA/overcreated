@@ -18,7 +18,7 @@ export const useThemeStore = defineStore("theme", {
         },
         setProjectAccentColor(color: string) {
             if (process.client) {
-                document.documentElement.style.setProperty("--accent-project", color)
+                document.body.style.setProperty("--accent-project", color)
             }
         }
     }

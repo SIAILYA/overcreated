@@ -45,6 +45,7 @@
               v-for="project in projects"
               :key="project.id"
               :project-item="project"
+              @click="useThemeStore().setProjectAccentColor(project.color)"
           />
         </transition-group>
       </section>
@@ -65,6 +66,7 @@ import {usePortfolioStore} from "~/stores/portfolioStore";
 import {storeToRefs} from "pinia";
 import OvcProjectCard from "~/components/ovc-project-card.vue";
 import CloseAdd from "~/components/icons/close-add.vue";
+import {useThemeStore} from "~/stores/themeStore";
 
 definePageMeta({
   middleware: "accent-color-client",
@@ -95,7 +97,7 @@ const selectedTopics = computed(() => {
 })
 
 const fetchProjectsBySelectedTopics = async () => {
-  const _ = await fetchProjectsByTopics(selectedTopics.value)
+  await fetchProjectsByTopics(selectedTopics.value)
 }
 
 watch(selectedTopics, async () => {
@@ -103,7 +105,6 @@ watch(selectedTopics, async () => {
 })
 
 await fetchProjectTopics()
-
 await Promise.all([
   fetchProjectsBySelectedTopics(),
   fetchTechs(),
@@ -120,10 +121,5 @@ await Promise.all([
   color: var(--text-color);
   background: var(--background-tetriary);
   transition: all .3s ease;
-}
-
-.filters-button {
-  color: var(--text-color);
-  opacity: 0.7;
 }
 </style>

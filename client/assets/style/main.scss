@@ -19,6 +19,7 @@ body {
   $accentGreen: #00FF57;
   $accentBlue: #00BDC9;
   $accentPurple: #df006a;
+  $accentError: #ca1515;
   $borderColor: rgba($textColor, .25);
 
   --background-primary: #{$backgroundPrimary};
@@ -32,9 +33,10 @@ body {
   --accent-green: #{$accentGreen};
   --accent-blue: #{$accentBlue};
   --accent-purple: #{$accentPurple};
+  --accent-error: #{$accentError};
 
   --accent: #{$textColor};
-  --accent-project: #{$accentGreen};
+  --accent-project: #{$textColor};
 }
 
 // Set light theme colors
@@ -49,6 +51,7 @@ body {
   $accentGreen: #08b200;
   $accentBlue: #00BDC9;
   $accentPurple: #C7005F;
+  $accentError: #ab0707;
   $borderColor: rgba($textColor, .25);
 
   --background-primary: #{$backgroundPrimary};
@@ -62,9 +65,10 @@ body {
   --accent-green: #{$accentGreen};
   --accent-blue: #{$accentBlue};
   --accent-purple: #{$accentPurple};
+  --accent-error: #{$accentError};
 
   --accent: #{$textColor};
-  --accent-project: #{$accentGreen};
+  --accent-project: #{$textColor};
 }
 
 body[variant="light"] {
@@ -127,6 +131,22 @@ body {
 
 .project-variant body {
   --accent: var(--accent-project);
+}
+
+.error-variant body {
+  --accent: var(--accent-error);
+}
+
+.text-accent {
+  color: var(--accent);
+}
+
+.shadow-accent {
+  text-shadow: 0 0 10px var(--accent);
+}
+
+.border-accent {
+  border-color: var(--accent);
 }
 
 .ovc-btn {

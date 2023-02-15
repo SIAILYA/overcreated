@@ -8,9 +8,8 @@ import {ProjectsAPI} from "~/data/models/api/ProjectsAPI";
 
 @Entity()
 export class Project extends FetchModel {
-    api = new ProjectsAPI('/portfolio/projects')
     static $api: ProjectsAPI
-
+    api = new ProjectsAPI('/portfolio/projects')
     @Column()
     title!: string
 
@@ -41,16 +40,6 @@ export class Project extends FetchModel {
     @Column()
     github?: string
 
-    static async previews() {
-        return (await Project.$api.getPreviews())
-            .map((t: Project) => new Project().fromJSON(t))
-    }
-
-    static async previewsByTopics(topics: ProjectTopic[]) {
-        return (await Project.$api.getPreviewsByTopics(topics))
-            .map((t: Project) => new Project().fromJSON(t))
-    }
-
     get plain_techs() {
         return this.techs?.map(t => t.title).join(', ') || ''
     }
@@ -64,5 +53,28 @@ export class Project extends FetchModel {
         if (_t[_t.length - 1] === '/') {
             return _t.slice(0, _t.length - 1)
         }
+    }
+
+    /**
+     * @deprecated
+     * Теперь везде используется previewsByTopics
+     **/
+    static async previews() {
+        return (await Project.$api.getPreviews())
+            .map((t: Project) => new Project().fromJSON(t))
+    }
+
+    static async previewsByTopics(topics: ProjectTopic[]) {
+        return (await Project.$api.getPreviewsByTopics(topics))
+            .map((t: Project) => new Project().fromJSON(t))
+    }
+
+    static async fetchBySlug(slug: string) {
+        const _r = await Project.$api.getProjectBySlug(slug)
+
+        if (!_r) {
+            return null
+        }
+        return new Project().fromJSON(_r)
     }
 }
