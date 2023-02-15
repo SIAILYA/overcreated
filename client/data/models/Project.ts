@@ -10,6 +10,7 @@ import {ProjectsAPI} from "~/data/models/api/ProjectsAPI";
 export class Project extends FetchModel {
     static $api: ProjectsAPI
     api = new ProjectsAPI('/portfolio/projects')
+
     @Column()
     title!: string
 
@@ -39,6 +40,9 @@ export class Project extends FetchModel {
 
     @Column()
     github?: string
+
+    @Column()
+    behance?: string
 
     get plain_techs() {
         return this.techs?.map(t => t.title).join(', ') || ''

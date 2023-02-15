@@ -1,5 +1,5 @@
 <template>
-  <section :style="{'--accent': project?.color}" class="container grid md:grid-cols-2">
+  <section :style="{'--accent': project?.color}" class="container grid md:grid-cols-2 gap-6">
     <section>
       <h1 class="text-5xl font-medium duration-300">
         <span class="text-accent shadow-accent transition-all">{{
@@ -15,8 +15,8 @@
           v-if="project?.link"
           :style="{color: getContrastColor(project?.color)}"
           :to="project?.link"
-          target="_blank"
           class="mt-4 px-3 py-2 block border bg-accent border-accent rounded-lg text-center cursor-pointer transition-all"
+          target="_blank"
       >
         Посетить проект
       </nuxt-link>
@@ -29,6 +29,25 @@
           v-html="marked.parse(project?.fullDescription)"
       />
     </section>
+    <section>
+      <h4 class="text-xl mb-2">Ссылки проекта</h4>
+      <div class="flex gap-3">
+        <nuxt-link v-if="project?.behance" :to="project?.behance">
+          <icon-behance color="var(--accent)" width="48"/>
+        </nuxt-link>
+        <nuxt-link v-if="project?.github" :to="project?.github">
+          <icon-github color="var(--accent)" width="48"/>
+        </nuxt-link>
+      </div>
+
+<!--      <hr class="my-3" style="border-color: var(&#45;&#45;border-color)">-->
+
+      <div class="mt-5">
+        <h4 class="text-xl">Изображения проекта</h4>
+
+
+      </div>
+    </section>
   </section>
 </template>
 
@@ -37,6 +56,8 @@ import {Project} from "~/data/models/Project";
 import {useThemeStore} from "~/stores/themeStore";
 import {VariantEnum} from "~/data/types/theme";
 import {marked} from "marked";
+import IconBehance from "~/components/icons/behance.vue";
+import IconGithub from "~/components/icons/github.vue";
 
 const route = useRoute()
 const project = ref<Project>()
