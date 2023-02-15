@@ -1,5 +1,5 @@
 import {InjectRepository} from "@nestjs/typeorm";
-import {Repository} from "typeorm";
+import {FindOneOptions, Repository} from "typeorm";
 import {Injectable} from "@nestjs/common";
 import {ProjectModel} from "../entities/project.model";
 import {OrderableService} from "../../../common/base/service/orderable.service";
@@ -28,5 +28,16 @@ export class ProjectsService extends OrderableService<ProjectModel> {
             .addOrderBy('topics.id', 'ASC')
 
         return await queryBuilder.getMany()
+    }
+
+    async getProjectBySlug(slug: string): Promise<ProjectModel> {
+        return await this.projectModelRepository
+            .findOne(
+                {
+                    where: {
+                        slug,
+                        isVisible: true
+                    }
+                } as FindOneOptions<ProjectModel>)
     }
 }

@@ -1,5 +1,5 @@
 import {BadGatewayException, Injectable} from '@nestjs/common';
-import {Repository} from 'typeorm';
+import {FindOptionsWhere, Repository} from 'typeorm';
 import {IBaseService} from '../interface/IBase.service';
 import {BaseModel} from '../base.model';
 import {GetAllParamsDto} from "../controller/dto/getAll.params.dto";
@@ -15,20 +15,23 @@ export class BaseService<M extends BaseModel> implements IBaseService<M> {
 
     getAll(getAllParams: GetAllParamsDto): Promise<Array<M>> {
         // @ts-ignore
-        return this.repository.find({where: {}, ...getAllParams});
+        return this.repository.find({where: {}, ...getAllParams} as FindOptionsWhere<M>);
     }
 
     getAllVisible(getAllParams: GetAllParamsDto): Promise<Array<M>> {
+        // FIXME: isVisible нет в базовой модели,
+        //  нужно вынести метод в интерфейс и реализовать в сервисах и контроллерах
         // @ts-ignore
         return this.repository.find({where: {isVisible: true}, ...getAllParams});
     }
 
     get(id: string): Promise<M> {
-        // @ts-ignore
-        return this.repository.findOneBy({id: id});
+        return this.repository.findOneBy({id: id} as FindOptionsWhere<M>);
     }
 
     getVisible(id: string): Promise<M> {
+        // FIXME: isVisible нет в базовой модели,
+        //  нужно вынести метод в интерфейс и реализовать в сервисах и контроллерах
         // @ts-ignore
         return this.repository.findOne({where: {id: id, isVisible: true}});
     }
