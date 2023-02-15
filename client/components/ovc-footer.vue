@@ -1,9 +1,9 @@
 <template>
   <footer class="flex justify-center items-center text-sm opacity-30 pt-3 pb-1">
     <span>overcreated v3, 2022</span>
-    <span class="ml-1">
+    <a href="https://github.com/siailya/overcreated" class="ml-1">
       <icon-github/>
-    </span>
+    </a>
   </footer>
 </template>
 
