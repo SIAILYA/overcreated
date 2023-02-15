@@ -143,21 +143,23 @@
   opacity: 0;
   transform: translateY(10vh);
   transition: all .5s ease;
-  filter: blur(12px);
 }
 
 .projects-list-leave-active {
   position: absolute;
-  transform: translateY(10vh);
+  transform: translateY(10vh) scale(0.01);
   opacity: 0;
   transition: all .5s ease;
-  filter: blur(12px);
-  max-width: 23%;
+  max-width: 20%;
+  margin: 0 auto;
+  left: 40%;
+  top: 0;
 }
 
 @media screen and (max-width: 768px) {
   .projects-list-leave-active {
     max-width: 90%;
+    left: 0;
   }
 }
 
@@ -166,7 +168,6 @@
   transform: translateY(10vh);
   opacity: 0;
   transition: all .5s ease;
-  filter: blur(12px);
 }
 
 .projects-list-move {

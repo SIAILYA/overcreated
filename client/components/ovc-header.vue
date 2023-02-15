@@ -130,11 +130,11 @@ onMounted(() => {
 }
 
 .dark-mode body .mobile-menu {
-  background: rgba(44, 44, 44, .7);
+  background: rgba(44, 44, 44, .85);
 }
 
 .light-mode body .mobile-menu {
-  background: rgba(255, 255, 255, .7);
+  background: rgba(255, 255, 255, .85);
 }
 
 

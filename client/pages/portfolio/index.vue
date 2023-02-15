@@ -12,7 +12,6 @@
         <ovc-pill
             v-for="projectTopic in projectTopics"
             v-model:selected="projectTopic.selected"
-            @update:selected="fetchProjectsBySelectedTopics"
             :color="projectTopic.color"
         >
           {{ projectTopic.title }}
@@ -36,15 +35,28 @@
       <!--      TODO: Дополнительные фильтры-->
     </section>
 
-    <section class="mt-8 grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-5 auto-rows-fr">
-      <transition-group name="projects-list">
-        <ovc-project-card
-            v-for="project in projects"
-            :key="project.id"
-            :project-item="project"
-        />
-      </transition-group>
-    </section>
+    <transition name="page" mode="out-in">
+      <section
+          v-if="projects.length > 0"
+          class="mt-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 auto-rows-fr transition-all relative"
+      >
+        <transition-group name="projects-list">
+          <ovc-project-card
+              v-for="project in projects"
+              :key="project.id"
+              :project-item="project"
+          />
+        </transition-group>
+      </section>
+      <section v-else>
+        <div class="text-center mt-8">
+          <h3 class="text-2xl font-medium">Ничего не нашлось :(</h3>
+          <article class="mt-2">
+            Попробуйте выбрать другие топики
+          </article>
+        </div>
+      </section>
+    </transition>
   </main>
 </template>
 
@@ -63,8 +75,10 @@ useHead({
   title: "Портфолио | samolyev"
 })
 
-const {fetchProjectTopics, selectAllTopics, deselectAllTopics,
-  fetchTechs, fetchProjectsByTopics} = usePortfolioStore()
+const {
+  fetchProjectTopics, selectAllTopics, deselectAllTopics,
+  fetchTechs, fetchProjectsByTopics
+} = usePortfolioStore()
 const {projectTopics, techs, projects} = storeToRefs(usePortfolioStore())
 const portfolioStore = usePortfolioStore()
 
@@ -85,7 +99,6 @@ const fetchProjectsBySelectedTopics = async () => {
 }
 
 watch(selectedTopics, async () => {
-  console.log("selectedTopics changed")
   await fetchProjectsBySelectedTopics()
 })
 
