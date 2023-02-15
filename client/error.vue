@@ -1,6 +1,6 @@
 <template>
   <default>
-    <section class="container error text-center">
+    <section class="container error text-center" style="--accent: var(--accent-error)">
       <h1 class="text-8xl font-medium text-accent shadow-accent transition-all duration-300">{{ error.statusCode }}</h1>
       <h2 class="mt-3">{{ error.message }}</h2>
 
