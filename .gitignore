@@ -37,3 +37,4 @@ package-lock.json
 /admin-panel/.env
 
 server-v3/uploads
+/server/uploads/

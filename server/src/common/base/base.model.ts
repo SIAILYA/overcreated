@@ -4,7 +4,7 @@ import {Expose} from "class-transformer";
 
 @ObjectType({isAbstract: true})
 export class BaseModel {
-    @Expose({groups: ['client', 'preview']})
+    @Expose({groups: ['full', 'preview']})
     @PrimaryGeneratedColumn("uuid")
     public id!: string;
 
