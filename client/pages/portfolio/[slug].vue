@@ -1,5 +1,5 @@
 <template>
-  <section :style="{'--accent': project?.color}" class="container grid md:grid-cols-2 gap-6">
+  <section :style="{'--accent': project?.color}" class="container grid md:grid-cols-2 gap-6 md:gap-12 lg:gap-24">
     <section>
       <h1 class="text-5xl font-medium duration-300">
         <span class="text-accent shadow-accent transition-all">{{
@@ -40,12 +40,36 @@
         </nuxt-link>
       </div>
 
-<!--      <hr class="my-3" style="border-color: var(&#45;&#45;border-color)">-->
-
       <div class="mt-5">
-        <h4 class="text-xl">Изображения проекта</h4>
+        <h4 class="text-xl mb-2">Изображения проекта</h4>
 
+        <div class="grid grid-cols-2 gap-3 transition-all">
+          <img
+              v-for="(picture, index) in project?.pictures?.slice(0, 4)"
+              :class="index === 0 && 'col-span-2'"
+              :src="picture.url"
+              alt=""
+              class="cursor-pointer rounded-lg border border-stone-500 transition-all h-full object-cover"
+              @click="onClickPicture(index)"
+          >
+          <div
+              v-if="project?.pictures?.slice(4)?.length"
+              class="cursor-pointer rounded-lg border border-stone-500 transition-all h-full text-accent text-3xl text-center flex"
+              style="background: var(--background-secondary)"
+              @click="onClickPicture(4)"
+          >
+            <span class="m-auto">
+              +{{ project?.pictures?.slice(4)?.length }}
+            </span>
+          </div>
+        </div>
 
+        <ovc-gallery
+            :show="isGalleryShown"
+            :active-picture="activeGalleryPicture"
+            :pictures="project?.pictures"
+            @close="onCloseGallery"
+        />
       </div>
     </section>
   </section>
@@ -58,9 +82,12 @@ import {VariantEnum} from "~/data/types/theme";
 import {marked} from "marked";
 import IconBehance from "~/components/icons/behance.vue";
 import IconGithub from "~/components/icons/github.vue";
+import {Ref} from "vue";
 
 const route = useRoute()
 const project = ref<Project>()
+const isGalleryShown: Ref<boolean> = ref(false)
+const activeGalleryPicture: Ref<number | null> = ref(null)
 
 definePageMeta({
   middleware: 'accent-color-client',
@@ -73,6 +100,15 @@ useHead({
   }
 })
 
+const onClickPicture = (index: number) => {
+  isGalleryShown.value = true
+  activeGalleryPicture.value = index
+}
+
+const onCloseGallery = () => {
+  isGalleryShown.value = false
+  activeGalleryPicture.value = null
+}
 
 const fetchProject = async () => {
   const res = await Project.fetchBySlug(route.params.slug as string)

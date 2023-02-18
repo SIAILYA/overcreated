@@ -25,7 +25,8 @@ export abstract class BaseModel {
 
             if (_propType) {
                 if (Array.isArray(_propValue)) {
-                    this[thisProp] = _propValue.map((item: any) => new _propType[0]().fromJSON(item)) as any
+                    const _arr = _propValue.map((item: any) => new _propType[0]().fromJSON(item)) as any
+                    this[thisProp] = _arr
                 } else if (_propValue !== undefined && _propType !== String) {
                     this[thisProp] = new _propType(_propValue)
                 }

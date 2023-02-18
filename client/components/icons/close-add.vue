@@ -9,7 +9,7 @@
 
 <script setup lang="ts">
 interface Props {
-  rotate: boolean
+  rotate?: boolean
 }
 
 const props = withDefaults(defineProps<Props>(), {

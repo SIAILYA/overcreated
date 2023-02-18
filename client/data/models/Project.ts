@@ -5,6 +5,7 @@ import {Entity} from "~/data/decorators/Entity";
 import {ProjectTopic} from "~/data/models/ProjectTopic";
 import {Tech} from "~/data/models/Tech";
 import {ProjectsAPI} from "~/data/models/api/ProjectsAPI";
+import {Picture} from "~/data/models/Picture";
 
 @Entity()
 export class Project extends FetchModel {
@@ -26,11 +27,15 @@ export class Project extends FetchModel {
     @Column()
     developTime?: number
 
+    @Column({type: [Picture]})
+    pictures?: Picture[]
+
     @Column({type: [ProjectTopic]})
     topics?: ProjectTopic[]
 
     @Column({type: [Tech]})
     techs?: Tech[]
+
 
     @Column()
     fullDescription?: string
@@ -75,7 +80,6 @@ export class Project extends FetchModel {
 
     static async fetchBySlug(slug: string) {
         const _r = await Project.$api.getProjectBySlug(slug)
-
         if (!_r) {
             return null
         }
