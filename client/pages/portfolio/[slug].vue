@@ -40,7 +40,7 @@
         </nuxt-link>
       </div>
 
-      <div class="mt-5">
+      <div class="mt-5" v-if="project?.pictures?.length">
         <h4 class="text-xl mb-2">Изображения проекта</h4>
 
         <div class="grid grid-cols-2 gap-3 transition-all">
@@ -49,12 +49,12 @@
               :class="index === 0 && 'col-span-2'"
               :src="picture.url"
               alt=""
-              class="cursor-pointer rounded-lg border border-stone-500 transition-all h-full object-cover"
+              class="cursor-pointer picture-card w-full aspect-video rounded-lg border border-stone-500 transition-all h-full object-cover"
               @click="onClickPicture(index)"
           >
           <div
               v-if="project?.pictures?.slice(4)?.length"
-              class="cursor-pointer rounded-lg border border-stone-500 transition-all h-full text-accent text-3xl text-center flex"
+              class="cursor-pointer picture-card w-full aspect-video rounded-lg border border-stone-500 transition-all h-full text-accent text-3xl text-center flex"
               style="background: var(--background-secondary)"
               @click="onClickPicture(4)"
           >
@@ -130,6 +130,11 @@ const fetchProject = async () => {
 await fetchProject()
 </script>
 
-<style scoped>
-
+<style scoped lang="scss">
+.picture-card {
+  &:hover {
+    box-shadow: 0 0 10px 2px var(--shadow-color);
+    transform: scale(1.01);
+  }
+}
 </style>
