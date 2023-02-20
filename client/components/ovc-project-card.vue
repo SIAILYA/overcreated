@@ -15,7 +15,7 @@
 
     <section
         :style="{color: makeMoreContrast(theme.value, projectItem.color)}"
-        class="project-card__properties mb-3"
+        class="project-card__properties mb-3 mt-auto"
     >
       <div class="mb-1.5 w-full flex whitespace-nowrap" v-if="projectItem.techs.length">
         <icons-code/>
@@ -32,7 +32,7 @@
       </div>
     </section>
 
-    <div class="flex">
+    <div class="flex h-[20px]">
       <div class="flex gap-1 mt-auto">
         <span
             v-for="topic in projectItem.topics"
