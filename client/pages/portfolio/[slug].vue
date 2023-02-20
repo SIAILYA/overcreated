@@ -21,7 +21,7 @@
         Посетить проект
       </nuxt-link>
 
-      <hr class="my-3" style="border-color: var(--border-color)">
+      <hr class="my-7" style="border-color: var(--border-color)">
 
       <article
           v-if="project?.fullDescription"
@@ -29,18 +29,55 @@
           v-html="marked.parse(project?.fullDescription)"
       />
     </section>
+
     <section>
-      <h4 class="text-xl mb-2">Ссылки проекта</h4>
-      <div class="flex gap-3">
-        <nuxt-link v-if="project?.behance" :to="project?.behance">
-          <icon-behance color="var(--accent)" width="48"/>
-        </nuxt-link>
-        <nuxt-link v-if="project?.github" :to="project?.github">
-          <icon-github color="var(--accent)" width="48"/>
-        </nuxt-link>
+      <div class="mb-5">
+        <h4 class="text-xl mb-2">Топики</h4>
+        <div class="flex gap-3">
+          <ovc-pill
+              v-for="topic in project?.topics"
+              :color="topic?.color"
+              class="cursor-[default!important]"
+              selected
+          >
+            {{ topic?.title }}
+          </ovc-pill>
+        </div>
       </div>
 
-      <div class="mt-5" v-if="project?.pictures?.length">
+      <div class="mb-5" v-if="project?.techs?.length">
+        <div class="flex mb-2 items-center">
+          <h4 class="text-xl">
+            Технологии
+          </h4>
+          <ovc-help class="inline-block ml-1.5" text="Технологии, использовавшиеся при азработке проекта"/>
+        </div>
+
+        <div class="flex flex-wrap gap-3">
+          <ovc-pill
+              v-for="tech in project?.techs"
+              class="cursor-[default!important]"
+              color="var(--accent)"
+              selected
+          >
+            {{ tech?.title }}
+          </ovc-pill>
+        </div>
+      </div>
+
+      <div v-if="project?.behance || project?.github" class="mb-5">
+        <h4 class="text-xl mb-2">Ссылки</h4>
+        <div class="flex gap-3">
+          <nuxt-link v-if="project?.behance" :to="project?.behance" target="_blank">
+            <icon-behance color="var(--accent)" width="48"/>
+          </nuxt-link>
+          <nuxt-link v-if="project?.github" :to="project?.github" target="_blank">
+            <icon-github color="var(--accent)" width="48"/>
+          </nuxt-link>
+        </div>
+      </div>
+
+      <div v-if="project?.pictures?.length">
         <h4 class="text-xl mb-2">Изображения проекта</h4>
 
         <div class="grid grid-cols-2 gap-3 transition-all">
@@ -65,9 +102,9 @@
         </div>
 
         <ovc-gallery
-            :show="isGalleryShown"
             :active-picture="activeGalleryPicture"
             :pictures="project?.pictures"
+            :show="isGalleryShown"
             @close="onCloseGallery"
         />
       </div>
@@ -130,10 +167,10 @@ const fetchProject = async () => {
 await fetchProject()
 </script>
 
-<style scoped lang="scss">
+<style lang="scss" scoped>
 .picture-card {
   &:hover {
-    box-shadow: 0 0 10px 2px var(--shadow-color);
+    box-shadow: 0 0 3px 1px var(--shadow-color);
     transform: scale(1.01);
   }
 }
