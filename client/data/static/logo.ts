@@ -4,7 +4,7 @@ export const logoLetters = [
     {letter: "y", marked: false, minified: false, expanded: false, width: '14.7px'},
     {letter: "a", marked: false, minified: false, expanded: false, width: '9.84px'},
     {letter: " ", marked: false, minified: false, expanded: false, width: '13.72px'},
-    {letter: "s", marked: true, minified: true, expanded: true, width: '12px'},
+    {letter: "S", marked: true, minified: true, expanded: true, width: '12px'},
     {letter: "a", marked: false, minified: false, expanded: true, width: '14.7px'},
     {letter: "m", marked: false, minified: true, expanded: true, width: '25px'},
     {letter: "o", marked: false, minified: false, expanded: true, width: '15.5px'},

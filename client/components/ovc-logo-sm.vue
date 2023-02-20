@@ -5,7 +5,7 @@
             :class="{'colored': l.marked}"
             :style="{width: (l.minified || extended) ? l.width : 0}"
       >
-        {{ l.letter }}
+        {{ l.letter.toLowerCase() }}
       </span>
     </h3>
     <div class="line bottom-[0px]"></div>
