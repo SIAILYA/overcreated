@@ -95,7 +95,7 @@ useHead({
 })
 
 onMounted(() => {
-  useThemeStore().setProjectAccentColor("#FFFFFF")
+  useThemeStore().setProjectAccentColor("var(--text-color)")
 })
 </script>
 
