@@ -3,7 +3,6 @@ import {TypeOrmModule} from "@nestjs/typeorm";
 import {ProjectModel} from "../entities/project.model";
 import {PictureModel} from "../../common/pictures/picture.model";
 import {ProjectsService} from "../services/projects.service";
-import {ProjectsResolver} from "../resolvers/projects.resolver";
 import {ProjectsController} from "../controllers/projects.controller";
 import {ProjectsAdminController} from "../controllers/projects.admin.controller";
 import {ProjectTopicModel} from "../entities/projectTopic.model";
@@ -21,7 +20,6 @@ import {TechsAdminController} from "../controllers/techs.admin.controller";
     ],
     exports: [TypeOrmModule],
     providers: [
-        ProjectsResolver,
         ProjectsService,
         ProjectTopicsService,
         TechsService
