@@ -6,6 +6,7 @@ import {ConfigModule, ConfigService} from "@nestjs/config";
 import {UploadModule} from "../modules/common/upload/upload.module";
 import {ServeStaticModule} from "@nestjs/serve-static";
 import {join} from 'path';
+import {TimelineModule} from "../modules/timeline/timeline.module";
 
 
 @Module({
@@ -28,6 +29,7 @@ import {join} from 'path';
         }),
         DatabaseModule,
         PortfolioModule,
+        TimelineModule,
         AuthModule,
         UploadModule
     ],
