@@ -1,8 +1,6 @@
 import {CreateDateColumn, PrimaryGeneratedColumn, UpdateDateColumn} from 'typeorm';
-import {Field, ObjectType} from "@nestjs/graphql";
 import {Expose} from "class-transformer";
 
-@ObjectType({isAbstract: true})
 export class BaseModel {
     @Expose({groups: ['full', 'preview']})
     @PrimaryGeneratedColumn("uuid")

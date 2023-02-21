@@ -1,12 +1,10 @@
 import {Column, Entity, JoinTable, ManyToMany} from "typeorm";
 import {PictureModel} from "../../common/pictures/picture.model";
-import {ObjectType} from "@nestjs/graphql";
 import {ProjectTopicModel} from "./projectTopic.model";
 import {TechModel} from "./tech.model";
 import {OrderableModel} from "../../../common/base/orderable.model";
 import {Expose} from "class-transformer";
 
-@ObjectType({description: 'Project'})
 @Entity({name: 'projects'})
 export class ProjectModel extends OrderableModel {
     @Expose({groups: ['preview', 'full']})
