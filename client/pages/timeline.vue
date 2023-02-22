@@ -37,6 +37,10 @@ definePageMeta({
   variant: "orange"
 })
 
+useHead({
+  title: "Таймлайн | samolyev"
+})
+
 const {fetchTimelineTopics} = useTimelineStore()
 const {timelineTopics} = storeToRefs(useTimelineStore())
 const timelineStore = useTimelineStore()
