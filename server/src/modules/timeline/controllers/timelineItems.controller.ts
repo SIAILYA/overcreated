@@ -18,6 +18,6 @@ export class TimelineItemsController extends BaseReadController<TimelineItemMode
     })
     @Post('/getAll')
     async getAll(@Body() getAllParams?: GetAllParamsDto): Promise<TimelineItemModel[]> {
-        return this.timelineItemsService.getAllVisible({order: {date: 'DESC'}, ...getAllParams})
+        return this.timelineItemsService.getAll({order: {date: 'DESC'}, ...getAllParams})
     }
 }
