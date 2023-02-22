@@ -173,3 +173,24 @@
 .projects-list-move {
   transition: all .5s ease;
 }
+
+.timeline-list-enter, .timeline-list-leave-to, .timeline-list-enter-from {
+  opacity: 0;
+  transform: translateY(10vh) scale(0.01);
+  transition: all .5s ease;
+  z-index: -1;
+}
+
+.timeline-list-leave-active {
+  position: absolute;
+  transform: translateY(10vh) scale(0.01);
+  opacity: 0;
+  transition: all .5s ease;
+  width: 100%;
+  margin: 0 auto;
+  top: 0;
+}
+
+.timeline-list-move {
+  transition: all .5s ease;
+}

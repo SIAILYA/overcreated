@@ -1,5 +1,5 @@
 <template>
-  <main class="container">
+  <main class="container h-full">
     <div class="text-center">
       <h2 class="page-header">Таймлайн</h2>
       <article>
@@ -24,6 +24,57 @@
         />
       </button>
     </section>
+
+    <section class="flex flex-col h-full relative mt-20">
+      <transition-group name="timeline-list">
+        <ovc-timeline-item-card
+            key="hello"
+            color="var(--accent-orange)"
+            date-readable="Когда-то в будущем"
+        >
+          <template #title>
+            Что будет дальше?
+          </template>
+
+          <template #description>
+            <p>
+              Если у вас есть предложения - <ovc-emb-link color="var(--accent-orange)" to="/contacts">свяжитесь</ovc-emb-link> со мной
+            </p>
+          </template>
+        </ovc-timeline-item-card>
+
+        <ovc-timeline-item-card
+            v-for="(tItem, tIndex) in timelineStore.filteredTimelineItems"
+            :key="tItem.id"
+            :color="tItem?.topic?.color"
+            show-divider
+            :date-readable="tItem.readable_date"
+        >
+          <template #title>
+            {{ tItem.title }}
+          </template>
+
+          <template #description>
+            <p v-html="tItem.description"></p>
+          </template>
+        </ovc-timeline-item-card>
+
+        <ovc-timeline-item-card
+            key="hello"
+            color="var(--accent-orange)"
+            show-divider
+            date-readable="15 Февраля'2002"
+        >
+          <template #title>
+            Всем привет!
+          </template>
+
+          <template #description>
+            Я родился
+          </template>
+        </ovc-timeline-item-card>
+      </transition-group>
+    </section>
   </main>
 </template>
 
@@ -31,6 +82,7 @@
 import {useTimelineStore} from "~/stores/timelineStore";
 import {storeToRefs} from "pinia";
 import CloseAdd from "~/components/icons/close-add.vue";
+import OvcTimelineItemCard from "~/components/ovc-timeline-item-card.vue";
 
 definePageMeta({
   middleware: "accent-color-client",
@@ -41,8 +93,8 @@ useHead({
   title: "Таймлайн | samolyev"
 })
 
-const {fetchTimelineTopics} = useTimelineStore()
-const {timelineTopics} = storeToRefs(useTimelineStore())
+const {fetchTimelineTopics, fetchTimelineItems} = useTimelineStore()
+const {timelineTopics, timelineItems} = storeToRefs(useTimelineStore())
 const timelineStore = useTimelineStore()
 
 const toggleAllTopics = () => {
@@ -54,6 +106,7 @@ const toggleAllTopics = () => {
 }
 
 await fetchTimelineTopics()
+await fetchTimelineItems()
 </script>
 
 <style scoped>
