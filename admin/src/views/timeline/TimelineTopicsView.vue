@@ -1,6 +1,6 @@
 <template>
   <div class="d-flex mb-3 mt-4 mt-md-0">
-    <h4 class="my-auto">Project Topics</h4>
+    <h4 class="my-auto">Timeline Topics</h4>
   </div>
 
   <timeline-topic-form
