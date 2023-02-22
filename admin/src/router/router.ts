@@ -67,6 +67,22 @@ const routes = [
         meta: {
             layout: "main",
         }
+    },
+    {
+        path: "/timeline",
+        name: "timeline",
+        component: () => import("../views/timeline/TimelineView.vue"),
+        meta: {
+            layout: "main"
+        }
+    },
+    {
+        path: "/timelineTopics",
+        name: "timelineTopics",
+        component: () => import("../views/timeline/TimelineTopicsView.vue"),
+        meta: {
+            layout: "main"
+        }
     }
 ]
 
