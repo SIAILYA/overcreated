@@ -1,6 +1,6 @@
 import {defineStore} from "pinia";
-import {Tech} from "../data/models/Tech";
-import {API} from "../data/models/API";
+import {Tech} from "@data/models/Tech";
+import {API} from "@data/models/common/API";
 
 export const useTechStore = defineStore("techStore", {
     state: () => ({

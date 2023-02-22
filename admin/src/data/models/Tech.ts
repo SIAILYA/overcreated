@@ -1,7 +1,7 @@
-import {ApiModel} from "./ApiModel";
+import {ApiModel} from "./common/ApiModel";
 import {Column} from "../decorators/Column";
 import {Entity} from "../decorators/Entity";
-import {IClearable} from "./IClearable";
+import {IClearable} from "./common/IClearable";
 
 
 @Entity()

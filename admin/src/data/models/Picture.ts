@@ -1,4 +1,4 @@
-import {ApiModel} from "./ApiModel";
+import {ApiModel} from "./common/ApiModel";
 import {Entity} from "../decorators/Entity";
 import {Column} from "../decorators/Column";
 import {axiosInstance, BASE_HOST} from "../network";

@@ -1,6 +1,6 @@
 import {defineStore} from "pinia";
-import {ProjectTopic} from "../data/models/ProjectTopic";
-import {API} from "../data/models/API";
+import {ProjectTopic} from "@data/models/ProjectTopic";
+import {API} from "@data/models/common/API";
 
 export const useProjectTopicStore = defineStore("projectTopicStore", {
     state: () => ({

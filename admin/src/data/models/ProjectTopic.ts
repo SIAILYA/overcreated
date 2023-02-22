@@ -1,7 +1,7 @@
-import {ApiModel} from "./ApiModel";
-import {API} from "./API";
+import {ApiModel} from "./common/ApiModel";
+import {API} from "./common/API";
 import {Column} from "../decorators/Column";
-import {IClearable} from "./IClearable";
+import {IClearable} from "./common/IClearable";
 import {Entity} from "../decorators/Entity";
 
 

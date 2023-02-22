@@ -3,7 +3,7 @@ import {Column} from "../decorators/Column";
 import {Tech} from "./Tech";
 import {ProjectTopic} from "./ProjectTopic";
 import {Entity} from "../decorators/Entity";
-import {OrderableModel} from "./OrderableModel";
+import {OrderableModel} from "./common/OrderableModel";
 
 
 @Entity()

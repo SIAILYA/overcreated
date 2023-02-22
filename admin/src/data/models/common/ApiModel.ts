@@ -1,5 +1,5 @@
 import {API} from "./API";
-import {Column} from "../decorators/Column";
+import {Column} from "../../decorators/Column";
 
 
 export abstract class ApiModel {

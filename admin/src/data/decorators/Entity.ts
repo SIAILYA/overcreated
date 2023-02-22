@@ -1,4 +1,4 @@
-import {API} from "../models/API";
+import {API} from "../models/common/API";
 
 type EntityOptions = {
     disableApi?: boolean

@@ -1,4 +1,4 @@
-import {axiosInstance} from "../network";
+import {axiosInstance} from "../../network";
 import {ApiModel} from "./ApiModel";
 
 type method = "all" | "create" | "update" | "delete" | "getAll" | "getById"
