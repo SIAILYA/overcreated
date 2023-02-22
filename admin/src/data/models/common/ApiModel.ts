@@ -52,7 +52,7 @@ export abstract class ApiModel {
             if (_propType) {
                 if (Array.isArray(_propValue)) {
                     this[thisProp] = _propValue.map((item: any) => new _propType[0]().fromJSON(item)) as any
-                } else if (_propType() instanceof ApiModel) {
+                } else if (new _propType() instanceof ApiModel) {
                     this[thisProp] = new _propType().fromJSON(_propValue)
                 } else if (_propValue !== undefined && _propType !== String) {
                     this[thisProp] = new _propType(_propValue)
@@ -81,7 +81,7 @@ export abstract class ApiModel {
             if (_propType) {
                 if (Array.isArray(_propValue)) {
                     json[thisProp] = _propValue.map((item: any) => item.json)
-                } else if (_propType() instanceof ApiModel) {
+                } else if (new _propType() instanceof ApiModel) {
                     // @ts-ignore
                     json[thisProp] = _propValue.json
                 } else {
