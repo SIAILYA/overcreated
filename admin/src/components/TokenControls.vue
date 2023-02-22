@@ -11,14 +11,17 @@ import {useRouter} from "vue-router";
 
 import {useTokenStore} from "@stores/tokenStore";
 import {formatMinutesSeconds} from "@/utils/utils"
+import {useConfirm} from "@/utils/useConfirm";
 
 const {expireAt} = storeToRefs(useTokenStore())
 const untilExpire = ref(0)
 const router = useRouter()
 
 const onClickLogout = () => {
-  localStorage.removeItem("token")
-  router.replace("/login")
+  useConfirm("Exit?").then(() => {
+    localStorage.removeItem("token")
+    router.replace("/login")
+  })
 }
 
 const decreaseExpireTimer = () => {
