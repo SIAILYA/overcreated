@@ -57,7 +57,7 @@ import {useConfirm} from "@/utils/useConfirm";
 const showTimelineTopicEditWindow = ref(false)
 
 const timelineTopicCreate = reactive<TimelineTopic>(new TimelineTopic())
-const timelineTopicEdit = ref<TimelineTopic | null>(null)
+const timelineTopicEdit = ref<TimelineTopic>(new TimelineTopic())
 const {createTimelineTopic, fetchTimelineTopics} = useTimelineTopicStore()
 const {timelineTopics} = storeToRefs(useTimelineTopicStore())
 
@@ -68,7 +68,6 @@ const onCreateTimelineTopic = () => {
 
 const onCLoseEditTimelineTopic = () => {
   showTimelineTopicEditWindow.value = false
-  timelineTopicEdit.value = null
 }
 
 const onClickEditTimelineTopic = (t: TimelineTopic) => {

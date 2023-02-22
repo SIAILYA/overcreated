@@ -4,7 +4,7 @@
   </div>
 
   <timeline-item-form
-      :timeline-item="timelineItemCreate"
+      :timeline-item-inst="timelineItemCreate"
       @create="onSubmitCreateTimelineItem"
   />
 
@@ -31,7 +31,7 @@
   <modal-window :show="showEditTimelineItemWindow" @close="onCloseEditTimelineItemWindow">
     <timeline-item-form
         is-delete
-        :timeline-item="timelineItemEdit"
+        :timeline-item-inst="timelineItemEdit"
         @create="onSaveTimelineItemEdit"
         @delete="onDeleteTimelineItemEdit"
     >
@@ -58,7 +58,7 @@ const {timelineItems} = storeToRefs(useTimelineStore())
 
 
 const timelineItemCreate = reactive<TimelineItem>(new TimelineItem())
-const timelineItemEdit = ref<TimelineItem | null>(null)
+const timelineItemEdit = ref<TimelineItem>(new TimelineItem())
 const showEditTimelineItemWindow = ref(false)
 
 const onSubmitCreateTimelineItem = async (t: TimelineItem) => {
@@ -73,7 +73,6 @@ const onClickEditTimelineItem = async (t: TimelineItem) => {
 
 const onCloseEditTimelineItemWindow = () => {
   showEditTimelineItemWindow.value = false
-  timelineItemEdit.value = null
 }
 
 const onSaveTimelineItemEdit = async (t: TimelineItem) => {

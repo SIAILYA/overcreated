@@ -26,11 +26,11 @@
       :show="showReorderWindow"
       @close="showReorderWindow = false"
   >
-    <h3>Set "{{ reorderProject.title }}" order</h3>
+    <h3>Set "{{ reorderProject?.title }}" order</h3>
 
     <div class="mt-3">
       <input
-          v-model="reorderProject.order"
+          v-model="reorderProjectTitle"
           class="form-control"
           max="100"
           min="1"
@@ -41,7 +41,7 @@
     <div class="mt-3 d-flex justify-content-end">
       <button
           class="btn btn-primary me-3"
-          @click="onConfirmReorderProject()"
+          @click="onConfirmReorderProject"
       >
         Save
       </button>
@@ -81,6 +81,17 @@ const filteredProjects: ComputedRef<Project[]> = computed(() => {
   return projects.value.filter(p => p.title.toLowerCase().includes(projectsSearch.value.toLowerCase()))
 })
 
+const reorderProjectTitle = computed({
+  get() {
+    return reorderProject.value?.title || ''
+  },
+  set(v: string) {
+    if (reorderProject.value?.title !== undefined) {
+      reorderProject.value.title = v
+    }
+  }
+})
+
 const onReorderProject = (project: Project) => {
   console.log(project.title)
   reorderProject.value = project
@@ -88,7 +99,7 @@ const onReorderProject = (project: Project) => {
 }
 
 const onConfirmReorderProject = () => {
-  reorderProject.value?.reorder(reorderProject.value.order).then(() => {
+  reorderProject.value!.reorder(reorderProject.value!.order).then(() => {
     fetchProjects()
     showReorderWindow.value = false
   })

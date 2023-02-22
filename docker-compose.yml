@@ -16,14 +16,17 @@ services:
       - server_uploads:/app/uploads
 
   client:
-    build:
-      args:
-        NUXT_API_URL: http://localhost:5000/api/v3
-      context: ./client
+    build: ./client
     container_name: client
     ports:
       - "3000:3000"
     restart: always
+
+  admin:
+    build: ./admin
+    container_name: admin
+    ports:
+      - "3001:80"
 
   db:
     image: postgres
