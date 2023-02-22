@@ -33,7 +33,7 @@
     <section>
       <div class="mb-5">
         <h4 class="text-xl mb-2">Топики</h4>
-        <div class="flex gap-3">
+        <div class="flex flex-wrap gap-3">
           <ovc-pill
               v-for="topic in project?.topics"
               :color="topic?.color"
