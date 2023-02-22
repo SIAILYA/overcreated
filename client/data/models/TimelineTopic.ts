@@ -1,3 +1,4 @@
+import "reflect-metadata";
 import {FetchModel} from "~/data/models/api/FetchModel";
 import {ClientAPI} from "~/data/models/api/ClientAPI";
 import {Column} from "~/data/decorators/Column";

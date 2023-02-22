@@ -1,3 +1,4 @@
+import "reflect-metadata";
 import {ClientAPI} from "~/data/models/api/ClientAPI";
 import {useOvcApi} from "~/hooks/useOvcApi";
 

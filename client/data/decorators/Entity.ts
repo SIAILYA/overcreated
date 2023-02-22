@@ -1,5 +1,4 @@
 import "reflect-metadata";
-import {ClientAPI} from "~/data/models/api/ClientAPI";
 
 type EntityOptions = {
     disableApi?: boolean

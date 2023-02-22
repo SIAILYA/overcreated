@@ -1,4 +1,5 @@
 import {useOvcApi} from "~/hooks/useOvcApi";
+import "reflect-metadata";
 
 export class ClientAPI {
     path!: string
