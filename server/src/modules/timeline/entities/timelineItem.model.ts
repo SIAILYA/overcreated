@@ -20,6 +20,6 @@ export class TimelineItemModel extends BaseModel {
     @Column({type: 'varchar', length: 8192, nullable: true})
     addition_description: string
 
-    @ManyToOne(() => TimelineTopicModel)
+    @ManyToOne(() => TimelineTopicModel, {eager: true})
     topic: TimelineTopicModel
 }
