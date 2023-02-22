@@ -9,10 +9,6 @@ export const useTimelineStore = defineStore("timelineStore", {
         async fetchTimelineItems() {
             const _t = await TimelineItem.$api.getAll()
             this.timelineItems = _t.map((t: object) => new TimelineItem().fromJSON(t))
-        },
-        async createTimelineItem(timelineItem: TimelineItem) {
-            await timelineItem.create()
-            await this.fetchTimelineItems()
         }
     }
 })

@@ -1,16 +1,17 @@
 <template>
   <div class="row">
     <div class="col-12 col-md-4 mt-2">
-      <input class="form-control" placeholder="Title" type="text" v-model="timelineItem.title">
+      <input v-model="timelineItem.title" class="form-control" placeholder="Title" type="text">
     </div>
     <div class="col-12 col-md-4 mt-2">
-      <input class="form-control" placeholder="Date" type="date" v-model="timelineItemDate">
+      <input v-model="timelineItemDate" class="form-control" placeholder="Date" type="date">
     </div>
     <div class="col-12 col-md-4 mt-2">
       <select
           :style="{color: timelineItem?.topic?.color}"
           class="form-control form-select"
           @change="e => onSelectTopic(e?.currentTarget?.value)"
+          :value="timelineItem?.topic?.id"
       >
         <option :value="undefined">None</option>
         <option v-for="topic in timelineTopics" :value="topic.id">{{ topic.title }}</option>
@@ -20,7 +21,7 @@
       <input v-model="timelineItem.readable_date" class="form-control w-100" placeholder="Readable date" type="text">
     </div>
     <div class="col-12 col-md-4 mt-2">
-      <button class="btn btn-success w-100" :disabled="!timelineItem.validate()" @click="emit('create', timelineItem)">
+      <button :disabled="!timelineItem.validate()" class="btn btn-success w-100" @click="emit('create', timelineItem)">
         <slot name="create">
           Create
         </slot>
@@ -34,7 +35,7 @@
       </label>
 
       <div v-if="showDescription">
-        <textarea id="description" class="form-control" rows="1" v-model="timelineItem.description"></textarea>
+        <textarea id="description" v-model="timelineItem.description" class="form-control" rows="1"></textarea>
 
         <label class="form-label mt-1" for="description">Description preview</label>
         <div class="card d-block mt-1 p-2" v-html="timelineItem.description">
@@ -49,14 +50,20 @@
       </label>
 
       <div v-if="showAddDescription">
-        <textarea id="add_description" class="form-control" rows="3" v-model="timelineItem.addition_description"></textarea>
+        <textarea id="add_description" v-model="timelineItem.addition_description" class="form-control"
+                  rows="3"></textarea>
 
         <label class="form-label mt-1" for="add_description">Additional description preview</label>
         <div class="card mt-1 p-2" v-html="marked(timelineItem.addition_description || '')">
         </div>
       </div>
     </div>
+  </div>
 
+  <div v-if="isDelete" class="mt-3">
+    <button class="btn btn-danger" @click="emit('delete', timelineItem)">
+      Delete
+    </button>
   </div>
 </template>
 
@@ -72,9 +79,10 @@ import {marked} from "marked";
 
 interface Props {
   timelineItem: TimelineItem
+  isDelete?: false
 }
 
-const emit = defineEmits(['create'])
+const emit = defineEmits(['create', 'delete'])
 const props = defineProps<Props>()
 
 const {timelineTopics} = storeToRefs(useTimelineTopicStore())
