@@ -49,3 +49,26 @@ export const createQueryString = (data: any) => {
         return `${key}=${encodeURIComponent(`${val}`.replace(/\s/g, '_'))}`
     }).join('&')
 }
+
+export const getRuMonthByNumber = (i: number) => {
+    const arr = [
+        'Январь',
+        'Февраль',
+        'Март',
+        'Апрель',
+        'Май',
+        'Июнь',
+        'Июль',
+        'Август',
+        'Сентябрь',
+        'Октябрь',
+        'Ноябрь',
+        'Декабрь',
+    ]
+
+    return arr[i]
+}
+
+export const getReadableDate = (d: Date): string => {
+    return `${getRuMonthByNumber(d.getMonth())}'${d.getFullYear() - 2000}`
+}
