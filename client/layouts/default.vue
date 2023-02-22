@@ -16,5 +16,6 @@
 <style scoped>
 .view {
   min-height: 62vh;
+  padding-bottom: 24px;
 }
 </style>
