@@ -23,6 +23,13 @@
             :rotate="!timelineStore.isAnyTopicSelected"
         />
       </button>
+
+      <ovc-help
+            align="end"
+            class="my-auto"
+            text="Выбирайте топики, чтобы отфильтровать таймлайн. Крестик сбрасывает все фильтры. Плюсик включает все топики"
+            width="200px"
+        />
     </section>
 
     <section class="flex flex-col h-full relative mt-20">
