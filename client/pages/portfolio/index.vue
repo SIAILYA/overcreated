@@ -112,14 +112,4 @@ await Promise.all([
 </script>
 
 <style scoped>
-.clear-topics {
-  width: 36px;
-  height: 36px;
-  aspect-ratio: 1;
-  border: 1px solid var(--text-color);
-  border-radius: 10px;
-  color: var(--text-color);
-  background: var(--background-tetriary);
-  transition: all .3s ease;
-}
 </style>
