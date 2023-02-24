@@ -19,7 +19,6 @@ export default defineNuxtConfig({
                 {name: 'viewport', content: 'width=device-width, initial-scale=1'},
             ],
             link: [
-                {rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Round'},
                 {rel: 'icon', type: 'image/png', href: '/favicon.png'}
             ],
         }

@@ -19,8 +19,10 @@
             <theme-switcher class="hidden md:block"/>
 
             <div class="flex md:hidden">
-              <span class="material-icons-round flex my-auto cursor-pointer" @click="onMobileMenuOpen">
-                menu
+              <span class="flex my-auto cursor-pointer" @click="onMobileMenuOpen">
+                <svg viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><g
+                    fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path
+                    d="M4 6h16"></path><path d="M4 12h16"></path><path d="M4 18h16"></path></g></svg>
               </span>
             </div>
           </div>
@@ -43,8 +45,8 @@
       <div class="flex justify-between">
         <theme-switcher btn/>
 
-        <div class="material-icons-round cursor-pointer" @click="onMobileMenuClose">
-          close
+        <div class="cursor-pointer" @click="onMobileMenuClose">
+          <close-add/>
         </div>
       </div>
 
@@ -67,6 +69,7 @@ import type {ComputedRef, Ref} from "vue";
 
 import ThemeSwitcher from "~/components/ovc-theme-switcher";
 import {navigationMenu} from "~/data/static/navigation-menu";
+import CloseAdd from "~/components/icons/close-add.vue";
 
 const scrollTop: Ref<number> = ref(0)
 const isMobileMenuOpen: Ref<boolean> = ref(false)
