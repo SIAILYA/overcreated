@@ -1,0 +1,63 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+"""Picture"""
+type PictureModel {
+  id: String!
+  _created_at: DateTime!
+  _updated_at: DateTime!
+  url: String!
+  caption: String
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+"""Project"""
+type ProjectModel {
+  id: String!
+  _created_at: DateTime!
+  _updated_at: DateTime!
+  title: String!
+  slug: String!
+  color: String!
+  isVisible: Boolean!
+  description: String!
+  fullDescription: String
+  pictures: [PictureModel!]
+  link: String
+  github: String
+  behance: String
+  developTime: Float
+}
+
+type Query {
+  project(id: String!): ProjectModel!
+  projects: [ProjectModel!]!
+}
+
+type Mutation {
+  createProject(project: ProjectInput!): ProjectModel!
+}
+
+input ProjectInput {
+  title: String!
+  slug: String!
+  color: String!
+  isVisible: Boolean!
+  description: String!
+  fullDescription: String
+  pictures: [PictureInput!]
+  link: String
+  github: String
+  behance: String
+  developTime: Float
+}
+
+input PictureInput {
+  url: String!
+  caption: String
+}

@@ -1,16 +1,14 @@
-import {ConfigService} from '@nestjs/config';
-import {NestFactory} from '@nestjs/core';
-import {AppModule} from './app.module';
+import { NestFactory } from '@nestjs/core';
+import { AppModule } from './common/app.module';
 import * as cookieParser from 'cookie-parser';
+import * as bodyParser from 'body-parser';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule, {cors: true});
-  const configService = app.get(ConfigService);
 
   app.use(cookieParser());
-
-  await app.listen(configService.get('PORT'));
-  console.log(`Application is running on: ${await app.getUrl()}`);
+  app.use(bodyParser.urlencoded({ extended: true }))
+  await app.listen(5000);
 }
 
 bootstrap();

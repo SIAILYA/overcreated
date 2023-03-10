@@ -1,0 +1,15 @@
+export const logoLetters = [
+    {letter: "I", marked: true, minified: false, expanded: false, width: '15.25px'},
+    {letter: "l", marked: false, minified: false, expanded: false, width: '13.42px'},
+    {letter: "y", marked: false, minified: false, expanded: false, width: '14.7px'},
+    {letter: "a", marked: false, minified: false, expanded: false, width: '9.84px'},
+    {letter: " ", marked: false, minified: false, expanded: false, width: '13.72px'},
+    {letter: "S", marked: true, minified: true, expanded: true, width: '12px'},
+    {letter: "a", marked: false, minified: false, expanded: true, width: '14.7px'},
+    {letter: "m", marked: false, minified: true, expanded: true, width: '25px'},
+    {letter: "o", marked: false, minified: false, expanded: true, width: '15.5px'},
+    {letter: "l", marked: false, minified: true, expanded: true, width: '6px'},
+    {letter: "y", marked: false, minified: false, expanded: true, width: '13.5px'},
+    {letter: "e", marked: false, minified: false, expanded: true, width: '15.5px'},
+    {letter: "v", marked: false, minified: true, expanded: true, width: '16.38px'},
+]
