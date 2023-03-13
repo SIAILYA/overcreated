@@ -28,7 +28,7 @@ services:
       - "3000:3000"
     restart: always
     environment:
-      - NUXT_PUBLIC_OVC_API_HOST
+      - NUXT_PUBLIC_API_HOST
       - NUXT_PUBLIC_API_URL
 
   admin:
