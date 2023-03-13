@@ -17,7 +17,7 @@ services:
       - JWT_EXPIRES_IN=9999h
       - ADMIN_LOGIN=123
       - ADMIN_PASSWORD=123
-      - UPLOAD_PATH=uploads
+      - UPLOAD_PATH=/app/uploads
     volumes:
       - server_uploads:/app/uploads
 

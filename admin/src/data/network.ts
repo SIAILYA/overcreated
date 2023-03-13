@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export const BASE_HOST = "http://localhost:5000";
+export const BASE_HOST = import.meta.env.PROD ? "https://samolyev.ru" : "http://localhost:5000";
 
 export const axiosInstance = axios.create({
     baseURL: `${BASE_HOST}/api/v3/admin`,
